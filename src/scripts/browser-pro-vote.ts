@@ -1,3 +1,5 @@
+import { track } from './analytics';
+
 const STORAGE_KEY = 'vfxrun:pro-vote';
 
 function getMessage(key: string, fallback: string): string {
@@ -56,9 +58,7 @@ export function initBrowserProVote(): void {
       // Still show success — vote intent was captured in-session.
     }
 
-    void import('./analytics').then(({ track }) => {
-      track('pro_vote_submitted', { feature_name: features.join(',') });
-    });
+    track('pro_vote_submitted', { feature_name: features.join(',') });
 
     showStatus(form, getMessage('browser.proVoteSuccess', 'Thanks — your vote was recorded.'), false);
     form.reset();

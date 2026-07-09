@@ -65,8 +65,17 @@ function getAnonymousId(): string {
   }
 }
 
+function pageContext(): Record<string, string> {
+  return {
+    $current_url: window.location.origin + window.location.pathname,
+    $pathname: window.location.pathname,
+    $host: window.location.host,
+  };
+}
+
 function sanitizeProperties(properties?: AnalyticsPayload): Record<string, string> {
   const safe: Record<string, string> = {
+    ...pageContext(),
     source_page: window.location.pathname,
     language: currentLanguage(),
     platform: detectPlatform(),

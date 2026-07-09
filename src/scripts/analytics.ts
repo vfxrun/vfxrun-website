@@ -20,6 +20,8 @@ const ALLOWED_PROPERTIES = new Set<AnalyticsProperty>([
 
 type AnalyticsPayload = Partial<Record<AnalyticsProperty, string>>;
 
+const ANONYMOUS_ID_KEY = 'vfxrun:anonymous_id';
+
 let posthogHost: string | undefined;
 let posthogKey: string | undefined;
 let analyticsReady = false;
@@ -41,6 +43,26 @@ function detectPlatform(): string {
 
 function currentLanguage(): string {
   return document.documentElement.dataset.locale || document.documentElement.lang || 'en';
+}
+
+function createAnonymousId(): string {
+  if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
+    return crypto.randomUUID();
+  }
+  return `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+}
+
+function getAnonymousId(): string {
+  try {
+    const existing = localStorage.getItem(ANONYMOUS_ID_KEY);
+    if (existing) return existing;
+
+    const id = createAnonymousId();
+    localStorage.setItem(ANONYMOUS_ID_KEY, id);
+    return id;
+  } catch {
+    return createAnonymousId();
+  }
 }
 
 function sanitizeProperties(properties?: AnalyticsPayload): Record<string, string> {
@@ -78,11 +100,16 @@ function sendToPostHog(event: AnalyticsEvent, payload: Record<string, string>): 
         api_key: posthogKey,
         event,
         properties: {
+          distinct_id: getAnonymousId(),
           ...payload,
           $lib: 'vfxrun-web',
         },
       }),
       keepalive: true,
+    }).then((response) => {
+      if (!response.ok && import.meta.env.DEV) {
+        console.warn('[analytics] PostHog rejected event', response.status);
+      }
     });
   } catch {
     /* optional analytics — ignore network failures */

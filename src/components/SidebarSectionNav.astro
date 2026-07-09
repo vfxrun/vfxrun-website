@@ -1,0 +1,104 @@
+---
+import { defaultText } from '../i18n/messages';
+
+interface Section {
+  id: string;
+  labelKey: string;
+}
+
+interface Props {
+  sections: readonly Section[];
+  navKey?: string;
+}
+
+const { sections, navKey = 'browser' } = Astro.props;
+---
+
+<nav class="sidebar-nav" aria-label="Page sections" data-section-nav={navKey}>
+  <ul class="sidebar-nav__list">
+    {
+      sections.map((section) => (
+        <li>
+          <a class="sidebar-nav__link" href={`#${section.id}`} data-i18n={section.labelKey}>
+            {defaultText(section.labelKey)}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>
+
+<style>
+  .sidebar-nav__list {
+    list-style: none;
+    margin: 0;
+    padding: 0 0 0 140px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    width: 100%;
+  }
+
+  .sidebar-nav__link {
+    position: relative;
+    display: block;
+    width: calc(100%);
+    padding: 0.65rem 0.85rem 0.65rem 1.1rem;
+    font-size: var(--sidebar-link-size);
+    font-weight: 500;
+    line-height: 1.35;
+    color: var(--text-muted);
+    text-decoration: none;
+    border-radius: 6px;
+    transition:
+      color 0.15s ease,
+      background 0.15s ease;
+  }
+
+  .sidebar-nav__link:hover {
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  :global(.sidebar-nav__link--active) {
+    color: #8aadff !important;
+    background: rgba(28, 36, 72, 0.72) !important;
+    font-weight: 600;
+  }
+
+  :global(.sidebar-nav__link--active)::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.45rem;
+    bottom: 0.45rem;
+    width: 4px;
+    border-radius: 999px;
+    background: #5c8dff;
+  }
+
+  @media (max-width: 959px) {
+    .sidebar-nav__list {
+      flex-direction: row;
+      flex-wrap: nowrap;
+      gap: 0.35rem;
+      overflow-x: auto;
+      padding: 0 0 0.25rem;
+      scrollbar-width: thin;
+    }
+
+    .sidebar-nav__link {
+      width: auto;
+      font-size: 0.875rem;
+      white-space: nowrap;
+      flex-shrink: 0;
+      padding: 0.55rem 0.75rem 0.55rem 0.95rem;
+    }
+
+    :global(.sidebar-nav__link--active)::before {
+      top: 0.35rem;
+      bottom: 0.35rem;
+      width: 3px;
+    }
+  }
+</style>

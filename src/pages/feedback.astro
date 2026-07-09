@@ -1,0 +1,117 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/Button.astro';
+import { CONTACT_EMAIL, DISCORD_INVITE_URL } from '../config/site';
+import { defaultFlatText } from '../i18n/i18n-bundles';
+---
+
+<BaseLayout
+  title="Feedback"
+  description="Send feedback, bug reports, and feature requests for VFXRun Browser and SheetGen."
+  canonicalPath="/feedback"
+>
+  <section class="page-section" data-contact-email={CONTACT_EMAIL}>
+    <div class="container prose feedback-page">
+      <h1 data-i18n="feedbackPage.title">{defaultFlatText('feedbackPage.title')}</h1>
+      <p class="lead" data-i18n="feedbackPage.lead">{defaultFlatText('feedbackPage.lead')}</p>
+
+      <div class="card contact-card">
+        <h2 data-i18n="feedbackPage.emailTitle">{defaultFlatText('feedbackPage.emailTitle')}</h2>
+        <p data-i18n="feedbackPage.emailLead">{defaultFlatText('feedbackPage.emailLead')}</p>
+        <p class="contact-email">
+          <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
+        </p>
+        <div class="contact-actions">
+          <Button href={`mailto:${CONTACT_EMAIL}`} data-feedback-mailto>
+            <span data-i18n="feedbackPage.emailBtn">{defaultFlatText('feedbackPage.emailBtn')}</span>
+          </Button>
+          <Button href={DISCORD_INVITE_URL} external variant="secondary" data-analytics-event="discord_clicked" data-analytics-target-url={DISCORD_INVITE_URL}>
+            <span data-i18n="feedbackPage.discordBtn">{defaultFlatText('feedbackPage.discordBtn')}</span>
+          </Button>
+        </div>
+      </div>
+
+      <h2 data-i18n="feedbackPage.bugTitle">{defaultFlatText('feedbackPage.bugTitle')}</h2>
+      <p data-i18n="feedbackPage.bugIntro">{defaultFlatText('feedbackPage.bugIntro')}</p>
+      <ul class="checklist">
+        <li>
+          <strong data-i18n="feedbackPage.bugVersion">{defaultFlatText('feedbackPage.bugVersion')}</strong>
+          <span data-i18n="feedbackPage.bugVersionNote">{defaultFlatText('feedbackPage.bugVersionNote')}</span>
+        </li>
+        <li><strong data-i18n="feedbackPage.bugOs">{defaultFlatText('feedbackPage.bugOs')}</strong></li>
+        <li><strong data-i18n="feedbackPage.bugTrying">{defaultFlatText('feedbackPage.bugTrying')}</strong></li>
+        <li>
+          <strong data-i18n="feedbackPage.bugHappened">{defaultFlatText('feedbackPage.bugHappened')}</strong>
+          <span data-i18n="feedbackPage.bugHappenedNote">{defaultFlatText('feedbackPage.bugHappenedNote')}</span>
+        </li>
+        <li><strong data-i18n="feedbackPage.bugScreenshot">{defaultFlatText('feedbackPage.bugScreenshot')}</strong></li>
+      </ul>
+      <p>
+        <Button href={`mailto:${CONTACT_EMAIL}`} variant="secondary" data-feedback-mailto>
+          <span data-i18n="feedbackPage.bugBtn">{defaultFlatText('feedbackPage.bugBtn')}</span>
+        </Button>
+      </p>
+
+      <h2 data-i18n="feedbackPage.featureTitle">{defaultFlatText('feedbackPage.featureTitle')}</h2>
+      <p data-i18n="feedbackPage.featureLead">{defaultFlatText('feedbackPage.featureLead')}</p>
+      <p>
+        <span data-i18n="feedbackPage.featurePro">{defaultFlatText('feedbackPage.featurePro')}</span>
+        <a href="/#pro">/#pro</a>.
+      </p>
+
+      <h2 data-i18n="feedbackPage.otherTitle">{defaultFlatText('feedbackPage.otherTitle')}</h2>
+      <ul>
+        <li>
+          <span data-i18n="feedbackPage.otherWishlistLabel">{defaultFlatText('feedbackPage.otherWishlistLabel')}</span>
+          <a href="/#pro"><span data-i18n="feedbackPage.otherWishlist">{defaultFlatText('feedbackPage.otherWishlist')}</span></a>
+        </li>
+        <li>
+          <span data-i18n="feedbackPage.otherDiscord">{defaultFlatText('feedbackPage.otherDiscord')}</span>
+          <a href={DISCORD_INVITE_URL} data-analytics-event="discord_clicked" data-analytics-target-url={DISCORD_INVITE_URL}>discord.gg/4y6QFSHxW</a>
+        </li>
+      </ul>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .feedback-page .lead {
+    color: var(--text-muted);
+    max-width: 42rem;
+  }
+
+  .contact-card {
+    margin: 1.5rem 0 2rem;
+    padding: 1.25rem 1.35rem;
+  }
+
+  .contact-card h2 {
+    margin-top: 0;
+    font-size: 1.125rem;
+  }
+
+  .contact-email {
+    margin: 0.75rem 0 1rem;
+    font-size: 1.0625rem;
+    font-weight: 600;
+  }
+
+  .contact-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+  }
+
+  .checklist {
+    padding-left: 1.25rem;
+  }
+
+  .checklist li {
+    margin-bottom: 0.35rem;
+  }
+
+  .muted {
+    color: var(--text-muted);
+    font-size: 0.9375rem;
+  }
+</style>

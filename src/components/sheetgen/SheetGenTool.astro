@@ -1,0 +1,71 @@
+---
+import SheetGenApp from './SheetGenApp';
+---
+
+<div class="sheetgen-workspace" id="sheetgen-tool" aria-label="SheetGen workspace">
+  <div class="sheetgen-tool-mount">
+    <SheetGenApp client:only="react">
+      <p slot="fallback" class="sheetgen-loading" data-i18n="sheetgen.tool.loading">
+        Loading SheetGen…
+      </p>
+    </SheetGenApp>
+  </div>
+</div>
+
+<style is:global>
+  .sheetgen-workspace {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    background: var(--bg);
+    overflow: hidden;
+  }
+
+  .sheetgen-tool-mount {
+    flex: 1 1 auto;
+    min-height: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: var(--bg);
+    isolation: isolate;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sheetgen-tool-mount astro-island {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    min-height: 0;
+    height: 100%;
+    width: 100%;
+  }
+
+  .sheetgen-tool-mount .app-shell {
+    flex: 1 1 auto;
+    height: 100% !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: hidden;
+  }
+
+  .sheetgen-tool-mount .app-toolbar {
+    display: none;
+  }
+
+  .sheetgen-tool-mount .resizable-layout {
+    flex: 1 1 auto;
+    min-height: 0;
+  }
+
+  .sheetgen-loading {
+    margin: auto;
+    padding: 1rem 1.25rem;
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    text-align: center;
+  }
+</style>

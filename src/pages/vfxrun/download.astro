@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Button from '../../components/Button.astro';
+import { defaultFlatText } from '../../i18n/i18n-bundles';
+
+const redirectUrl = '/#download';
+---
+
+<BaseLayout
+  title="Download VFXRun Browser"
+  description="Download the free VFXRun Browser desktop app for Windows."
+  canonicalPath="/vfxrun/download"
+>
+  <meta http-equiv="refresh" content={`0;url=${redirectUrl}`} slot="head" />
+
+  <section class="page-section">
+    <div class="container prose redirect-page">
+      <h1 data-i18n="redirectPage.downloadTitle">{defaultFlatText('redirectPage.downloadTitle')}</h1>
+      <p class="lead" data-i18n="redirectPage.downloadLead">{defaultFlatText('redirectPage.downloadLead')}</p>
+      <p>
+        <span data-i18n="redirectPage.downloadManualBefore">{defaultFlatText('redirectPage.downloadManualBefore')}</span>
+        <a href={redirectUrl}>
+          <span data-i18n="redirectPage.downloadManualLink">{defaultFlatText('redirectPage.downloadManualLink')}</span>
+        </a>.
+      </p>
+      <Button href={redirectUrl}>
+        <span data-i18n="redirectPage.downloadBtn">{defaultFlatText('redirectPage.downloadBtn')}</span>
+      </Button>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .redirect-page {
+    text-align: center;
+    max-width: 32rem;
+    margin-inline: auto;
+  }
+
+  .redirect-page .lead {
+    margin-inline: auto;
+  }
+</style>

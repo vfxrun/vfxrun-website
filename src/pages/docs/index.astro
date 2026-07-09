@@ -1,0 +1,73 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Button from '../../components/Button.astro';
+import { defaultFlatText } from '../../i18n/i18n-bundles';
+---
+
+<BaseLayout
+  title="Documentation"
+  description="Documentation for VFXRun Browser and SheetGen — local VFX workflows, privacy, and sprite sheet export guides."
+  canonicalPath="/docs"
+>
+  <section class="page-section">
+    <div class="container">
+      <h1 data-i18n="docsPage.title">{defaultFlatText('docsPage.title')}</h1>
+      <p class="lead" data-i18n="docsPage.lead">{defaultFlatText('docsPage.lead')}</p>
+
+      <div class="card-grid card-grid--2 doc-links">
+        <article class="card">
+          <h2><a href="/docs/vfxrun" data-i18n="docsPage.vfxrunTitle">{defaultFlatText('docsPage.vfxrunTitle')}</a></h2>
+          <p data-i18n="docsPage.vfxrunDesc">{defaultFlatText('docsPage.vfxrunDesc')}</p>
+          <Button href="/docs/vfxrun" variant="secondary">
+            <span data-i18n="docsPage.vfxrunBtn">{defaultFlatText('docsPage.vfxrunBtn')}</span>
+          </Button>
+        </article>
+        <article class="card">
+          <h2><a href="/docs/sheetgen" data-i18n="docsPage.sheetgenTitle">{defaultFlatText('docsPage.sheetgenTitle')}</a></h2>
+          <p data-i18n="docsPage.sheetgenDesc">{defaultFlatText('docsPage.sheetgenDesc')}</p>
+          <Button href="/docs/sheetgen" variant="secondary">
+            <span data-i18n="docsPage.sheetgenBtn">{defaultFlatText('docsPage.sheetgenBtn')}</span>
+          </Button>
+        </article>
+      </div>
+
+      <div class="card extra-links">
+        <h2 data-i18n="docsPage.alsoSee">{defaultFlatText('docsPage.alsoSee')}</h2>
+        <ul>
+          <li>
+            <a href="/privacy"><span data-i18n="docsPage.privacyLink">{defaultFlatText('docsPage.privacyLink')}</span></a>
+          </li>
+          <li>
+            <a href="/feedback"><span data-i18n="docsPage.feedbackLink">{defaultFlatText('docsPage.feedbackLink')}</span></a>
+          </li>
+          <li>
+            <a href="/changelog"><span data-i18n="docsPage.changelogLink">{defaultFlatText('docsPage.changelogLink')}</span></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .doc-links {
+    margin: 2rem 0;
+  }
+
+  .doc-links h2 a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .doc-links h2 a:hover {
+    color: var(--accent-text);
+  }
+
+  .extra-links {
+    margin-top: 1.25rem;
+  }
+
+  .extra-links ul {
+    margin-bottom: 0;
+  }
+</style>

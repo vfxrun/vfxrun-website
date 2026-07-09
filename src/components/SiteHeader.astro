@@ -1,0 +1,382 @@
+﻿---
+import { PRIMARY_TABS, SECONDARY_NAV_LINKS } from '../config/site';
+import { defaultText } from '../i18n/messages';
+import LanguageSelector from './LanguageSelector.astro';
+
+const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
+
+function isBrowserTabActive(): boolean {
+  return currentPath === '/' || currentPath === '/vfxrun' || currentPath.startsWith('/vfxrun/');
+}
+
+function isSheetgenTabActive(): boolean {
+  return currentPath === '/sheetgen' || currentPath.startsWith('/sheetgen/');
+}
+
+function isTabActive(tab: 'browser' | 'sheetgen'): boolean {
+  if (tab === 'browser') return isBrowserTabActive();
+  return isSheetgenTabActive();
+}
+
+function isSecondaryActive(href: string): boolean {
+  const linkPath = href.replace(/\/$/, '') || '/';
+  return currentPath === linkPath || currentPath.startsWith(`${linkPath}/`);
+}
+
+const tabI18nKeys = {
+  browser: 'nav.browser',
+  sheetgen: 'nav.sheetgen',
+} as const;
+
+const secondaryI18nKeys: Record<string, string> = {
+  '/docs': 'nav.docs',
+  '/feedback': 'nav.feedback',
+  '/discord': 'nav.discord',
+};
+---
+
+<header class="site-header" transition:persist="site-header">
+  <div class="site-header__inner">
+    <div class="site-header__start">
+      <a class="site-logo" href="/" aria-label="VFXRun.com">
+        <span class="site-logo__wordmarks">
+          <img
+            class="site-logo__icon"
+            src="/assets/logo-vfxrun.png"
+            alt="VFXRun"
+            width="32"
+            height="32"
+            decoding="async"
+          />
+          <img
+            class="site-logo__weblink"
+            src="/assets/vfxrun-weblink.png"
+            alt="VFXRun.com"
+            width="120"
+            height="24"
+            decoding="async"
+          />
+        </span>
+      </a>
+
+      <nav class="site-nav site-nav--primary" aria-label="Products">
+        {
+          PRIMARY_TABS.map((tab, index) => {
+            const active = isTabActive(tab.tab);
+            return (
+              <>
+                {index > 0 ? <span class="site-nav__tab-divider" aria-hidden="true"></span> : null}
+                <a
+                  class:list={[
+                    'site-nav__tab',
+                    { 'site-nav__tab--active': active, 'site-nav__tab--sheetgen': tab.tab === 'sheetgen' },
+                  ]}
+                  href={tab.href}
+                  {...(tab.tab === 'sheetgen'
+                    ? {
+                        'data-analytics-event': 'sheetgen_opened',
+                        'data-analytics-target-url': tab.href,
+                      }
+                    : {})}
+                >
+                  <span data-i18n={tabI18nKeys[tab.tab]}>{defaultText(tabI18nKeys[tab.tab])}</span>
+                </a>
+              </>
+            );
+          })
+        }
+      </nav>
+    </div>
+
+    <div class="site-header__end">
+      <nav class="site-nav site-nav--secondary site-nav--desktop" aria-label="Secondary">
+        {
+          SECONDARY_NAV_LINKS.map((link) => {
+            const active = isSecondaryActive(link.href);
+            const key = secondaryI18nKeys[link.href];
+            const analyticsEvent =
+              link.href === '/feedback'
+                ? 'feedback_clicked'
+                : link.href === '/discord'
+                  ? 'discord_clicked'
+                  : undefined;
+            return (
+              <a
+                class:list={['site-nav__link', { 'site-nav__link--active': active }]}
+                href={link.href}
+                style={`min-width: ${link.minWidth}`}
+                {...(analyticsEvent
+                  ? { 'data-analytics-event': analyticsEvent, 'data-analytics-target-url': link.href }
+                  : {})}
+              >
+                <span data-i18n={key}>{defaultText(key)}</span>
+              </a>
+            );
+          })
+        }
+      </nav>
+
+      <details class="site-more site-nav--mobile">
+        <summary data-i18n="nav.more">{defaultText('nav.more')}</summary>
+        <div class="site-more__menu">
+          {
+            SECONDARY_NAV_LINKS.map((link) => {
+              const key = secondaryI18nKeys[link.href];
+              const analyticsEvent =
+                link.href === '/feedback'
+                  ? 'feedback_clicked'
+                  : link.href === '/discord'
+                    ? 'discord_clicked'
+                    : undefined;
+              return (
+                <a
+                  href={link.href}
+                  {...(analyticsEvent
+                    ? { 'data-analytics-event': analyticsEvent, 'data-analytics-target-url': link.href }
+                    : {})}
+                >
+                  <span data-i18n={key}>{defaultText(key)}</span>
+                </a>
+              );
+            })
+          }
+        </div>
+      </details>
+
+      <LanguageSelector />
+    </div>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(11, 12, 14, 0.98);
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(8px);
+  }
+
+  .site-header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    width: min(100% - 2.5rem, var(--header-max-width));
+    min-height: var(--header-height);
+    margin-inline: auto;
+    padding: 0.5rem 0;
+  }
+
+  .site-header__start {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    min-width: 0;
+    flex-shrink: 0;
+  }
+
+  .site-header__end {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1rem;
+    flex-shrink: 0;
+    min-width: 22rem;
+  }
+
+  .site-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+
+  .site-logo:hover {
+    text-decoration: none;
+    opacity: 0.92;
+  }
+
+  .site-logo__wordmarks {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+  }
+
+  .site-logo__icon {
+    display: block;
+    width: auto;
+    height: 34px;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
+
+  .site-logo__weblink {
+    display: block;
+    width: auto;
+    height: 1.35rem;
+    object-fit: contain;
+  }
+
+  .site-nav--primary {
+    gap: 0.85rem;
+  }
+
+  .site-nav__tab-divider {
+    width: 1px;
+    height: 2.25rem;
+    background: var(--border);
+    flex-shrink: 0;
+    margin-left: 0.5rem;
+  }
+
+  .site-nav__tab--sheetgen {
+    margin-left: 0.85rem;
+  }
+
+  .site-nav__tab {
+    padding: 0.25rem 0;
+    font-size: var(--nav-tab-size);
+    font-weight: 600;
+    color: #6f7179;
+    text-decoration: none;
+    border-radius: 0;
+    white-space: nowrap;
+  }
+
+  .site-nav__tab:hover {
+    color: #a8aab2;
+    text-decoration: none;
+  }
+
+  .site-nav__tab--active {
+    color: var(--text);
+    background: transparent;
+  }
+
+  .site-nav__tab--active:hover {
+    color: var(--text);
+  }
+
+  .site-nav {
+    display: flex;
+    align-items: center;
+  }
+
+  .site-nav--secondary {
+    gap: 1.25rem;
+    flex-shrink: 0;
+  }
+
+  .site-nav__link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    padding: 0.15rem 0;
+    font-size: var(--nav-link-size);
+    font-weight: 500;
+    color: var(--text-muted);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .site-nav__link:hover {
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .site-nav__link--active {
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .site-more {
+    position: relative;
+  }
+
+  .site-more summary {
+    list-style: none;
+    cursor: pointer;
+    font-size: var(--nav-link-size);
+    color: var(--text-muted);
+    padding: 0.4rem 0.6rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+
+  .site-more summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .site-more__menu {
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    min-width: 9rem;
+    padding: 0.35rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: #1b1b1b;
+    box-shadow: var(--shadow);
+    display: grid;
+    gap: 0.15rem;
+    z-index: 120;
+  }
+
+  .site-more__menu a {
+    padding: 0.45rem 0.55rem;
+    border-radius: var(--radius);
+    color: var(--text);
+    text-decoration: none;
+    font-size: var(--nav-link-size);
+  }
+
+  .site-more__menu a:hover {
+    background: var(--accent-soft);
+    text-decoration: none;
+  }
+
+  .site-nav--desktop {
+    display: none;
+  }
+
+  .site-nav--mobile {
+    display: block;
+  }
+
+  @media (min-width: 900px) {
+    .site-nav--desktop {
+      display: flex;
+    }
+
+    .site-nav--mobile {
+      display: none;
+    }
+  }
+
+  @media (max-width: 899px) {
+    .site-header__inner {
+      flex-wrap: wrap;
+      justify-content: center;
+      row-gap: 0.5rem;
+    }
+
+    .site-header__start {
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .site-header__end {
+      width: 100%;
+      min-width: 0;
+      justify-content: center;
+    }
+  }
+</style>
+
+

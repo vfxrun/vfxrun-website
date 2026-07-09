@@ -1,0 +1,186 @@
+---
+import { BROWSER_CAROUSEL_SLIDES } from '../config/site';
+import { defaultText } from '../i18n/messages';
+
+const firstSlide = BROWSER_CAROUSEL_SLIDES[0];
+const slidesJson = JSON.stringify(
+  BROWSER_CAROUSEL_SLIDES.map((slide) => ({ src: slide.src, captionKey: slide.captionKey })),
+);
+---
+
+<div class="browser-carousel" data-browser-carousel data-slides={slidesJson}>
+  <div class="browser-carousel__viewport">
+    <figure class="browser-carousel__frame">
+      <img
+        data-carousel-image
+        src={firstSlide.src}
+        alt=""
+        width="960"
+        height="600"
+        loading="eager"
+        decoding="async"
+      />
+      <figcaption class="browser-carousel__footer">
+        <p class="browser-carousel__caption" data-carousel-caption data-i18n={firstSlide.captionKey}>
+          {defaultText(firstSlide.captionKey)}
+        </p>
+        <div class="browser-carousel__segments" aria-hidden="true">
+          {
+            BROWSER_CAROUSEL_SLIDES.map((_, segmentIndex) => (
+              <span
+                class:list={['browser-carousel__segment', { 'is-active': segmentIndex === 0 }]}
+                data-carousel-segment
+              />
+            ))
+          }
+        </div>
+      </figcaption>
+    </figure>
+
+    <button
+      type="button"
+      class="browser-carousel__arrow browser-carousel__arrow--prev"
+      data-carousel-prev
+      data-i18n-aria-label="browser.carousel.prev"
+      aria-label={defaultText('browser.carousel.prev')}
+    >
+      <span aria-hidden="true">‹</span>
+    </button>
+
+    <button
+      type="button"
+      class="browser-carousel__arrow browser-carousel__arrow--next"
+      data-carousel-next
+      data-i18n-aria-label="browser.carousel.next"
+      aria-label={defaultText('browser.carousel.next')}
+    >
+      <span aria-hidden="true">›</span>
+    </button>
+  </div>
+</div>
+
+<style>
+  .browser-carousel {
+    width: 100%;
+  }
+
+  .browser-carousel__viewport {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 720 / 355;
+    background: #0c0d10;
+    overflow: hidden;
+    --carousel-footer-height: 3.75rem;
+  }
+
+  .browser-carousel__frame {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+  }
+
+  .browser-carousel__frame img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    transition: opacity 0.2s ease;
+  }
+
+  .browser-carousel__frame.is-fading img {
+    opacity: 0.82;
+  }
+
+  .browser-carousel__footer {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    margin: 0;
+    pointer-events: none;
+    background: rgba(0, 0, 0, 0.62);
+  }
+
+  .browser-carousel__caption {
+    margin: 0;
+    padding: 0.975rem 2.5rem 0.825rem;
+    font-size: 1.3125rem;
+    font-weight: 500;
+    line-height: 1.45;
+    color: #f5f5f7;
+    text-align: center;
+  }
+
+  .browser-carousel__segments {
+    display: flex;
+    height: 3px;
+  }
+
+  .browser-carousel__segment {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.14);
+    transition: background 0.2s ease;
+  }
+
+  .browser-carousel__segment.is-active {
+    background: var(--accent);
+  }
+
+  .browser-carousel__arrow span {
+    display: block;
+    transform: translateY(-4px);
+  }
+
+  .browser-carousel__arrow {
+    position: absolute;
+    top: 50%;
+    z-index: 3;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.625rem;
+    height: 2.625rem;
+    padding: 0;
+    border: 0;
+    border-radius: 3px;
+    background: rgba(0, 0, 0, 0.48);
+    color: rgba(255, 255, 255, 0.88);
+    font-size: 1.875rem;
+    line-height: 1;
+    cursor: pointer;
+    transform: translateY(-50%);
+    transition: background 0.15s ease;
+  }
+
+  .browser-carousel__arrow:hover {
+    background: rgba(0, 0, 0, 0.68);
+    color: #fff;
+  }
+
+  .browser-carousel__arrow--prev {
+    left: 0.45rem;
+  }
+
+  .browser-carousel__arrow--next {
+    right: 0.45rem;
+  }
+
+  @media (max-width: 639px) {
+    .browser-carousel__viewport {
+      --carousel-footer-height: 3.35rem;
+    }
+
+    .browser-carousel__caption {
+      padding: 0.825rem 2rem 0.675rem;
+      font-size: 1.21875rem;
+    }
+
+    .browser-carousel__arrow {
+      width: 2.375rem;
+      height: 2.375rem;
+      font-size: 1.6875rem;
+    }
+  }
+</style>

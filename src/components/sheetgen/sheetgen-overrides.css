@@ -1,0 +1,19 @@
+/* Embedded SheetGen: keep the tool inside the page shell instead of locking viewport scroll. */
+body.body--sheetgen {
+  --accent-text: #46a4fb;
+  --accent-text-hover: rgba(70, 164, 251, 0.24);
+  --accent-text-muted: rgba(70, 164, 251, 0.14);
+  --accent: #5c68f7;
+  --accent-hover: rgba(92, 104, 247, 0.24);
+  --accent-soft: rgba(92, 104, 247, 0.14);
+}
+
+body.body--sheetgen .sheetgen-tool-mount .app-shell {
+  height: 100% !important;
+  min-height: 0 !important;
+}
+
+body.body--sheetgen .sheetgen-tool-mount .resizable-layout {
+  flex: 1 1 auto;
+  min-height: 0;
+}

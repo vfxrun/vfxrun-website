@@ -1,0 +1,47 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { defaultFlatText } from '../i18n/i18n-bundles';
+---
+
+<BaseLayout
+  title="Terms of Use"
+  description="Terms of use for VFXRun.com, VFXRun Browser, and SheetGen."
+  canonicalPath="/terms"
+>
+  <section class="page-section">
+    <div class="container prose">
+      <h1 data-i18n="termsPage.title">{defaultFlatText('termsPage.title')}</h1>
+      <p class="lead" data-i18n="termsPage.updated">{defaultFlatText('termsPage.updated')}</p>
+
+      <h2 data-i18n="termsPage.overviewTitle">{defaultFlatText('termsPage.overviewTitle')}</h2>
+      <p data-i18n="termsPage.overviewBody">{defaultFlatText('termsPage.overviewBody')}</p>
+
+      <h2 data-i18n="termsPage.freeTitle">{defaultFlatText('termsPage.freeTitle')}</h2>
+      <p data-i18n="termsPage.freeBody">{defaultFlatText('termsPage.freeBody')}</p>
+
+      <h2 data-i18n="termsPage.contentTitle">{defaultFlatText('termsPage.contentTitle')}</h2>
+      <p data-i18n="termsPage.contentBody">{defaultFlatText('termsPage.contentBody')}</p>
+
+      <h2 data-i18n="termsPage.marketplaceTitle">{defaultFlatText('termsPage.marketplaceTitle')}</h2>
+      <p data-i18n="termsPage.marketplaceBody">{defaultFlatText('termsPage.marketplaceBody')}</p>
+
+      <h2 data-i18n="termsPage.disclaimerTitle">{defaultFlatText('termsPage.disclaimerTitle')}</h2>
+      <p data-i18n="termsPage.disclaimerBody">{defaultFlatText('termsPage.disclaimerBody')}</p>
+
+      <h2 data-i18n="termsPage.changesTitle">{defaultFlatText('termsPage.changesTitle')}</h2>
+      <p data-i18n="termsPage.changesBody">{defaultFlatText('termsPage.changesBody')}</p>
+
+      <p>
+        <a href="/privacy"><span data-i18n="termsPage.footerPrivacy">{defaultFlatText('termsPage.footerPrivacy')}</span></a>
+        ·
+        <a href="/feedback"><span data-i18n="termsPage.footerFeedback">{defaultFlatText('termsPage.footerFeedback')}</span></a>
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .lead {
+    color: var(--text-muted);
+  }
+</style>

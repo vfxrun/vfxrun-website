@@ -1,0 +1,73 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/Button.astro';
+import { DISCORD_INVITE_URL } from '../config/site';
+import { defaultFlatText } from '../i18n/i18n-bundles';
+---
+
+<BaseLayout
+  title="Discord"
+  description="Join the VFXRun Discord for early updates, bug reports, feature ideas, and 2D VFX workflow discussion."
+  canonicalPath="/discord"
+>
+  <section class="page-section">
+    <div class="container prose discord-page">
+      <h1 data-i18n="discordPage.title">{defaultFlatText('discordPage.title')}</h1>
+      <p class="lead" data-i18n="discordPage.lead">{defaultFlatText('discordPage.lead')}</p>
+
+      <div class="discord-actions">
+        <Button
+          href={DISCORD_INVITE_URL}
+          external
+          data-analytics-event="discord_clicked"
+          data-analytics-target-url={DISCORD_INVITE_URL}
+        >
+          <span data-i18n="discordPage.joinBtn">{defaultFlatText('discordPage.joinBtn')}</span>
+        </Button>
+        <Button href="/feedback" variant="secondary" data-analytics-event="feedback_clicked" data-analytics-target-url="/feedback">
+          <span data-i18n="discordPage.feedbackBtn">{defaultFlatText('discordPage.feedbackBtn')}</span>
+        </Button>
+      </div>
+
+      <h2 data-i18n="discordPage.usesTitle">{defaultFlatText('discordPage.usesTitle')}</h2>
+      <ul>
+        <li data-i18n="discordPage.useRelease">{defaultFlatText('discordPage.useRelease')}</li>
+        <li data-i18n="discordPage.useBug">{defaultFlatText('discordPage.useBug')}</li>
+        <li data-i18n="discordPage.useFeature">{defaultFlatText('discordPage.useFeature')}</li>
+        <li data-i18n="discordPage.usePro">{defaultFlatText('discordPage.usePro')}</li>
+        <li data-i18n="discordPage.useWorkflow">{defaultFlatText('discordPage.useWorkflow')}</li>
+      </ul>
+
+      <h2 data-i18n="discordPage.wishlistTitle">{defaultFlatText('discordPage.wishlistTitle')}</h2>
+      <p>
+        <span data-i18n="discordPage.wishlistLead">{defaultFlatText('discordPage.wishlistLead')}</span>
+        <a href="/#pro">/#pro</a>.
+      </p>
+
+      <p class="muted">
+        <span data-i18n="discordPage.emailNote">{defaultFlatText('discordPage.emailNote')}</span>
+        <a href="/feedback"><span data-i18n="discordPage.emailNoteLink">{defaultFlatText('discordPage.emailNoteLink')}</span></a>
+        .
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .discord-page .lead {
+    color: var(--text-muted);
+    max-width: 42rem;
+  }
+
+  .discord-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    margin: 1.25rem 0 1.75rem;
+  }
+
+  .muted {
+    color: var(--text-muted);
+    font-size: 0.9375rem;
+  }
+</style>

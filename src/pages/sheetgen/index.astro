@@ -1,0 +1,176 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SheetGenTool from '../../components/sheetgen/SheetGenTool.astro';
+import { defaultText } from '../../i18n/messages';
+
+const trustStrip = ['sheetgen.trust.noAccount', 'sheetgen.trust.freeForever'] as const;
+
+const chromeLinks = [
+  { href: '/docs', key: 'footer.docs' },
+  { href: '/changelog', key: 'footer.changelog' },
+  { href: '/privacy', key: 'footer.privacy' },
+  { href: '/terms', key: 'footer.terms' },
+  { href: '/feedback', key: 'footer.feedback' },
+  { href: '/discord', key: 'footer.discord' },
+] as const;
+---
+
+<BaseLayout
+  title="SheetGen"
+  description="Free browser-based sprite sheet generator by VFXRun. Pack PNG sequences into sprite sheets for 2D game development."
+  canonicalPath="/sheetgen"
+  variant="sheetgen"
+>
+  <div class="sheetgen-shell">
+    <div class="sheetgen-strip" aria-label="SheetGen highlights">
+      <p class="sheetgen-strip__trust">
+        <span data-i18n={trustStrip[0]}>{defaultText(trustStrip[0])}</span>
+        <span class="sheetgen-strip__sep" aria-hidden="true">·</span>
+        <span data-i18n={trustStrip[1]}>{defaultText(trustStrip[1])}</span>
+      </p>
+      <p class="sheetgen-strip__privacy" data-i18n="sheetgen.privacyHint">
+        {defaultText('sheetgen.privacyHint')}
+      </p>
+    </div>
+
+    <div class="sheetgen-shell__tool">
+      <SheetGenTool />
+    </div>
+
+    <p class="sheetgen-shell__copy" data-i18n="sheetgen.copyright">
+      {defaultText('sheetgen.copyright')}
+    </p>
+
+    <nav class="sheetgen-shell__links" aria-label="SheetGen page links">
+      {
+        chromeLinks.map((link) => {
+          const analyticsEvent =
+            link.href === '/feedback'
+              ? 'feedback_clicked'
+              : link.href === '/discord'
+                ? 'discord_clicked'
+                : undefined;
+          return (
+            <a
+              href={link.href}
+              {...(analyticsEvent
+                ? { 'data-analytics-event': analyticsEvent, 'data-analytics-target-url': link.href }
+                : {})}
+            >
+              <span data-i18n={link.key}>{defaultText(link.key)}</span>
+            </a>
+          );
+        })
+      }
+    </nav>
+  </div>
+</BaseLayout>
+
+<style>
+  .sheetgen-shell {
+    flex: 1 1 auto;
+    min-height: 0;
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto auto;
+    overflow: hidden;
+    background: var(--bg);
+  }
+
+  .sheetgen-strip {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: nowrap;
+    padding: 0.4rem 1.25rem;
+    border-bottom: 1px solid var(--border);
+    background: rgba(16, 17, 18, 0.98);
+  }
+
+  .sheetgen-strip__trust {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 0.35rem 0.5rem;
+    margin: 0;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--text);
+    white-space: nowrap;
+  }
+
+  .sheetgen-strip__sep {
+    color: var(--text-muted);
+    font-weight: 400;
+  }
+
+  .sheetgen-strip__privacy {
+    margin: 0;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-align: right;
+    line-height: 1.35;
+    flex-shrink: 1;
+    min-width: 0;
+  }
+
+  .sheetgen-shell__tool {
+    flex: 1 1 auto;
+    min-height: 0;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sheetgen-shell__copy {
+    margin: 0;
+    padding: 0.45rem 1.25rem 0.35rem;
+    border-top: 1px solid var(--border);
+    background: var(--surface);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-align: center;
+  }
+
+  .sheetgen-shell__links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.35rem 0.85rem;
+    margin: 0;
+    padding: 0.35rem 1.25rem 0.55rem;
+    border-top: 1px solid var(--border);
+    background: var(--surface);
+  }
+
+  .sheetgen-shell__links a {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-decoration: none;
+  }
+
+  .sheetgen-shell__links a:hover {
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  @media (max-width: 720px) {
+    .sheetgen-strip {
+      flex-wrap: wrap;
+      padding: 0.45rem 0.85rem;
+    }
+
+    .sheetgen-strip__trust {
+      white-space: normal;
+    }
+
+    .sheetgen-strip__privacy {
+      text-align: left;
+      flex-basis: 100%;
+    }
+  }
+</style>

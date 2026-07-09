@@ -1,0 +1,489 @@
+---
+import Button from './Button.astro';
+import SidebarSectionNav from './SidebarSectionNav.astro';
+import BrowserScreenshotCarousel from './BrowserScreenshotCarousel.astro';
+import { VFXRUN_SECTIONS, PRO_VOTE_FEATURES } from '../config/site';
+import { defaultText } from '../i18n/messages';
+
+const heroBullets = [
+  'browser.heroBullet1',
+  'browser.heroBullet2',
+  'browser.heroBullet3',
+  'browser.heroBullet4',
+] as const;
+---
+
+<div class="browser-page page-layout">
+  <aside class="browser-page__sidebar page-layout__sidebar">
+    <SidebarSectionNav sections={VFXRUN_SECTIONS} navKey="browser" />
+  </aside>
+
+  <div class="browser-page__content page-layout__content">
+    <section class="browser-section product-hero" id="overview">
+      <div class="hero-content">
+        <div class="hero-content__media">
+          <BrowserScreenshotCarousel />
+        </div>
+
+        <div class="hero-content__copy">
+          <p class="hero-intro-a" data-i18n="browser.heroIntroA">{defaultText('browser.heroIntroA')}</p>
+          <p class="hero-intro-b" data-i18n="browser.heroIntroB">{defaultText('browser.heroIntroB')}</p>
+          <ul class="hero-feature-list">
+            {
+              heroBullets.map((key) => (
+                <li>
+                  <span data-i18n={key}>{defaultText(key)}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider" aria-hidden="true"></div>
+
+    <section class="browser-section product-download-section" id="download">
+      <div class="product-download">
+        <div class="download-head">
+          <h2 class="share-title" data-i18n="browser.shareTitle">{defaultText('browser.shareTitle')}</h2>
+          <span class="share-wrap">
+            <button type="button" class="share-button" id="browser-share-btn">
+              <span data-i18n="browser.shareBtn">{defaultText('browser.shareBtn')}</span>
+            </button>
+            <span
+              class="share-toast"
+              id="browser-share-toast"
+              role="status"
+              aria-live="polite"
+              data-i18n="browser.shareToast">{defaultText('browser.shareToast')}</span
+            >
+          </span>
+        </div>
+
+        <div class="download-actions">
+          <div class="download-platform" data-analytics-download="windows">
+            <Button href="#" class="download-platform__btn" disabled>
+              <span data-i18n="browser.downloadWindowsBtn">{defaultText('browser.downloadWindowsBtn')}</span>
+            </Button>
+            <p class="download-platform__size" data-i18n="browser.downloadFileSize">
+              {defaultText('browser.downloadFileSize')}
+            </p>
+          </div>
+
+          <div class="download-platform" data-analytics-download="macos">
+            <Button href="#" class="download-platform__btn" disabled>
+              <span data-i18n="browser.downloadMacBtn">{defaultText('browser.downloadMacBtn')}</span>
+            </Button>
+            <p class="download-platform__size" data-i18n="browser.downloadFileSize">
+              {defaultText('browser.downloadFileSize')}
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider" aria-hidden="true"></div>
+
+    <section class="browser-section browser-section--pro" id="pro">
+      <h2 class="section-title" data-i18n="browser.sections.pro">{defaultText('browser.sections.pro')}</h2>
+      <p class="pro-subtitle" data-i18n="browser.proWishlistLead">{defaultText('browser.proWishlistLead')}</p>
+
+      <form class="pro-vote-form" id="vote-form">
+        <fieldset class="pro-vote-form__features">
+          <legend class="sr-only" data-i18n="browser.proVotesLegend">{defaultText('browser.proVotesLegend')}</legend>
+          {
+            PRO_VOTE_FEATURES.map((feature) => (
+              <label class="pro-vote-form__check">
+                <input type="checkbox" name="feature" value={feature.id} />
+                <span data-i18n={feature.labelKey}>{defaultText(feature.labelKey)}</span>
+              </label>
+            ))
+          }
+        </fieldset>
+        <label class="pro-vote-form__email">
+          <span class="pro-vote-form__email-label" data-i18n="browser.proEmail">{defaultText('browser.proEmail')}</span>
+          <input type="email" name="email" placeholder="you@example.com" required />
+        </label>
+        <button type="submit" class="pro-vote-form__submit btn btn--primary">
+          <span data-i18n="browser.proSubmit">{defaultText('browser.proSubmit')}</span>
+        </button>
+        <p class="pro-vote-form__status" data-vote-status hidden></p>
+        <span class="sr-only" data-i18n="browser.proVoteSuccess">{defaultText('browser.proVoteSuccess')}</span>
+        <span class="sr-only" data-i18n="browser.proVoteErrorFeatures">{defaultText('browser.proVoteErrorFeatures')}</span>
+        <span class="sr-only" data-i18n="browser.proVoteErrorEmail">{defaultText('browser.proVoteErrorEmail')}</span>
+      </form>
+    </section>
+
+    <div class="section-divider" aria-hidden="true"></div>
+
+    <section class="browser-section browser-section--faq" id="faq">
+      <h2 class="section-title" data-i18n="browser.sections.faq">{defaultText('browser.sections.faq')}</h2>
+      <dl class="faq-list">
+        <div class="faq-item">
+          <dt data-i18n="browser.faqAssetsQ">{defaultText('browser.faqAssetsQ')}</dt>
+          <dd data-i18n="browser.faqAssetsA">{defaultText('browser.faqAssetsA')}</dd>
+        </div>
+        <div class="faq-item">
+          <dt data-i18n="browser.faqLoginQ">{defaultText('browser.faqLoginQ')}</dt>
+          <dd data-i18n="browser.faqLoginA">{defaultText('browser.faqLoginA')}</dd>
+        </div>
+        <div class="faq-item">
+          <dt data-i18n="browser.faqUploadQ">{defaultText('browser.faqUploadQ')}</dt>
+          <dd data-i18n="browser.faqUploadA">{defaultText('browser.faqUploadA')}</dd>
+        </div>
+      </dl>
+    </section>
+  </div>
+</div>
+
+<script>
+  import '../scripts/browser-share.ts';
+</script>
+
+<style>
+  .browser-page {
+    --content-max: var(--browser-content-max);
+    align-items: start;
+    padding: 1rem 0 2.5rem;
+    column-gap: 0;
+    grid-template-columns:
+      var(--browser-gutter)
+      var(--browser-sidebar-width)
+      var(--browser-logo-carousel-gap)
+      minmax(0, var(--browser-content-max))
+      var(--browser-gutter);
+  }
+
+  .browser-page__sidebar {
+    padding-top: 0.15rem;
+    width: 100%;
+    max-width: var(--browser-sidebar-width);
+  }
+
+  .browser-section {
+    padding: 1.75rem 0;
+    scroll-margin-top: calc(var(--header-height) + 1rem);
+  }
+
+  .browser-section:first-child {
+    padding-top: 0;
+  }
+
+  .section-title {
+    margin: 0 0 0.5rem;
+    font-size: 1.0625rem;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  .browser-section--pro .section-title,
+  .browser-section--faq .section-title {
+    font-size: 1.59375rem;
+  }
+
+  .section-divider {
+    border-bottom: 1px solid var(--border);
+    margin: 0;
+  }
+
+  .hero-content {
+    display: grid;
+    gap: 1.5rem;
+    align-items: start;
+  }
+
+  @media (min-width: 960px) {
+    .hero-content {
+      grid-template-columns: minmax(0, 1.65fr) minmax(280px, 0.78fr);
+      gap: 2rem 2.25rem;
+    }
+  }
+
+  .hero-content__media {
+    min-width: 0;
+  }
+
+  .hero-content__copy {
+    padding-top: 0.15rem;
+  }
+
+  .hero-intro-a {
+    margin: 0 0 1.25rem;
+    font-size: clamp(1.125rem, 1.75vw, 1.375rem);
+    font-weight: 400;
+    line-height: 1.55;
+    color: var(--text);
+  }
+
+  .hero-intro-b {
+    margin: 0 0 0.9rem;
+    font-size: 1.0625rem;
+    line-height: 1.55;
+    color: var(--text-muted);
+  }
+
+  .hero-feature-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.75rem;
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 1.45;
+    color: var(--accent-text);
+  }
+
+  .hero-feature-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.7rem;
+  }
+
+  .hero-feature-list li::before {
+    content: '';
+    flex-shrink: 0;
+    width: 0.55rem;
+    height: 0.55rem;
+    margin-top: 0.55rem;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  .product-download-section {
+    padding-top: 1.75rem;
+  }
+
+  .product-download {
+    scroll-margin-top: calc(var(--header-height) + 1rem);
+    padding-bottom: 0.15rem;
+  }
+
+  .download-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem 1rem;
+    margin-bottom: 1.35rem;
+  }
+
+  .share-title {
+    margin: 0;
+    font-size: clamp(2.75rem, 5.2vw, 3.5rem);
+    font-weight: 600;
+    line-height: 1.15;
+    color: var(--text);
+  }
+
+  .share-wrap {
+    position: relative;
+    display: inline-flex;
+    flex: 0 0 auto;
+  }
+
+  .share-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    min-height: 2rem;
+    padding: 0 0.85rem;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    border-radius: var(--radius);
+    background: rgba(255, 255, 255, 0.95);
+    color: #111;
+    font: inherit;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .share-button:hover {
+    background: #fff;
+    border-color: #fff;
+  }
+
+  .share-toast {
+    position: absolute;
+    left: 50%;
+    bottom: calc(100% + 0.5rem);
+    transform: translateX(-50%);
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    color: var(--text);
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    z-index: 3;
+  }
+
+  .share-toast.is-visible {
+    opacity: 1;
+  }
+
+  .download-actions {
+    display: grid;
+    gap: 1.15rem;
+    max-width: 52rem;
+  }
+
+  @media (min-width: 640px) {
+    .download-actions {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.15rem;
+    }
+  }
+
+  .download-platform {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+
+  .download-platform :global(.download-platform__btn) {
+    width: 100%;
+    min-height: 4.5rem;
+    padding: 0.85rem 1rem;
+    font-size: 1.40625rem;
+    font-weight: 600;
+    border-radius: var(--radius-lg);
+  }
+
+  .download-platform__size {
+    margin: 0;
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+    text-align: center;
+  }
+
+  .pro-subtitle {
+    margin: 0 0 0.85rem;
+    font-size: 0.9375rem;
+    color: var(--text-muted);
+    max-width: 42rem;
+  }
+
+  .pro-vote-form {
+    display: grid;
+    gap: 0.75rem;
+    max-width: 30rem;
+    padding: 0;
+    border: 0;
+    background: transparent;
+  }
+
+  .pro-vote-form__features {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 0.85rem 1rem;
+    margin: 0;
+    display: grid;
+    gap: 0.65rem;
+    background: var(--panel);
+  }
+
+  .pro-vote-form__check {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 0.65rem;
+    font-size: 1.21875rem;
+    line-height: 1.4;
+    color: var(--text);
+    cursor: pointer;
+  }
+
+  .pro-vote-form__check input[type='checkbox'] {
+    width: 1.125rem;
+    height: 1.125rem;
+    margin: 0;
+    accent-color: var(--accent-text);
+    cursor: pointer;
+  }
+
+  .pro-vote-form__status {
+    margin: 0;
+    font-size: 0.875rem;
+    color: var(--text-muted);
+  }
+
+  .pro-vote-form__status.is-error {
+    color: #f87171;
+  }
+
+  .pro-vote-form__email {
+    display: grid;
+    gap: 0.35rem;
+  }
+
+  .pro-vote-form__email-label {
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+  }
+
+  .pro-vote-form__email input {
+    display: block;
+    width: 100%;
+    min-height: 2.35rem;
+    padding: 0.55rem 0.7rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--panel);
+    color: var(--text);
+    font: inherit;
+    font-size: 0.875rem;
+  }
+
+  .pro-vote-form__submit {
+    width: 100%;
+    min-height: 3rem;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    border-radius: var(--radius-lg);
+    border: 0;
+    cursor: pointer;
+  }
+
+  .faq-list {
+    display: grid;
+    gap: 0.65rem;
+    margin: 0;
+  }
+
+  .faq-item {
+    margin: 0;
+    padding: 0.85rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+  }
+
+  .faq-item dt {
+    font-weight: 600;
+    margin-bottom: 0.35rem;
+    font-size: 0.9375rem;
+  }
+
+  .faq-item dd {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 959px) {
+    .browser-page {
+      width: min(calc(100% - 2rem), var(--content-max));
+      margin-inline: auto;
+      grid-template-columns: 1fr;
+      column-gap: 0;
+      row-gap: 1rem;
+    }
+  }
+</style>

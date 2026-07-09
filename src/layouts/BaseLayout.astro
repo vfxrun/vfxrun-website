@@ -1,0 +1,147 @@
+﻿---
+import '../styles/global.css';
+import { ClientRouter } from 'astro:transitions';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import { SITE } from '../config/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+  canonicalPath?: string;
+  /** SheetGen tool page: hide global footer, fill viewport with tool workspace. */
+  variant?: 'default' | 'sheetgen';
+}
+
+const { title, description = SITE.description, canonicalPath, variant = 'default' } = Astro.props;
+const pageTitle = title ? `${title} | ${SITE.name}` : SITE.title;
+const canonicalUrl = canonicalPath ? new URL(canonicalPath, SITE.url).href : Astro.url.href;
+const cloudflareAnalyticsToken = import.meta.env.PUBLIC_CLOUDFLARE_ANALYTICS_TOKEN?.trim() ?? '';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="icon" type="image/png" href="/assets/vfxrun-favicon.png?v=2" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{pageTitle}</title>
+    <ClientRouter />
+    <script is:inline>
+      (function () {
+        var key = 'vfxrun:language';
+        function resolve(value) {
+          if (!value || typeof value !== 'string') return null;
+          var tag = value.trim().replace(/_/g, '-');
+          var supported = ['en', 'zh-CN', 'zh-TW', 'ja', 'ko', 'es', 'fr'];
+          if (supported.indexOf(tag) !== -1) return tag;
+          var parts = tag.split('-');
+          var base = parts[0].toLowerCase();
+          var region = (parts[1] || '').toUpperCase();
+          if (base === 'zh') return region === 'TW' || region === 'HK' || region === 'MO' ? 'zh-TW' : 'zh-CN';
+          if (base === 'en' || base === 'ja' || base === 'ko' || base === 'es' || base === 'fr') return base;
+          return null;
+        }
+        try {
+          var locale = resolve(localStorage.getItem(key)) || resolve(navigator.language) || 'en';
+          document.documentElement.setAttribute('data-locale', locale);
+          document.documentElement.lang = locale.indexOf('zh') === 0 ? locale : locale.split('-')[0];
+          window.setTimeout(function () {
+            if (!document.documentElement.dataset.i18nReady) {
+              document.documentElement.dataset.i18nReady = '1';
+            }
+          }, 2500);
+        } catch (e) {}
+      })();
+    </script>
+    <slot name="head" />
+    <script type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      name: SITE.name,
+      url: SITE.url,
+      description: SITE.description,
+    })} />
+    {
+      cloudflareAnalyticsToken ? (
+        <script
+          defer
+          src="https://static.cloudflareinsights.com/beacon.min.js"
+          data-cf-beacon={JSON.stringify({ token: cloudflareAnalyticsToken })}
+        />
+      ) : null
+    }
+  </head>
+  <body class:list={[{ 'body--sheetgen': variant === 'sheetgen' }]}>
+    <div class:list={['page-shell', { 'page-shell--sheetgen': variant === 'sheetgen' }]}>
+      <SiteHeader />
+      <main class:list={[{ 'main--sheetgen': variant === 'sheetgen' }]} transition:animate="fade">
+        <slot />
+      </main>
+      {variant !== 'sheetgen' && <SiteFooter transition:animate="fade" />}
+    </div>
+    <script>
+      import '../scripts/i18n-client.ts';
+      import '../scripts/header-nav-active.ts';
+      import '../scripts/layout-shell-sync.ts';
+      import '../scripts/page-features.ts';
+      import '../scripts/section-nav-spy.ts';
+      import '../scripts/analytics-init.ts';
+    </script>
+  </body>
+</html>
+
+<style>
+  .page-shell {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .page-shell--sheetgen {
+    min-height: 100dvh;
+    height: 100dvh;
+    overflow: hidden;
+  }
+
+  .main--sheetgen {
+    flex: 1 1 auto;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+</style>
+
+<style is:global>
+  body.body--sheetgen {
+    overflow: hidden;
+  }
+
+  @keyframes site-fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  ::view-transition-group(site-header) {
+    animation: none;
+  }
+
+  ::view-transition-old(site-header),
+  ::view-transition-new(site-header) {
+    animation: none;
+  }
+
+  ::view-transition-old(main-content),
+  ::view-transition-new(main-content) {
+    animation-duration: 0.15s;
+  }
+</style>
+

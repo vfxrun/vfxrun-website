@@ -1,0 +1,161 @@
+---
+interface Props {
+  labelKey?: string;
+  label?: string;
+  variant?: number;
+  showInnerLabel?: boolean;
+  size?: 'default' | 'hero';
+}
+
+const {
+  labelKey = 'browser.screenshotLabel',
+  label = 'VFXRun Browser — app screenshot',
+  variant = 1,
+  showInnerLabel = true,
+  size = 'default',
+} = Astro.props;
+---
+
+<div class="app-shot" class:list={[{ 'app-shot--hero': size === 'hero' }]} role="img" aria-label={label}>
+  <div class="app-shot__window">
+    <div class="app-shot__titlebar">
+      <div class="app-shot__controls" aria-hidden="true">
+        <span></span><span></span><span></span>
+      </div>
+      <span class="app-shot__title">VFXRun Browser</span>
+    </div>
+    <div class="app-shot__viewport" data-variant={variant}>
+      <div class="app-shot__sidebar" aria-hidden="true"></div>
+      <div class="app-shot__main">
+        <div class="app-shot__grid" aria-hidden="true">
+          <span></span><span></span><span></span><span></span><span></span><span></span>
+        </div>
+        {
+          showInnerLabel ? (
+            <p class="app-shot__label" data-i18n={labelKey}>
+              {label}
+            </p>
+          ) : null
+        }
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .app-shot {
+    width: 100%;
+  }
+
+  .app-shot--hero .app-shot__viewport {
+    min-height: 280px;
+    aspect-ratio: 720 / 355;
+  }
+
+  @media (min-width: 720px) {
+    .app-shot--hero .app-shot__viewport {
+      min-height: 340px;
+    }
+  }
+
+  .app-shot__window {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--panel);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+
+  .app-shot__titlebar {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.45rem 0.65rem;
+    background: #141518;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .app-shot__controls {
+    display: flex;
+    gap: 0.35rem;
+  }
+
+  .app-shot__controls span {
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 50%;
+    background: #3a3d46;
+  }
+
+  .app-shot__title {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+  }
+
+  .app-shot__viewport {
+    display: grid;
+    grid-template-columns: 4.5rem 1fr;
+    min-height: 220px;
+    aspect-ratio: 16 / 10;
+  }
+
+  .app-shot__sidebar {
+    border-right: 1px solid var(--border);
+    background: #141518;
+  }
+
+  .app-shot__main {
+    position: relative;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(180deg, #181a1f 0%, #141518 100%);
+    padding: 1rem;
+  }
+
+  .app-shot__grid {
+    position: absolute;
+    inset: 0.75rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.45rem;
+    opacity: 0.35;
+  }
+
+  .app-shot__grid span {
+    border: 1px dashed #3a3f4f;
+    border-radius: 4px;
+    background: rgba(92, 104, 247, 0.06);
+  }
+
+  .app-shot__viewport[data-variant='2'] .app-shot__grid span {
+    background: rgba(92, 200, 247, 0.08);
+  }
+
+  .app-shot__viewport[data-variant='3'] .app-shot__grid span {
+    background: rgba(200, 140, 247, 0.08);
+  }
+
+  .app-shot__viewport[data-variant='4'] .app-shot__grid span {
+    background: rgba(140, 247, 180, 0.08);
+  }
+
+  .app-shot__viewport[data-variant='5'] .app-shot__grid span {
+    background: rgba(247, 200, 92, 0.08);
+  }
+
+  .app-shot__viewport[data-variant='6'] .app-shot__grid span {
+    background: rgba(247, 140, 140, 0.08);
+  }
+
+  .app-shot__label {
+    position: relative;
+    z-index: 1;
+    margin: 0;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    padding: 0.35rem 0.55rem;
+    border: 1px dashed #454850;
+    border-radius: var(--radius);
+    background: rgba(23, 24, 27, 0.85);
+  }
+</style>

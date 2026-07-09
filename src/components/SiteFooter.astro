@@ -1,0 +1,60 @@
+---
+import { defaultText } from '../i18n/messages';
+---
+
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <p class="site-footer__copy" data-i18n="footer.copyright">{defaultText('footer.copyright')}</p>
+    <nav class="site-footer__nav" aria-label="Footer">
+      <a href="/docs"><span data-i18n="footer.docs">{defaultText('footer.docs')}</span></a>
+      <a href="/changelog"><span data-i18n="footer.changelog">{defaultText('footer.changelog')}</span></a>
+      <a href="/privacy"><span data-i18n="footer.privacy">{defaultText('footer.privacy')}</span></a>
+      <a href="/terms"><span data-i18n="footer.terms">{defaultText('footer.terms')}</span></a>
+      <a href="/feedback" data-analytics-event="feedback_clicked" data-analytics-target-url="/feedback"><span data-i18n="footer.feedback">{defaultText('footer.feedback')}</span></a>
+      <a href="/discord" data-analytics-event="discord_clicked" data-analytics-target-url="/discord"><span data-i18n="footer.discord">{defaultText('footer.discord')}</span></a>
+    </nav>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    margin-top: auto;
+    border-top: 1px solid var(--border);
+    background: var(--bg);
+    padding: 1.75rem 0 2rem;
+  }
+
+  .site-footer__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    width: min(100% - 2rem, var(--content-max));
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  .site-footer__copy {
+    margin: 0;
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+  }
+
+  .site-footer__nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem 1rem;
+  }
+
+  .site-footer__nav a {
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+    text-decoration: none;
+  }
+
+  .site-footer__nav a:hover {
+    color: var(--text);
+    text-decoration: none;
+  }
+</style>

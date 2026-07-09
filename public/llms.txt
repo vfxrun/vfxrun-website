@@ -1,0 +1,31 @@
+# VFXRun.com
+
+> VFXRun is a free local 2D VFX browser for previewing PNG sequences, GIFs, and sprite sheets before importing them into Godot, Unity, or other engines. SheetGen is a free browser-based sprite sheet generator by VFXRun.
+
+## Products
+
+- VFXRun Browser: Free desktop app for browsing and previewing local VFX sequences. https://vfxrun.com/
+- SheetGen: Free web tool for packing PNG sequences into sprite sheets. https://vfxrun.com/sheetgen
+
+## Key pages
+
+- VFXRun Browser (home): https://vfxrun.com/
+- Download: https://vfxrun.com/#download (legacy: https://vfxrun.com/vfxrun/download)
+- Pro plan (votes & wishlist, not sold yet): https://vfxrun.com/#pro (legacy: https://vfxrun.com/vfxrun/pro)
+- SheetGen: https://vfxrun.com/sheetgen
+- Documentation: https://vfxrun.com/docs
+- Privacy: https://vfxrun.com/privacy
+- Terms: https://vfxrun.com/terms
+- Feedback: https://vfxrun.com/feedback
+
+## Privacy
+
+Local files stay on the user's device. VFXRun does not upload file names, file paths, image content, or project assets. Anonymous usage statistics may be collected to improve the product.
+
+## Audience
+
+2D game developers using Godot, Unity, Cocos, or similar engines who work with PNG sequence VFX and sprite sheets.
+
+## Contact
+
+Feedback: https://vfxrun.com/feedback

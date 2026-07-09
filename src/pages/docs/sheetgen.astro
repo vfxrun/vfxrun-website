@@ -1,0 +1,56 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { defaultFlatText } from '../../i18n/i18n-bundles';
+---
+
+<BaseLayout
+  title="SheetGen Docs"
+  description="Sprite sheet export guide for SheetGen — free browser-based PNG sequence packing by VFXRun."
+  canonicalPath="/docs/sheetgen"
+>
+  <section class="page-section">
+    <div class="container prose">
+      <h1 data-i18n="docsSheetgenPage.title">{defaultFlatText('docsSheetgenPage.title')}</h1>
+      <p class="lead" data-i18n="docsSheetgenPage.lead">{defaultFlatText('docsSheetgenPage.lead')}</p>
+
+      <h2 data-i18n="docsSheetgenPage.overviewTitle">{defaultFlatText('docsSheetgenPage.overviewTitle')}</h2>
+      <p data-i18n="docsSheetgenPage.overviewBody">{defaultFlatText('docsSheetgenPage.overviewBody')}</p>
+
+      <h2 data-i18n="docsSheetgenPage.workflowTitle">{defaultFlatText('docsSheetgenPage.workflowTitle')}</h2>
+      <ol>
+        <li>
+          <span data-i18n="docsSheetgenPage.workflowStep1Before">{defaultFlatText('docsSheetgenPage.workflowStep1Before')}</span>
+          <a href="/sheetgen">SheetGen</a>
+          <span data-i18n="docsSheetgenPage.workflowStep1After">{defaultFlatText('docsSheetgenPage.workflowStep1After')}</span>
+        </li>
+        <li data-i18n="docsSheetgenPage.workflowStep2">{defaultFlatText('docsSheetgenPage.workflowStep2')}</li>
+        <li data-i18n="docsSheetgenPage.workflowStep3">{defaultFlatText('docsSheetgenPage.workflowStep3')}</li>
+        <li data-i18n="docsSheetgenPage.workflowStep4">{defaultFlatText('docsSheetgenPage.workflowStep4')}</li>
+        <li data-i18n="docsSheetgenPage.workflowStep5">{defaultFlatText('docsSheetgenPage.workflowStep5')}</li>
+      </ol>
+
+      <h2 data-i18n="docsSheetgenPage.pairTitle">{defaultFlatText('docsSheetgenPage.pairTitle')}</h2>
+      <p data-i18n="docsSheetgenPage.pairBody">{defaultFlatText('docsSheetgenPage.pairBody')}</p>
+
+      <h2 data-i18n="docsSheetgenPage.privacyTitle">{defaultFlatText('docsSheetgenPage.privacyTitle')}</h2>
+      <p>
+        <span data-i18n="docsSheetgenPage.privacyBodyBefore">{defaultFlatText('docsSheetgenPage.privacyBodyBefore')}</span>
+        <a href="/privacy"><span data-i18n="footer.privacy">{defaultFlatText('footer.privacy')}</span></a>
+        <span data-i18n="docsSheetgenPage.privacyBodyAfter">{defaultFlatText('docsSheetgenPage.privacyBodyAfter')}</span>
+      </p>
+
+      <p>
+        <a href="/sheetgen"><span data-i18n="docsSheetgenPage.footerTool">{defaultFlatText('docsSheetgenPage.footerTool')}</span></a>
+        ·
+        <a href="/docs"><span data-i18n="docsSheetgenPage.footerAllDocs">{defaultFlatText('docsSheetgenPage.footerAllDocs')}</span></a>
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .lead {
+    font-size: 1.125rem;
+    color: var(--text-muted);
+  }
+</style>

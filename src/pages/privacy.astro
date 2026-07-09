@@ -1,0 +1,58 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { defaultFlatText } from '../i18n/i18n-bundles';
+---
+
+<BaseLayout
+  title="Privacy Policy"
+  description="VFXRun privacy policy — local file handling, anonymous statistics, and data we do not collect."
+  canonicalPath="/privacy"
+>
+  <section class="page-section">
+    <div class="container prose">
+      <h1 data-i18n="privacyPage.title">{defaultFlatText('privacyPage.title')}</h1>
+      <p class="lead" data-i18n="privacyPage.updated">{defaultFlatText('privacyPage.updated')}</p>
+
+      <h2 data-i18n="privacyPage.localTitle">{defaultFlatText('privacyPage.localTitle')}</h2>
+      <p data-i18n="privacyPage.localBody">{defaultFlatText('privacyPage.localBody')}</p>
+
+      <h2 data-i18n="privacyPage.notCollectTitle">{defaultFlatText('privacyPage.notCollectTitle')}</h2>
+      <ul>
+        <li data-i18n="privacyPage.notCollect1">{defaultFlatText('privacyPage.notCollect1')}</li>
+        <li data-i18n="privacyPage.notCollect2">{defaultFlatText('privacyPage.notCollect2')}</li>
+        <li data-i18n="privacyPage.notCollect3">{defaultFlatText('privacyPage.notCollect3')}</li>
+        <li data-i18n="privacyPage.notCollect4">{defaultFlatText('privacyPage.notCollect4')}</li>
+        <li data-i18n="privacyPage.notCollect5">{defaultFlatText('privacyPage.notCollect5')}</li>
+        <li data-i18n="privacyPage.notCollect6">{defaultFlatText('privacyPage.notCollect6')}</li>
+      </ul>
+
+      <h2 data-i18n="privacyPage.analyticsTitle">{defaultFlatText('privacyPage.analyticsTitle')}</h2>
+      <p data-i18n="privacyPage.analyticsBody1">{defaultFlatText('privacyPage.analyticsBody1')}</p>
+      <p data-i18n="privacyPage.analyticsBody2">{defaultFlatText('privacyPage.analyticsBody2')}</p>
+      <p data-i18n="privacyPage.analyticsBody3">{defaultFlatText('privacyPage.analyticsBody3')}</p>
+
+      <h2 data-i18n="privacyPage.emailTitle">{defaultFlatText('privacyPage.emailTitle')}</h2>
+      <p data-i18n="privacyPage.emailBody">{defaultFlatText('privacyPage.emailBody')}</p>
+
+      <h2 data-i18n="privacyPage.cookiesTitle">{defaultFlatText('privacyPage.cookiesTitle')}</h2>
+      <p data-i18n="privacyPage.cookiesBody">{defaultFlatText('privacyPage.cookiesBody')}</p>
+
+      <h2 data-i18n="privacyPage.contactTitle">{defaultFlatText('privacyPage.contactTitle')}</h2>
+      <p>
+        <span data-i18n="privacyPage.contactBodyBefore">{defaultFlatText('privacyPage.contactBodyBefore')}</span>
+        <a href="/feedback"><span data-i18n="footer.feedback">{defaultFlatText('footer.feedback')}</span></a>
+        <span data-i18n="privacyPage.contactBodyAfter">{defaultFlatText('privacyPage.contactBodyAfter')}</span>
+      </p>
+
+      <p>
+        <a href="/terms"><span data-i18n="privacyPage.footerTerms">{defaultFlatText('privacyPage.footerTerms')}</span></a>
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .lead {
+    color: var(--text-muted);
+  }
+</style>

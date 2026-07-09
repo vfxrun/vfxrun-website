@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { defaultFlatText } from '../../i18n/i18n-bundles';
+---
+
+<BaseLayout
+  title="VFXRun Browser Docs"
+  description="Documentation for VFXRun Browser — free local PNG sequence VFX browser for 2D game developers."
+  canonicalPath="/docs/vfxrun"
+>
+  <section class="page-section">
+    <div class="container prose">
+      <h1 data-i18n="docsVfxrunPage.title">{defaultFlatText('docsVfxrunPage.title')}</h1>
+      <p class="lead" data-i18n="docsVfxrunPage.lead">{defaultFlatText('docsVfxrunPage.lead')}</p>
+
+      <h2 data-i18n="docsVfxrunPage.whatIsTitle">{defaultFlatText('docsVfxrunPage.whatIsTitle')}</h2>
+      <p data-i18n="docsVfxrunPage.whatIsBody">{defaultFlatText('docsVfxrunPage.whatIsBody')}</p>
+
+      <h2 data-i18n="docsVfxrunPage.whatIsNotTitle">{defaultFlatText('docsVfxrunPage.whatIsNotTitle')}</h2>
+      <ul>
+        <li data-i18n="docsVfxrunPage.notMarketplace">{defaultFlatText('docsVfxrunPage.notMarketplace')}</li>
+        <li data-i18n="docsVfxrunPage.notCloud">{defaultFlatText('docsVfxrunPage.notCloud')}</li>
+        <li data-i18n="docsVfxrunPage.notPro">{defaultFlatText('docsVfxrunPage.notPro')}</li>
+      </ul>
+
+      <h2 data-i18n="docsVfxrunPage.localTitle">{defaultFlatText('docsVfxrunPage.localTitle')}</h2>
+      <p data-i18n="footer.privacyNote">{defaultFlatText('footer.privacyNote')}</p>
+
+      <h2 data-i18n="docsVfxrunPage.godotTitle">{defaultFlatText('docsVfxrunPage.godotTitle')}</h2>
+      <ol>
+        <li data-i18n="docsVfxrunPage.godotStep1">{defaultFlatText('docsVfxrunPage.godotStep1')}</li>
+        <li data-i18n="docsVfxrunPage.godotStep2">{defaultFlatText('docsVfxrunPage.godotStep2')}</li>
+        <li data-i18n="docsVfxrunPage.godotStep3">{defaultFlatText('docsVfxrunPage.godotStep3')}</li>
+        <li data-i18n="docsVfxrunPage.godotStep4">{defaultFlatText('docsVfxrunPage.godotStep4')}</li>
+      </ol>
+
+      <p>
+        <a href="/#download"><span data-i18n="docsVfxrunPage.footerDownload">{defaultFlatText('docsVfxrunPage.footerDownload')}</span></a>
+        ·
+        <a href="/docs"><span data-i18n="docsVfxrunPage.footerAllDocs">{defaultFlatText('docsVfxrunPage.footerAllDocs')}</span></a>
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .lead {
+    font-size: 1.125rem;
+    color: var(--text-muted);
+  }
+</style>

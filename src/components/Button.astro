@@ -1,0 +1,80 @@
+---
+interface Props {
+  href: string;
+  variant?: 'primary' | 'secondary' | 'ghost';
+  disabled?: boolean;
+  external?: boolean;
+  class?: string;
+}
+
+const { href, variant = 'primary', disabled = false, external = false, class: className = '', ...rest } = Astro.props;
+const Tag = disabled ? 'span' : 'a';
+const attrs = disabled
+  ? { ...rest, class: `btn btn--${variant} btn--disabled ${className}`.trim() }
+  : {
+      href,
+      ...rest,
+      class: `btn btn--${variant} ${className}`.trim(),
+      ...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {}),
+    };
+---
+
+<Tag {...attrs}>
+  <slot />
+</Tag>
+
+<style>
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    padding: 0.45rem 0.9rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    line-height: 1.4;
+    border-radius: var(--radius);
+    border: 1px solid transparent;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s, color 0.15s;
+  }
+
+  .btn--primary {
+    background: var(--accent);
+    color: #fff;
+  }
+
+  .btn--primary:hover {
+    background: var(--accent-hover);
+    text-decoration: none;
+  }
+
+  .btn--secondary {
+    background: var(--surface);
+    color: var(--text);
+    border-color: var(--border);
+  }
+
+  .btn--secondary:hover {
+    border-color: #454850;
+    text-decoration: none;
+  }
+
+  .btn--ghost {
+    background: transparent;
+    color: var(--accent-text);
+    border-color: var(--border);
+  }
+
+  .btn--ghost:hover {
+    background: var(--accent-text-muted);
+    text-decoration: none;
+  }
+
+  .btn--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+</style>

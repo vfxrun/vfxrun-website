@@ -1,0 +1,45 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { defaultFlatText } from '../i18n/i18n-bundles';
+---
+
+<BaseLayout
+  title="Changelog"
+  description="Release notes and updates for VFXRun.com, VFXRun Browser, and SheetGen."
+  canonicalPath="/changelog"
+>
+  <section class="page-section">
+    <div class="container prose">
+      <h1 data-i18n="changelogPage.title">{defaultFlatText('changelogPage.title')}</h1>
+      <p class="lead" data-i18n="changelogPage.lead">{defaultFlatText('changelogPage.lead')}</p>
+
+      <article class="changelog-entry">
+        <h2 data-i18n="changelogPage.entryTitle">{defaultFlatText('changelogPage.entryTitle')}</h2>
+        <ul>
+          <li data-i18n="changelogPage.item1">{defaultFlatText('changelogPage.item1')}</li>
+          <li data-i18n="changelogPage.item2">{defaultFlatText('changelogPage.item2')}</li>
+          <li data-i18n="changelogPage.item3">{defaultFlatText('changelogPage.item3')}</li>
+        </ul>
+      </article>
+
+      <p class="muted" data-i18n="changelogPage.moreNote">{defaultFlatText('changelogPage.moreNote')}</p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .changelog-entry {
+    margin: 2rem 0;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .changelog-entry h2 {
+    font-size: 1.125rem;
+  }
+
+  .muted {
+    color: var(--text-muted);
+    font-size: 0.9375rem;
+  }
+</style>

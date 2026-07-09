@@ -1,0 +1,342 @@
+---
+import Button from './Button.astro';
+import SidebarSectionNav from './SidebarSectionNav.astro';
+import { VFXRUN_PRO_SECTIONS, PRO_VOTE_FEATURES } from '../config/site';
+import { defaultText } from '../i18n/messages';
+---
+
+<div class="browser-page pro-page page-layout">
+  <aside class="browser-page__sidebar page-layout__sidebar">
+    <SidebarSectionNav sections={VFXRUN_PRO_SECTIONS} navKey="pro" />
+  </aside>
+
+  <div class="browser-page__content page-layout__content">
+    <section class="browser-section pro-page__intro" id="pro">
+      <p class="pro-page__eyebrow" data-i18n="browser.sections.pro">{defaultText('browser.sections.pro')}</p>
+      <h1 class="pro-page__title">VFXRun Pro</h1>
+      <p class="pro-page__intro" data-i18n="browser.proIntro">{defaultText('browser.proIntro')}</p>
+      <p class="pro-page__notice" data-i18n="browser.proNotice">{defaultText('browser.proNotice')}</p>
+    </section>
+
+    <div class="section-divider" aria-hidden="true"></div>
+
+    <section class="browser-section" id="features">
+      <h2 class="section-title" data-i18n="browser.proSections.features">{defaultText('browser.proSections.features')}</h2>
+      <p class="pro-subtitle" data-i18n="browser.proFeaturesLead">{defaultText('browser.proFeaturesLead')}</p>
+      <ul class="pro-feature-list">
+        {
+          PRO_VOTE_FEATURES.map((feature) => (
+            <li>
+              <span data-i18n={feature.labelKey}>{defaultText(feature.labelKey)}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <div class="section-divider" aria-hidden="true"></div>
+
+    <section class="browser-section" id="trial">
+      <h2 class="section-title" data-i18n="browser.proSections.trial">{defaultText('browser.proSections.trial')}</h2>
+      <p class="pro-subtitle" data-i18n="browser.proTrialLead">{defaultText('browser.proTrialLead')}</p>
+      <Button href="#wishlist" class="pro-action-btn" disabled>
+        <span data-i18n="browser.proTrialBtn">{defaultText('browser.proTrialBtn')}</span>
+      </Button>
+    </section>
+
+    <div class="section-divider" aria-hidden="true"></div>
+
+    <section class="browser-section" id="pricing">
+      <h2 class="section-title" data-i18n="browser.proSections.pricing">{defaultText('browser.proSections.pricing')}</h2>
+      <p class="pro-subtitle" data-i18n="browser.proPricingLead">{defaultText('browser.proPricingLead')}</p>
+      <Button href="#pricing" class="pro-action-btn pro-buy-btn" disabled id="pro-buy-btn">
+        <span data-i18n="browser.proBuyBtn">{defaultText('browser.proBuyBtn')}</span>
+      </Button>
+    </section>
+
+    <div class="section-divider" aria-hidden="true"></div>
+
+    <section class="browser-section" id="faq">
+      <h2 class="section-title" data-i18n="browser.proSections.faq">{defaultText('browser.proSections.faq')}</h2>
+      <dl class="faq-list">
+        <div class="faq-item">
+          <dt data-i18n="browser.proFaqAvailableQ">{defaultText('browser.proFaqAvailableQ')}</dt>
+          <dd data-i18n="browser.proFaqAvailableA">{defaultText('browser.proFaqAvailableA')}</dd>
+        </div>
+        <div class="faq-item">
+          <dt data-i18n="browser.proFaqFreeQ">{defaultText('browser.proFaqFreeQ')}</dt>
+          <dd data-i18n="browser.proFaqFreeA">{defaultText('browser.proFaqFreeA')}</dd>
+        </div>
+        <div class="faq-item">
+          <dt data-i18n="browser.proFaqTrialQ">{defaultText('browser.proFaqTrialQ')}</dt>
+          <dd data-i18n="browser.proFaqTrialA">{defaultText('browser.proFaqTrialA')}</dd>
+        </div>
+      </dl>
+      <p class="pro-feedback-link">
+        <a href="/feedback" data-analytics-event="feedback_clicked" data-analytics-target-url="/feedback">
+          <span data-i18n="browser.proFeedbackLink">{defaultText('browser.proFeedbackLink')}</span>
+        </a>
+      </p>
+    </section>
+
+    <div class="section-divider" aria-hidden="true"></div>
+
+    <section class="browser-section browser-section--pro" id="wishlist">
+      <h2 class="section-title" data-i18n="browser.proSections.wishlist">{defaultText('browser.proSections.wishlist')}</h2>
+      <p class="pro-subtitle" data-i18n="browser.proWishlistLead">{defaultText('browser.proWishlistLead')}</p>
+
+      <form class="pro-vote-form" id="vote-form">
+        <fieldset class="pro-vote-form__features">
+          <legend class="sr-only" data-i18n="browser.proVotesLegend">{defaultText('browser.proVotesLegend')}</legend>
+          {
+            PRO_VOTE_FEATURES.map((feature) => (
+              <label class="pro-vote-form__check">
+                <input type="checkbox" name="feature" value={feature.id} />
+                <span data-i18n={feature.labelKey}>{defaultText(feature.labelKey)}</span>
+              </label>
+            ))
+          }
+        </fieldset>
+        <label class="pro-vote-form__email">
+          <span class="pro-vote-form__email-label" data-i18n="browser.proEmail">{defaultText('browser.proEmail')}</span>
+          <input type="email" name="email" placeholder="you@example.com" required />
+        </label>
+        <button type="submit" class="pro-vote-form__submit btn btn--primary">
+          <span data-i18n="browser.proSubmit">{defaultText('browser.proSubmit')}</span>
+        </button>
+        <p class="pro-vote-form__status" data-vote-status hidden></p>
+        <span class="sr-only" data-i18n="browser.proVoteSuccess">{defaultText('browser.proVoteSuccess')}</span>
+        <span class="sr-only" data-i18n="browser.proVoteErrorFeatures">{defaultText('browser.proVoteErrorFeatures')}</span>
+        <span class="sr-only" data-i18n="browser.proVoteErrorEmail">{defaultText('browser.proVoteErrorEmail')}</span>
+      </form>
+    </section>
+  </div>
+</div>
+
+<script>
+  import '../scripts/pro-page-hash.ts';
+</script>
+
+<style>
+  .pro-page {
+    --content-max: var(--browser-content-max);
+    align-items: start;
+    padding: 1rem 0 2.5rem;
+    column-gap: 0;
+    grid-template-columns:
+      var(--browser-gutter)
+      var(--browser-sidebar-width)
+      var(--browser-logo-carousel-gap)
+      minmax(0, var(--browser-content-max))
+      var(--browser-gutter);
+  }
+
+  .pro-page__intro {
+    padding-top: 0;
+  }
+
+  .pro-page__eyebrow {
+    margin: 0 0 0.35rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .pro-page__title {
+    margin: 0 0 0.75rem;
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  .pro-page__intro {
+    margin: 0 0 0.65rem;
+    font-size: 1.0625rem;
+    line-height: 1.55;
+    color: var(--text);
+    max-width: 42rem;
+  }
+
+  .pro-page__notice {
+    margin: 0;
+    font-size: 0.9375rem;
+    color: var(--text-muted);
+    max-width: 42rem;
+  }
+
+  .browser-section {
+    padding: 1.75rem 0;
+    scroll-margin-top: calc(var(--header-height) + 1rem);
+  }
+
+  .section-title {
+    margin: 0 0 0.5rem;
+    font-size: 1.59375rem;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  .section-divider {
+    border-bottom: 1px solid var(--border);
+    margin: 0;
+  }
+
+  .pro-subtitle {
+    margin: 0 0 0.85rem;
+    font-size: 0.9375rem;
+    color: var(--text-muted);
+    max-width: 42rem;
+  }
+
+  .pro-feature-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.65rem;
+    max-width: 36rem;
+  }
+
+  .pro-feature-list li {
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+    font-size: 1rem;
+    line-height: 1.45;
+  }
+
+  .pro-page :global(.pro-action-btn) {
+    min-height: 2.75rem;
+    padding: 0.65rem 1.15rem;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    border-radius: var(--radius-lg);
+  }
+
+  .faq-list {
+    display: grid;
+    gap: 0.65rem;
+    margin: 0;
+    max-width: 42rem;
+  }
+
+  .faq-item {
+    margin: 0;
+    padding: 0.85rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+  }
+
+  .faq-item dt {
+    font-weight: 600;
+    margin-bottom: 0.35rem;
+    font-size: 0.9375rem;
+  }
+
+  .faq-item dd {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+
+  .pro-feedback-link {
+    margin: 0.85rem 0 0;
+    font-size: 0.875rem;
+  }
+
+  .pro-vote-form {
+    display: grid;
+    gap: 0.75rem;
+    max-width: 30rem;
+    padding: 0;
+    border: 0;
+    background: transparent;
+  }
+
+  .pro-vote-form__features {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 0.85rem 1rem;
+    margin: 0;
+    display: grid;
+    gap: 0.65rem;
+    background: var(--panel);
+  }
+
+  .pro-vote-form__check {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 0.65rem;
+    font-size: 1rem;
+    line-height: 1.4;
+    color: var(--text);
+    cursor: pointer;
+  }
+
+  .pro-vote-form__check input[type='checkbox'] {
+    width: 1.125rem;
+    height: 1.125rem;
+    margin: 0;
+    accent-color: var(--accent-text);
+    cursor: pointer;
+  }
+
+  .pro-vote-form__status {
+    margin: 0;
+    font-size: 0.875rem;
+    color: var(--text-muted);
+  }
+
+  .pro-vote-form__status.is-error {
+    color: #f87171;
+  }
+
+  .pro-vote-form__email {
+    display: grid;
+    gap: 0.35rem;
+  }
+
+  .pro-vote-form__email-label {
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+  }
+
+  .pro-vote-form__email input {
+    display: block;
+    width: 100%;
+    min-height: 2.35rem;
+    padding: 0.55rem 0.7rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--panel);
+    color: var(--text);
+    font: inherit;
+    font-size: 0.875rem;
+  }
+
+  .pro-vote-form__submit {
+    width: 100%;
+    min-height: 3rem;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    border-radius: var(--radius-lg);
+    border: 0;
+    cursor: pointer;
+  }
+
+  @media (max-width: 959px) {
+    .pro-page {
+      width: min(calc(100% - 2rem), var(--content-max));
+      margin-inline: auto;
+      grid-template-columns: 1fr;
+      column-gap: 0;
+      row-gap: 1rem;
+    }
+  }
+</style>

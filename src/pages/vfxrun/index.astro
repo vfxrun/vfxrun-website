@@ -1,0 +1,46 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Button from '../../components/Button.astro';
+import { defaultFlatText } from '../../i18n/i18n-bundles';
+---
+
+<BaseLayout
+  title="VFXRun Browser"
+  description="Free desktop browser for local PNG sequence VFX. Preview, filter, and organize effects for Godot, Unity, and 2D game workflows."
+  canonicalPath="/"
+>
+  <script is:inline>
+    (function () {
+      var hash = window.location.hash || '';
+      window.location.replace('/' + hash);
+    })();
+  </script>
+
+  <section class="page-section">
+    <div class="container prose redirect-page">
+      <h1 data-i18n="redirectPage.homeTitle">{defaultFlatText('redirectPage.homeTitle')}</h1>
+      <p class="lead" data-i18n="redirectPage.homeLead">{defaultFlatText('redirectPage.homeLead')}</p>
+      <p>
+        <span data-i18n="redirectPage.homeManualBefore">{defaultFlatText('redirectPage.homeManualBefore')}</span>
+        <a href="/">
+          <span data-i18n="redirectPage.homeManualLink">{defaultFlatText('redirectPage.homeManualLink')}</span>
+        </a>.
+      </p>
+      <Button href="/">
+        <span data-i18n="redirectPage.homeBtn">{defaultFlatText('redirectPage.homeBtn')}</span>
+      </Button>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .redirect-page {
+    text-align: center;
+    max-width: 32rem;
+    margin-inline: auto;
+  }
+
+  .redirect-page .lead {
+    margin-inline: auto;
+  }
+</style>

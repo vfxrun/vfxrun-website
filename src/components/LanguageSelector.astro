@@ -1,0 +1,135 @@
+---
+import { LOCALE_LABELS, SUPPORTED_LOCALES } from '../i18n/locales';
+import { defaultText } from '../i18n/messages';
+---
+
+<div class="lang-select">
+  <button
+    type="button"
+    class="lang-select__button"
+    id="lang-toggle"
+    aria-haspopup="listbox"
+    aria-expanded="false"
+    aria-controls="lang-menu"
+  >
+    <span class="lang-select__label" data-i18n="lang.label">{defaultText('lang.label')}</span>
+    <span class="lang-select__current" data-lang-current>{LOCALE_LABELS.en}</span>
+    <span class="lang-select__arrow" aria-hidden="true">▼</span>
+  </button>
+  <div class="lang-select__menu" id="lang-menu" role="listbox" hidden>
+    <p class="lang-select__title" data-i18n="lang.title">{defaultText('lang.title')}</p>
+    {
+      SUPPORTED_LOCALES.map((locale) => (
+        <button
+          type="button"
+          class="lang-select__option"
+          data-locale-option={locale}
+          role="option"
+          aria-pressed={locale === 'en' ? 'true' : 'false'}
+        >
+          {LOCALE_LABELS[locale]}
+        </button>
+      ))
+    }
+  </div>
+</div>
+
+<script>
+  const toggle = document.getElementById('lang-toggle');
+  const menu = document.getElementById('lang-menu');
+
+  toggle?.addEventListener('click', (event) => {
+    event.stopPropagation();
+    const open = menu?.hasAttribute('hidden');
+    menu?.toggleAttribute('hidden', !open);
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+
+  document.addEventListener('click', () => {
+    menu?.setAttribute('hidden', '');
+    toggle?.setAttribute('aria-expanded', 'false');
+  });
+
+  menu?.addEventListener('click', (event) => event.stopPropagation());
+</script>
+
+<style>
+  .lang-select {
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .lang-select__button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    min-height: 32px;
+    min-width: 9.5rem;
+    padding: 0.3rem 0.65rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+    color: var(--text);
+    cursor: pointer;
+    font-size: var(--nav-link-size);
+  }
+
+  .lang-select__button:hover {
+    border-color: #454850;
+  }
+
+  .lang-select__label {
+    color: var(--text-muted);
+  }
+
+  .lang-select__current {
+    color: var(--accent-text);
+    font-weight: 500;
+    min-width: 4.75rem;
+    text-align: left;
+  }
+
+  .lang-select__arrow {
+    color: var(--text-muted);
+    font-size: 0.65rem;
+  }
+
+  .lang-select__menu {
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    z-index: 120;
+    width: 11rem;
+    padding: 0.35rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: #1b1b1b;
+    box-shadow: var(--shadow);
+  }
+
+  .lang-select__title {
+    margin: 0;
+    padding: 0.25rem 0.45rem 0.4rem;
+    color: var(--text-muted);
+    font-size: 0.72rem;
+  }
+
+  .lang-select__option {
+    display: block;
+    width: 100%;
+    min-height: 28px;
+    padding: 0.35rem 0.45rem;
+    border: 0;
+    border-radius: var(--radius);
+    background: transparent;
+    color: var(--text);
+    text-align: left;
+    cursor: pointer;
+    font-size: 0.8125rem;
+  }
+
+  .lang-select__option:hover,
+  .lang-select__option.active {
+    background: var(--accent-soft);
+  }
+</style>

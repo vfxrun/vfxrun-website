@@ -33,13 +33,7 @@ npm run build
 npm run preview
 ```
 
-SheetGen embeds the web UI from `C:\Users\young\Documents\Texture Packer` (override with `SHEETGEN_ROOT`).
-
-```bash
-# Optional: point to a different SheetGen source checkout
-set SHEETGEN_ROOT=C:\path\to\Texture Packer
-npm run dev
-```
+SheetGen web UI is bundled in `src/apps/sheetgen/` (no external checkout required for build or deploy).
 
 ## Cloudflare Pages
 

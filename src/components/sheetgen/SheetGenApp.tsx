@@ -1,5 +1,5 @@
-import WebApp from '@sheetgen-src/web/App';
-import '@sheetgen-src/styles.css';
+import WebApp from '../../apps/sheetgen/web/App';
+import '../../apps/sheetgen/styles.css';
 import './sheetgen-overrides.css';
 
 export default function SheetGenApp() {

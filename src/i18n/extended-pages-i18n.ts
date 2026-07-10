@@ -100,6 +100,12 @@ export type ExtendedPagesLocale = {
     item1: string;
     item2: string;
     item3: string;
+    item4: string;
+    item5: string;
+    legacyTitle: string;
+    legacyItem1: string;
+    legacyItem2: string;
+    legacyItem3: string;
     moreNote: string;
   };
   redirectPage: {
@@ -132,7 +138,7 @@ const extendedPagesEn: ExtendedPagesLocale = {
     installSecurityTitle: 'Install security notices',
     installWindowsTitle: 'Why does Windows show a security warning during install?',
     installWindowsBody:
-      'VFXRun Browser is an early free release. The Windows installer is not code-signed yet, so Windows SmartScreen may show messages such as “Windows protected your PC” or “Unknown publisher,” and the install button may be hidden at first. Only download from the official site vfxrun.com. If you have confirmed the installer came from our website, you can choose “More info” and then “Run anyway” to continue. We plan to add code signing as the product matures to reduce these prompts.',
+      'VFXRun Browser is an early free release. The Windows installer is not code-signed yet. Therefore Windows SmartScreen may show messages such as “Windows protected your PC” or “Unknown publisher,” and the install button may be hidden at times. Only download from the official site vfxrun.com. If you have confirmed the installer came from our website, you can choose “More info” and then “Run anyway” to continue. We will apply for code signing once the product stabilizes to reduce these prompts.',
     installMacTitle: 'Why does macOS show a security warning during install?',
     installMacBody:
       'We are in an early release phase and do not yet have Apple Developer ID signing and notarization, so macOS may say the app cannot be opened because the developer cannot be verified. Only download from the official site vfxrun.com. If you have confirmed the installer came from our website, you can right-click the app in Finder, choose Open, and confirm once more. We aim to complete signing and notarization before the Mac release is fully launched.',
@@ -233,10 +239,16 @@ const extendedPagesEn: ExtendedPagesLocale = {
   changelogPage: {
     title: 'Changelog',
     lead: 'Product updates and release notes.',
-    entryTitle: '2026-06-27 — Website MVP',
-    item1: 'Initial VFXRun.com site with product pages, docs, and policy pages.',
-    item2: 'Homepage, VFXRun Browser, SheetGen, and Pro plan placeholders.',
-    item3: 'Download and tool integrations marked coming soon until releases are ready.',
+    entryTitle: 'VFXRun Browser 1.3.3 — Windows',
+    item1: 'Released the Windows free installer.',
+    item2: 'Pro features are planned.',
+    item3: 'Download and basic use require no registration.',
+    item4: 'Fixed a main process error that could appear when closing the app.',
+    item5: 'Improved Windows installer icon clarity.',
+    legacyTitle: '2026-06-27 — Website MVP',
+    legacyItem1: 'Initial VFXRun.com site with product pages, docs, and policy pages.',
+    legacyItem2: 'Homepage, VFXRun Browser, SheetGen, and Pro plan placeholders.',
+    legacyItem3: 'Download and tool integrations marked coming soon until releases are ready.',
     moreNote: 'More entries will appear as VFXRun Browser and SheetGen ship public builds.',
   },
   redirectPage: {
@@ -270,7 +282,7 @@ export const extendedPagesI18n: Record<Locale, ExtendedPagesLocale> = {
       installSecurityTitle: '安装安全说明',
       installWindowsTitle: '为什么 Windows 安装时会出现安全提示？',
       installWindowsBody:
-        'VFXRun Browser 目前是早期免费版本，Windows 安装包暂时还没有正式代码签名。因此 Windows SmartScreen 可能会提示“Windows 已保护你的电脑”或“未知发布者”，有时安装按钮会被隐藏。请只从官网 vfxrun.com 下载安装包。若您已确认安装包来自我们的官网，可以点击“更多信息”，再点击“仍要运行”继续安装。后续产品稳定后我们会申请代码签名，以减少这类提示。',
+        'VFXRun Browser 目前是早期免费版本，Windows 安装包暂时还没有正式代码签名。因此 Windows SmartScreen 可能会提示“Windows 已保护你的电脑”或“未知发布者”，有时安装按钮会被隐藏。请只从官网 vfxrun.com 下载。若您已确认安装包来自我们的官网，可以点击“更多信息”，再点击“仍要运行”继续安装。我们会在产品稳定后申请代码签名，减少这类提示。',
       installMacTitle: '为什么 macOS 安装时会出现安全提示？',
       installMacBody:
         '我们处于早期版本，还没有 Apple Developer ID 签名和 notarization，macOS 可能会提示“无法打开，因为无法验证开发者”。请只从官网 vfxrun.com 下载。若您已确认安装包来自我们的官网，可以在 Finder 中右键点击应用，选择“打开”，然后再次确认打开。正式 Mac 版本发布前，我们会尽量完成签名和 notarization。',
@@ -367,10 +379,16 @@ export const extendedPagesI18n: Record<Locale, ExtendedPagesLocale> = {
     changelogPage: {
       title: '更新日志',
       lead: '产品更新与发布说明。',
-      entryTitle: '2026-06-27 — 网站 MVP',
-      item1: 'VFXRun.com 初版网站，含产品页、文档与政策页面。',
-      item2: '首页、VFXRun Browser、SheetGen 与 Pro 计划占位内容。',
-      item3: '下载与工具集成标记为即将推出，直至公开发布就绪。',
+      entryTitle: 'VFXRun Browser 1.3.3 — Windows',
+      item1: '发布 Windows 免费版安装包。',
+      item2: 'Pro 功能计划中。',
+      item3: '下载和基础使用无需注册。',
+      item4: '修复关闭程序时可能出现的 main process error。',
+      item5: '优化 Windows 安装器图标清晰度。',
+      legacyTitle: '2026-06-27 — 网站 MVP',
+      legacyItem1: 'VFXRun.com 初版网站，含产品页、文档与政策页面。',
+      legacyItem2: '首页、VFXRun Browser、SheetGen 与 Pro 计划占位内容。',
+      legacyItem3: '下载与工具集成标记为即将推出，直至公开发布就绪。',
       moreNote: '随着 VFXRun Browser 与 SheetGen 发布公开版本，将添加更多条目。',
     },
     redirectPage: {
@@ -400,7 +418,7 @@ export const extendedPagesI18n: Record<Locale, ExtendedPagesLocale> = {
       installSecurityTitle: '安裝安全說明',
       installWindowsTitle: '為什麼 Windows 安裝時會出現安全提示？',
       installWindowsBody:
-        'VFXRun Browser 目前是早期免費版本，Windows 安裝套件暫時還沒有正式程式碼簽章。因此 Windows SmartScreen 可能會提示「Windows 已保護你的電腦」或「未知發行者」，有時安裝按鈕會被隱藏。請只從官網 vfxrun.com 下載安裝套件。若您已確認安裝套件來自我們的官網，可以點擊「更多資訊」，再點擊「仍要執行」繼續安裝。後續產品穩定後我們會申請程式碼簽章，以減少這類提示。',
+        'VFXRun Browser 目前是早期免費版本，Windows 安裝套件暫時還沒有正式程式碼簽章。因此 Windows SmartScreen 可能會提示「Windows 已保護你的電腦」或「未知發行者」，有時安裝按鈕會被隱藏。請只從官網 vfxrun.com 下載。若您已確認安裝套件來自我們的官網，可以點擊「更多資訊」，再點擊「仍要執行」繼續安裝。我們會在產品穩定後申請程式碼簽章，減少這類提示。',
       installMacTitle: '為什麼 macOS 安裝時會出現安全提示？',
       installMacBody:
         '我們處於早期版本，還沒有 Apple Developer ID 簽章和 notarization，macOS 可能會提示「無法打開，因為無法驗證開發者」。請只從官網 vfxrun.com 下載。若您已確認安裝套件來自我們的官網，可以在 Finder 中右鍵點擊應用程式，選擇「打開」，然後再次確認打開。正式 Mac 版本發布前，我們會盡量完成簽章和 notarization。',
@@ -492,10 +510,16 @@ export const extendedPagesI18n: Record<Locale, ExtendedPagesLocale> = {
     changelogPage: {
       title: '更新日誌',
       lead: '產品更新與發布說明。',
-      entryTitle: '2026-06-27 — 網站 MVP',
-      item1: 'VFXRun.com 初版網站，含產品頁、文件與政策頁面。',
-      item2: '首頁、VFXRun Browser、SheetGen 與 Pro 計畫占位內容。',
-      item3: '下載與工具整合標記為即將推出，直至公開發布就緒。',
+      entryTitle: 'VFXRun Browser 1.3.3 — Windows',
+      item1: '發布 Windows 免費版安裝套件。',
+      item2: 'Pro 功能計畫中。',
+      item3: '下載和基礎使用無需註冊。',
+      item4: '修復關閉程式時可能出現的 main process error。',
+      item5: '優化 Windows 安裝器圖示清晰度。',
+      legacyTitle: '2026-06-27 — 網站 MVP',
+      legacyItem1: 'VFXRun.com 初版網站，含產品頁、文件與政策頁面。',
+      legacyItem2: '首頁、VFXRun Browser、SheetGen 與 Pro 計畫占位內容。',
+      legacyItem3: '下載與工具整合標記為即將推出，直至公開發布就緒。',
       moreNote: '隨著 VFXRun Browser 與 SheetGen 發布公開版本，將新增更多條目。',
     },
     redirectPage: {
@@ -525,7 +549,7 @@ export const extendedPagesI18n: Record<Locale, ExtendedPagesLocale> = {
       installSecurityTitle: 'インストール時のセキュリティについて',
       installWindowsTitle: 'Windows のインストール時にセキュリティ警告が出るのはなぜですか？',
       installWindowsBody:
-        'VFXRun Browser は早期の無料版です。Windows インストーラーはまだコード署名されていないため、SmartScreen が「Windows によって PC が保護されました」や「不明な発行元」などを表示し、インストールボタンが最初は隠れることがあります。公式サイト vfxrun.com からのみダウンロードしてください。当社の公式サイトからのファイルであることを確認したうえで、「詳細情報」を選び、「実行」をクリックして続行できます。製品が成熟するにつれコード署名を追加し、このような表示を減らす予定です。',
+        'VFXRun Browser は早期の無料版です。Windows インストーラーはまだコード署名されていません。そのため SmartScreen が「Windows によって PC が保護されました」や「不明な発行元」などを表示し、インストールボタンが隠れることがあります。公式サイト vfxrun.com からのみダウンロードしてください。当社の公式サイトからのインストーラーであることを確認したうえで、「詳細情報」を選び、「実行」をクリックして続行できます。製品が安定したらコード署名を申請し、このような表示を減らす予定です。',
       installMacTitle: 'なぜ macOS のインストール時にセキュリティ警告が出るのですか？',
       installMacBody:
         '早期バージョンのため、まだ Apple Developer ID の署名と公証（notarization）がありません。そのため macOS は「開発元を確認できないため開けません」などと表示することがあります。公式サイト vfxrun.com からのみダウンロードしてください。当社の公式サイトからのインストーラーであることを確認したうえで、Finder でアプリを右クリックし「開く」を選び、もう一度確認して開けます。Mac 版の正式リリース前に、署名と公証への対応を進める予定です。',
@@ -618,10 +642,16 @@ export const extendedPagesI18n: Record<Locale, ExtendedPagesLocale> = {
     changelogPage: {
       title: '変更履歴',
       lead: '製品の更新とリリースノート。',
-      entryTitle: '2026-06-27 — ウェブサイト MVP',
-      item1: '製品ページ、ドキュメント、ポリシーページを含む VFXRun.com 初版サイト。',
-      item2: 'ホームページ、VFXRun Browser、SheetGen、Pro プランのプレースホルダー。',
-      item3: '公開ビルドの準備ができるまで、ダウンロードとツール連携は近日公開として表示。',
+      entryTitle: 'VFXRun Browser 1.3.3 — Windows',
+      item1: 'Windows 無料版インストーラーを公開。',
+      item2: 'Pro 機能は計画中。',
+      item3: 'ダウンロードと基本利用に登録は不要。',
+      item4: 'アプリ終了時に発生しうる main process error を修正。',
+      item5: 'Windows インストーラーのアイコン表示を改善。',
+      legacyTitle: '2026-06-27 — ウェブサイト MVP',
+      legacyItem1: '製品ページ、ドキュメント、ポリシーページを含む VFXRun.com 初版サイト。',
+      legacyItem2: 'ホームページ、VFXRun Browser、SheetGen、Pro プランのプレースホルダー。',
+      legacyItem3: '公開ビルドの準備ができるまで、ダウンロードとツール連携は近日公開として表示。',
       moreNote: 'VFXRun Browser と SheetGen の公開ビルドに合わせて、さらにエントリが追加されます。',
     },
     redirectPage: {
@@ -651,7 +681,7 @@ export const extendedPagesI18n: Record<Locale, ExtendedPagesLocale> = {
       installSecurityTitle: '설치 보안 안내',
       installWindowsTitle: 'Windows 설치 시 보안 경고가 나타나는 이유는 무엇인가요?',
       installWindowsBody:
-        'VFXRun Browser는 초기 무료 버전입니다. Windows 설치 프로그램은 아직 코드 서명이 되어 있지 않아 SmartScreen이 "Windows에서 PC를 보호했습니다" 또는 "알 수 없는 게시자" 등을 표시하고, 설치 버튼이 처음에 숨겨질 수 있습니다. 공식 사이트 vfxrun.com에서만 다운로드하세요. 당사 공식 사이트에서 받은 파일임을 확인한 경우 "추가 정보"를 선택한 뒤 "실행"을 눌러 계속할 수 있습니다. 제품이 안정되면 코드 서명을 추가해 이러한 안내를 줄일 예정입니다.',
+        'VFXRun Browser는 초기 무료 버전입니다. Windows 설치 프로그램은 아직 코드 서명이 되어 있지 않습니다. 따라서 SmartScreen이 "Windows에서 PC를 보호했습니다" 또는 "알 수 없는 게시자" 등을 표시하고, 설치 버튼이 숨겨질 수 있습니다. 공식 사이트 vfxrun.com에서만 다운로드하세요. 당사 공식 사이트에서 받은 설치 파일임을 확인한 경우 "추가 정보"를 선택한 뒤 "실행"을 눌러 계속할 수 있습니다. 제품이 안정되면 코드 서명을 신청해 이러한 안내를 줄일 예정입니다.',
       installMacTitle: 'macOS 설치 시 보안 경고가 나타나는 이유는 무엇인가요?',
       installMacBody:
         '초기 버전 단계로 Apple Developer ID 서명과 공증(notarization)이 아직 없습니다. 따라서 macOS에서 "개발자를 확인할 수 없어 열 수 없습니다" 등의 메시지가 표시될 수 있습니다. 공식 사이트 vfxrun.com에서만 다운로드하세요. 당사 공식 사이트에서 받은 설치 파일임을 확인한 경우 Finder에서 앱을 우클릭하고 "열기"를 선택한 뒤 한 번 더 확인하여 열 수 있습니다. Mac 정식 출시 전에 서명과 공증을 진행할 예정입니다.',
@@ -744,10 +774,16 @@ export const extendedPagesI18n: Record<Locale, ExtendedPagesLocale> = {
     changelogPage: {
       title: '변경 로그',
       lead: '제품 업데이트 및 릴리스 노트.',
-      entryTitle: '2026-06-27 — 웹사이트 MVP',
-      item1: '제품 페이지, 문서, 정책 페이지를 포함한 VFXRun.com 초기 사이트.',
-      item2: '홈페이지, VFXRun Browser, SheetGen, Pro 플랜 플레이스홀더.',
-      item3: '공개 빌드 준비 전까지 다운로드 및 도구 통합은 곧 제공 예정으로 표시.',
+      entryTitle: 'VFXRun Browser 1.3.3 — Windows',
+      item1: 'Windows 무료 버전 설치 프로그램을 배포했습니다.',
+      item2: 'Pro 기능은 계획 중입니다.',
+      item3: '다운로드와 기본 사용에 가입이 필요하지 않습니다.',
+      item4: '앱 종료 시 발생할 수 있는 main process error를 수정했습니다.',
+      item5: 'Windows 설치 프로그램 아이콘 선명도를 개선했습니다.',
+      legacyTitle: '2026-06-27 — 웹사이트 MVP',
+      legacyItem1: '제품 페이지, 문서, 정책 페이지를 포함한 VFXRun.com 초기 사이트.',
+      legacyItem2: '홈페이지, VFXRun Browser, SheetGen, Pro 플랜 플레이스홀더.',
+      legacyItem3: '공개 빌드 준비 전까지 다운로드 및 도구 통합은 곧 제공 예정으로 표시.',
       moreNote: 'VFXRun Browser와 SheetGen 공개 빌드에 따라 더 많은 항목이 추가됩니다.',
     },
     redirectPage: {
@@ -777,7 +813,7 @@ export const extendedPagesI18n: Record<Locale, ExtendedPagesLocale> = {
       installSecurityTitle: 'Avisos de seguridad en la instalación',
       installWindowsTitle: '¿Por qué Windows muestra una advertencia de seguridad al instalar?',
       installWindowsBody:
-        'VFXRun Browser es una versión gratuita en fase inicial. El instalador de Windows aún no tiene firma de código, por lo que SmartScreen puede mostrar mensajes como «Windows protegió su PC» o «Editor desconocido», y el botón de instalación puede estar oculto al principio. Descargue solo desde el sitio oficial vfxrun.com. Si ha confirmado que el instalador proviene de nuestro sitio web, puede elegir «Más información» y luego «Ejecutar de todos modos» para continuar. Planeamos añadir firma de código a medida que el producto madure para reducir estas advertencias.',
+        'VFXRun Browser es una versión gratuita en fase inicial. El instalador de Windows aún no tiene firma de código. Por ello, SmartScreen puede mostrar mensajes como «Windows protegió su PC» o «Editor desconocido», y el botón de instalación puede estar oculto. Descargue solo desde el sitio oficial vfxrun.com. Si ha confirmado que el instalador proviene de nuestro sitio web, puede elegir «Más información» y luego «Ejecutar de todos modos» para continuar. Solicitaremos la firma de código cuando el producto se estabilice para reducir estas advertencias.',
       installMacTitle: '¿Por qué macOS muestra una advertencia de seguridad al instalar?',
       installMacBody:
         'Estamos en una versión inicial y aún no tenemos la firma de Apple Developer ID ni la notarización, por lo que macOS puede indicar que la aplicación no se puede abrir porque no se puede verificar el desarrollador. Descargue solo desde el sitio oficial vfxrun.com. Si ha confirmado que el instalador proviene de nuestro sitio web, puede hacer clic derecho en la aplicación en Finder, elegir Abrir y confirmar una vez más. Nuestro objetivo es completar la firma y la notarización antes del lanzamiento completo en Mac.',
@@ -870,10 +906,16 @@ export const extendedPagesI18n: Record<Locale, ExtendedPagesLocale> = {
     changelogPage: {
       title: 'Registro de cambios',
       lead: 'Actualizaciones del producto y notas de versión.',
-      entryTitle: '2026-06-27 — MVP del sitio web',
-      item1: 'Sitio inicial de VFXRun.com con páginas de producto, documentación y políticas.',
-      item2: 'Inicio, VFXRun Browser, SheetGen y marcadores del plan Pro.',
-      item3: 'Descarga e integraciones de herramientas marcadas como próximamente hasta que las versiones públicas estén listas.',
+      entryTitle: 'VFXRun Browser 1.3.3 — Windows',
+      item1: 'Publicado el instalador gratuito para Windows.',
+      item2: 'Las funciones Pro están planificadas.',
+      item3: 'La descarga y el uso básico no requieren registro.',
+      item4: 'Corregido un main process error que podía aparecer al cerrar la aplicación.',
+      item5: 'Mejorada la claridad del icono del instalador de Windows.',
+      legacyTitle: '2026-06-27 — MVP del sitio web',
+      legacyItem1: 'Sitio inicial de VFXRun.com con páginas de producto, documentación y políticas.',
+      legacyItem2: 'Inicio, VFXRun Browser, SheetGen y marcadores del plan Pro.',
+      legacyItem3: 'Descarga e integraciones de herramientas marcadas como próximamente hasta que las versiones públicas estén listas.',
       moreNote: 'Aparecerán más entradas cuando VFXRun Browser y SheetGen publiquen builds públicos.',
     },
     redirectPage: {
@@ -903,7 +945,7 @@ export const extendedPagesI18n: Record<Locale, ExtendedPagesLocale> = {
       installSecurityTitle: 'Avertissements de sécurité à l’installation',
       installWindowsTitle: 'Pourquoi Windows affiche-t-il un avertissement de sécurité à l’installation ?',
       installWindowsBody:
-        'VFXRun Browser est une version gratuite en phase initiale. L’installateur Windows n’est pas encore signé, donc SmartScreen peut afficher des messages comme « Windows a protégé votre PC » ou « Éditeur inconnu », et le bouton d’installation peut être masqué au départ. Téléchargez uniquement depuis le site officiel vfxrun.com. Si vous avez confirmé que l’installateur provient de notre site, vous pouvez choisir « Plus d’infos », puis « Exécuter quand même » pour continuer. Nous prévoyons d’ajouter une signature de code à mesure que le produit mûrit afin de réduire ces avertissements.',
+        'VFXRun Browser est une version gratuite en phase initiale. L’installateur Windows n’est pas encore signé. SmartScreen peut donc afficher des messages comme « Windows a protégé votre PC » ou « Éditeur inconnu », et le bouton d’installation peut être masqué. Téléchargez uniquement depuis le site officiel vfxrun.com. Si vous avez confirmé que l’installateur provient de notre site, vous pouvez choisir « Plus d’infos », puis « Exécuter quand même » pour continuer. Nous demanderons une signature de code lorsque le produit sera stabilisé afin de réduire ces avertissements.',
       installMacTitle: 'Pourquoi macOS affiche-t-il un avertissement de sécurité à l’installation ?',
       installMacBody:
         'Nous sommes en phase de version initiale et n’avons pas encore la signature Apple Developer ID ni la notarisation, donc macOS peut indiquer que l’application ne peut pas s’ouvrir car le développeur ne peut pas être vérifié. Téléchargez uniquement depuis le site officiel vfxrun.com. Si vous avez confirmé que l’installateur provient de notre site, faites un clic droit sur l’application dans le Finder, choisissez Ouvrir, puis confirmez une nouvelle fois. Nous visons à finaliser la signature et la notarisation avant le lancement complet sur Mac.',
@@ -996,10 +1038,16 @@ export const extendedPagesI18n: Record<Locale, ExtendedPagesLocale> = {
     changelogPage: {
       title: 'Journal des modifications',
       lead: 'Mises à jour produit et notes de version.',
-      entryTitle: '2026-06-27 — MVP du site web',
-      item1: 'Site initial VFXRun.com avec pages produit, documentation et politiques.',
-      item2: 'Accueil, VFXRun Browser, SheetGen et placeholders du plan Pro.',
-      item3: 'Téléchargement et intégrations d’outils marqués bientôt disponible jusqu’aux builds publics.',
+      entryTitle: 'VFXRun Browser 1.3.3 — Windows',
+      item1: 'Publication de l’installateur gratuit Windows.',
+      item2: 'Les fonctionnalités Pro sont planifiées.',
+      item3: 'Le téléchargement et l’usage de base ne nécessitent pas d’inscription.',
+      item4: 'Correction d’un main process error pouvant apparaître à la fermeture de l’application.',
+      item5: 'Amélioration de la netteté de l’icône de l’installateur Windows.',
+      legacyTitle: '2026-06-27 — MVP du site web',
+      legacyItem1: 'Site initial VFXRun.com avec pages produit, documentation et politiques.',
+      legacyItem2: 'Accueil, VFXRun Browser, SheetGen et placeholders du plan Pro.',
+      legacyItem3: 'Téléchargement et intégrations d’outils marqués bientôt disponible jusqu’aux builds publics.',
       moreNote: 'D’autres entrées apparaîtront lorsque VFXRun Browser et SheetGen publieront des builds publics.',
     },
     redirectPage: {

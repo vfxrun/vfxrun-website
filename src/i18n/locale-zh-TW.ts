@@ -110,7 +110,7 @@ export const zhTW: MessageTree = {
     faqUploadA: '不會。您的本機檔案保留在您的裝置上。',
     faqInstallWindowsQ: '為什麼 Windows 安裝時會出現安全提示？',
     faqInstallWindowsA:
-      'VFXRun Browser 目前是早期免費版本，Windows 安裝套件暫時還沒有正式程式碼簽章。因此 Windows SmartScreen 可能會提示「Windows 已保護你的電腦」或「未知發行者」，有時安裝按鈕會被隱藏。請只從官網 vfxrun.com 下載安裝套件。若您已確認安裝套件來自我們的官網，可以點擊「更多資訊」，再點擊「仍要執行」繼續安裝。後續產品穩定後我們會申請程式碼簽章，以減少這類提示。',
+      'VFXRun Browser 目前是早期免費版本，Windows 安裝套件暫時還沒有正式程式碼簽章。因此 Windows SmartScreen 可能會提示「Windows 已保護你的電腦」或「未知發行者」，有時安裝按鈕會被隱藏。請只從官網 vfxrun.com 下載。若您已確認安裝套件來自我們的官網，可以點擊「更多資訊」，再點擊「仍要執行」繼續安裝。我們會在產品穩定後申請程式碼簽章，減少這類提示。',
     faqInstallMacQ: '為什麼 macOS 安裝時會出現安全提示？',
     faqInstallMacA:
       '我們處於早期版本，還沒有 Apple Developer ID 簽章和 notarization，macOS 可能會提示「無法打開，因為無法驗證開發者」。請只從官網 vfxrun.com 下載。若您已確認安裝套件來自我們的官網，可以在 Finder 中右鍵點擊應用程式，選擇「打開」，然後再次確認打開。正式 Mac 版本發布前，我們會盡量完成簽章和 notarization。',

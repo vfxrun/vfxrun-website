@@ -19,6 +19,17 @@ import { defaultFlatText } from '../i18n/i18n-bundles';
           <li data-i18n="changelogPage.item1">{defaultFlatText('changelogPage.item1')}</li>
           <li data-i18n="changelogPage.item2">{defaultFlatText('changelogPage.item2')}</li>
           <li data-i18n="changelogPage.item3">{defaultFlatText('changelogPage.item3')}</li>
+          <li data-i18n="changelogPage.item4">{defaultFlatText('changelogPage.item4')}</li>
+          <li data-i18n="changelogPage.item5">{defaultFlatText('changelogPage.item5')}</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry changelog-entry--legacy">
+        <h2 data-i18n="changelogPage.legacyTitle">{defaultFlatText('changelogPage.legacyTitle')}</h2>
+        <ul>
+          <li data-i18n="changelogPage.legacyItem1">{defaultFlatText('changelogPage.legacyItem1')}</li>
+          <li data-i18n="changelogPage.legacyItem2">{defaultFlatText('changelogPage.legacyItem2')}</li>
+          <li data-i18n="changelogPage.legacyItem3">{defaultFlatText('changelogPage.legacyItem3')}</li>
         </ul>
       </article>
 
@@ -36,6 +47,10 @@ import { defaultFlatText } from '../i18n/i18n-bundles';
 
   .changelog-entry h2 {
     font-size: 1.125rem;
+  }
+
+  .changelog-entry--legacy h2 {
+    color: var(--text-muted);
   }
 
   .muted {

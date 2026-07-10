@@ -5,8 +5,8 @@ interface Env {
 }
 
 export const onRequestGet: PagesFunction<Env> = async (context) => {
-  const asset = context.params.asset;
-  if (asset !== WINDOWS_DOWNLOAD.fileName) {
+  const filename = context.params.filename;
+  if (filename !== WINDOWS_DOWNLOAD.fileName) {
     return new Response('Not found', { status: 404 });
   }
 

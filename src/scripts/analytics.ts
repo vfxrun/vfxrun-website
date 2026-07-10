@@ -8,7 +8,13 @@ export type AnalyticsEvent =
   | 'discord_clicked'
   | 'external_share_clicked';
 
-export type AnalyticsProperty = 'source_page' | 'target_url' | 'language' | 'platform' | 'feature_name';
+export type AnalyticsProperty =
+  | 'source_page'
+  | 'target_url'
+  | 'language'
+  | 'platform'
+  | 'feature_name'
+  | 'feature_count';
 
 const ALLOWED_PROPERTIES = new Set<AnalyticsProperty>([
   'source_page',
@@ -16,9 +22,12 @@ const ALLOWED_PROPERTIES = new Set<AnalyticsProperty>([
   'language',
   'platform',
   'feature_name',
+  'feature_count',
 ]);
 
-type AnalyticsPayload = Partial<Record<AnalyticsProperty, string>>;
+type AnalyticsPayload = Partial<Record<AnalyticsProperty, string>> & {
+  feature_count?: number;
+};
 
 const ANONYMOUS_ID_KEY = 'vfxrun:anonymous_id';
 
@@ -73,8 +82,8 @@ function pageContext(): Record<string, string> {
   };
 }
 
-function sanitizeProperties(properties?: AnalyticsPayload): Record<string, string> {
-  const safe: Record<string, string> = {
+function sanitizeProperties(properties?: AnalyticsPayload): Record<string, string | number> {
+  const safe: Record<string, string | number> = {
     ...pageContext(),
     source_page: window.location.pathname,
     language: currentLanguage(),
@@ -84,6 +93,13 @@ function sanitizeProperties(properties?: AnalyticsPayload): Record<string, strin
   if (!properties) return safe;
 
   for (const [key, value] of Object.entries(properties)) {
+    if (key === 'feature_count') {
+      if (typeof value === 'number' && Number.isFinite(value) && value > 0) {
+        safe.feature_count = Math.floor(value);
+      }
+      continue;
+    }
+
     if (!ALLOWED_PROPERTIES.has(key as AnalyticsProperty)) continue;
     if (typeof value !== 'string' || value.length === 0) continue;
     safe[key] = value;
@@ -92,13 +108,25 @@ function sanitizeProperties(properties?: AnalyticsPayload): Record<string, strin
   return safe;
 }
 
+/** PostHog props for pro_vote_submitted — comma-joined ids, no email. */
+export function proVoteSubmittedProperties(featureIds: readonly string[]): {
+  feature_name: string;
+  feature_count: number;
+} {
+  const features = featureIds.map((id) => id.trim()).filter(Boolean);
+  return {
+    feature_name: features.join(','),
+    feature_count: features.length,
+  };
+}
+
 function initPostHog(): void {
   posthogKey = readEnv('PUBLIC_POSTHOG_KEY');
   if (!posthogKey) return;
   posthogHost = (readEnv('PUBLIC_POSTHOG_HOST') ?? 'https://us.i.posthog.com').replace(/\/$/, '');
 }
 
-function sendToPostHog(event: AnalyticsEvent, payload: Record<string, string>): void {
+function sendToPostHog(event: AnalyticsEvent, payload: Record<string, string | number>): void {
   if (!posthogKey || !posthogHost) return;
 
   try {

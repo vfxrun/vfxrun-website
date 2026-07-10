@@ -130,6 +130,13 @@ export const en = {
     faqLoginA: 'No account is required to download or use the free version.',
     faqUploadQ: 'Does it upload my files?',
     faqUploadA: 'No. Your local files stay on your device.',
+    faqInstallWindowsQ: 'Why does Windows show a security warning during install?',
+    faqInstallWindowsA:
+      'VFXRun Browser is an early free release. The Windows installer is not code-signed yet, so Windows SmartScreen may show messages such as “Windows protected your PC” or “Unknown publisher,” and the install button may be hidden at first. Only download from the official site vfxrun.com. If you have confirmed the installer came from our website, you can choose “More info” and then “Run anyway” to continue. We plan to add code signing as the product matures to reduce these prompts.',
+    faqInstallMacQ: 'Will macOS show a similar warning?',
+    faqInstallMacA:
+      'It can. Without Apple Developer ID signing and notarization, macOS may say the app cannot be opened because the developer cannot be verified. Only download from vfxrun.com. If you have confirmed the file is from our official site, you can right-click the app in Finder, choose Open, and confirm once more. We aim to add signing and notarization before the Mac release is fully launched.',
+    downloadSecurityLink: 'See a security prompt when installing?',
     screenshotLabel: 'VFXRun Browser — app screenshot',
   },
   sheetgen: {
@@ -323,6 +330,13 @@ export const zhCN: typeof en = {
     faqLoginA: '下载和使用免费版无需账号。',
     faqUploadQ: '会上传我的文件吗？',
     faqUploadA: '不会。您的本地文件保留在您的设备上。',
+    faqInstallWindowsQ: '为什么 Windows 安装时会出现安全提示？',
+    faqInstallWindowsA:
+      'VFXRun Browser 目前是早期免费版本，Windows 安装包暂时还没有正式代码签名。因此 Windows SmartScreen 可能会提示“Windows 已保护你的电脑”或“未知发布者”，有时安装按钮会被隐藏。请只从官网 vfxrun.com 下载安装包。若您已确认安装包来自我们的官网，可以点击“更多信息”，再点击“仍要运行”继续安装。后续产品稳定后我们会申请代码签名，以减少这类提示。',
+    faqInstallMacQ: 'macOS 会出现类似提示吗？',
+    faqInstallMacA:
+      '会。早期版本如果没有 Apple Developer ID 签名和 notarization，macOS 可能会提示“无法打开，因为无法验证开发者”。请只从官网 vfxrun.com 下载。若您已确认安装包来自我们的官网，可以在 Finder 中右键点击应用，选择“打开”，然后再次确认打开。正式 Mac 版本发布前，我们会尽量完成签名和 notarization。',
+    downloadSecurityLink: '安装时看到安全提示？',
     screenshotLabel: 'VFXRun Browser — 软件截图',
   },
   sheetgen: {

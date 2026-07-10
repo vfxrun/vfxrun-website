@@ -110,6 +110,13 @@ export const es: MessageTree = {
     faqLoginA: 'No se requiere cuenta para descargar o usar la versión gratuita.',
     faqUploadQ: '¿Sube mis archivos?',
     faqUploadA: 'No. sus archivos locales permanecen en su dispositivo.',
+    faqInstallWindowsQ: '¿Por qué Windows muestra una advertencia de seguridad al instalar?',
+    faqInstallWindowsA:
+      'VFXRun Browser es una versión gratuita en fase inicial. El instalador de Windows aún no tiene firma de código, por lo que SmartScreen puede mostrar mensajes como «Windows protegió su PC» o «Editor desconocido», y el botón de instalación puede estar oculto al principio. Descargue solo desde el sitio oficial vfxrun.com. Si ha confirmado que el instalador proviene de nuestro sitio web, puede elegir «Más información» y luego «Ejecutar de todos modos» para continuar. Planeamos añadir firma de código a medida que el producto madure para reducir estas advertencias.',
+    faqInstallMacQ: '¿macOS mostrará una advertencia similar?',
+    faqInstallMacA:
+      'Puede ocurrir. Sin la firma de Apple Developer ID y la notarización, macOS puede indicar que no se puede abrir la app porque no se puede verificar el desarrollador. Descargue solo desde vfxrun.com. Si ha confirmado que el archivo proviene de nuestro sitio oficial, puede hacer clic derecho en la app en Finder, elegir Abrir y confirmar una vez más. Nuestro objetivo es añadir firma y notarización antes del lanzamiento completo en Mac.',
+    downloadSecurityLink: '¿Ve un aviso de seguridad al instalar?',
     faqEnginesQ: '¿Es compatible con Godot o Unity?',
     faqEnginesA: 'Sí. Funciona con cualquier motor que use secuencias PNG o hojas de sprites. Godot y Unity son flujos habituales.',
     screenshotLabel: 'VFXRun Browser — captura de la aplicación',

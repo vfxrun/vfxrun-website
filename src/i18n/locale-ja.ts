@@ -110,6 +110,13 @@ export const ja: MessageTree = {
     faqLoginA: '無料版のダウンロード・利用にアカウントは不要です。',
     faqUploadQ: 'ファイルはアップロードされますか？',
     faqUploadA: 'いいえ。ローカルファイルはお使いのデバイスに残ります。',
+    faqInstallWindowsQ: 'Windows のインストール時にセキュリティ警告が出るのはなぜですか？',
+    faqInstallWindowsA:
+      'VFXRun Browser は早期の無料版です。Windows インストーラーはまだコード署名されていないため、SmartScreen が「Windows によって PC が保護されました」や「不明な発行元」などを表示し、インストールボタンが最初は隠れることがあります。公式サイト vfxrun.com からのみダウンロードしてください。当社の公式サイトからのファイルであることを確認したうえで、「詳細情報」を選び、「実行」をクリックして続行できます。製品が成熟するにつれコード署名を追加し、このような表示を減らす予定です。',
+    faqInstallMacQ: 'macOS でも同様の警告が出ますか？',
+    faqInstallMacA:
+      '出る場合があります。Apple Developer ID の署名と公証（notarization）がない早期版では、開発元を確認できないため開けないと表示されることがあります。vfxrun.com からのみダウンロードしてください。公式サイトからのファイルであることを確認したうえで、Finder でアプリを右クリックし「開く」を選び、もう一度確認して開けます。Mac 版の正式リリース前に、署名と公証への対応を進める予定です。',
+    downloadSecurityLink: 'インストール時にセキュリティ警告が出ましたか？',
     faqEnginesQ: 'GodotやUnityに対応していますか？',
     faqEnginesA: 'はい。PNGシーケンスやスプライトシートを使うエンジンなら対応します。GodotとUnityは一般的なワークフローです。',
     screenshotLabel: 'VFXRun Browser — アプリのスクリーンショット',

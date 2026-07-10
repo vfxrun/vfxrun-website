@@ -63,12 +63,6 @@ const heroBullets = [
           </span>
         </div>
 
-        <ul class="download-meta" aria-label={defaultText('browser.downloadMetaLabel')}>
-          <li data-i18n="browser.downloadPlatformLabel">{defaultText('browser.downloadPlatformLabel')}</li>
-          <li data-i18n="browser.downloadEditionLabel">{defaultText('browser.downloadEditionLabel')}</li>
-          <li data-i18n="browser.downloadProStatus">{defaultText('browser.downloadProStatus')}</li>
-        </ul>
-
         <div class="download-actions">
           <div class="download-platform" data-analytics-download="windows">
             <Button href={WINDOWS_DOWNLOAD.href} class="download-platform__btn" download={WINDOWS_DOWNLOAD.fileName}>
@@ -86,6 +80,10 @@ const heroBullets = [
             </p>
           </div>
         </div>
+
+        <p class="download-security-link">
+          <a href="#faq-install-windows"><span data-i18n="browser.downloadSecurityLink">{defaultText('browser.downloadSecurityLink')}</span></a>
+        </p>
       </div>
     </section>
 
@@ -141,6 +139,14 @@ const heroBullets = [
         <div class="faq-item">
           <dt data-i18n="browser.faqUploadQ">{defaultText('browser.faqUploadQ')}</dt>
           <dd data-i18n="browser.faqUploadA">{defaultText('browser.faqUploadA')}</dd>
+        </div>
+        <div class="faq-item" id="faq-install-windows">
+          <dt data-i18n="browser.faqInstallWindowsQ">{defaultText('browser.faqInstallWindowsQ')}</dt>
+          <dd data-i18n="browser.faqInstallWindowsA">{defaultText('browser.faqInstallWindowsA')}</dd>
+        </div>
+        <div class="faq-item" id="faq-install-macos">
+          <dt data-i18n="browser.faqInstallMacQ">{defaultText('browser.faqInstallMacQ')}</dt>
+          <dd data-i18n="browser.faqInstallMacA">{defaultText('browser.faqInstallMacA')}</dd>
         </div>
       </dl>
     </section>
@@ -275,26 +281,7 @@ const heroBullets = [
     flex-wrap: wrap;
     align-items: center;
     gap: 0.75rem 1rem;
-    margin-bottom: 0.85rem;
-  }
-
-  .download-meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.55rem 0.85rem;
-    margin: 0 0 1.2rem;
-    padding: 0;
-    list-style: none;
-  }
-
-  .download-meta li {
-    padding: 0.28rem 0.7rem;
-    border: 1px solid var(--border);
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.03);
-    color: var(--text-muted);
-    font-size: 0.875rem;
-    line-height: 1.35;
+    margin-bottom: 1.35rem;
   }
 
   .share-title {
@@ -393,6 +380,20 @@ const heroBullets = [
     font-size: 0.8125rem;
     color: var(--text-muted);
     text-align: center;
+  }
+
+  .download-security-link {
+    margin: 1rem 0 0;
+    font-size: 0.875rem;
+  }
+
+  .download-security-link a {
+    color: var(--accent-text);
+    text-decoration: none;
+  }
+
+  .download-security-link a:hover {
+    text-decoration: underline;
   }
 
   .pro-subtitle {

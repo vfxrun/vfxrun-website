@@ -2,7 +2,6 @@ import { describe, expect, it, vi, beforeEach, afterEach } from 'vitest';
 
 /**
  * Ensures wishlist analytics never includes the voter email in the PostHog payload.
- * Mirrors the contract in src/scripts/analytics.ts + browser-pro-vote.ts.
  */
 describe('wishlist analytics payload', () => {
   const fetchMock = vi.fn();
@@ -37,12 +36,10 @@ describe('wishlist analytics payload', () => {
     vi.resetModules();
   });
 
-  it('does not send email to PostHog on pro_vote_submitted', async () => {
-    const { track } = await import('../src/scripts/analytics');
+  it('sends comma-joined feature_name and feature_count for multiple selections', async () => {
+    const { proVoteSubmittedProperties, track } = await import('../src/scripts/analytics');
 
-    track('pro_vote_submitted', {
-      feature_name: 'timeline,color',
-    });
+    track('pro_vote_submitted', proVoteSubmittedProperties(['timeline', 'color']));
 
     expect(fetchMock).toHaveBeenCalledTimes(1);
     const [, init] = fetchMock.mock.calls[0] as [string, RequestInit];
@@ -53,7 +50,17 @@ describe('wishlist analytics payload', () => {
 
     expect(body.event).toBe('pro_vote_submitted');
     expect(body.properties.feature_name).toBe('timeline,color');
+    expect(body.properties.feature_count).toBe(2);
     expect(body.properties.email).toBeUndefined();
     expect(JSON.stringify(body)).not.toContain('user@example.com');
+  });
+
+  it('proVoteSubmittedProperties joins all selected feature ids', async () => {
+    const { proVoteSubmittedProperties } = await import('../src/scripts/analytics');
+
+    expect(proVoteSubmittedProperties(['timeline', 'color'])).toEqual({
+      feature_name: 'timeline,color',
+      feature_count: 2,
+    });
   });
 });

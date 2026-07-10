@@ -1,5 +1,5 @@
 import type { WishlistPayload } from '../../lib/wishlist';
-import { track } from './analytics';
+import { proVoteSubmittedProperties, track } from './analytics';
 import {
   currentWishlistLanguage,
   currentWishlistSourcePage,
@@ -56,13 +56,13 @@ export function initBrowserProVote(): void {
   form.addEventListener('submit', (event) => {
     event.preventDefault();
 
-    const features = [...form.querySelectorAll<HTMLInputElement>('input[name="feature"]:checked')].map(
+    const selectedFeatures = [...form.querySelectorAll<HTMLInputElement>('input[name="feature"]:checked')].map(
       (input) => input.value,
     );
     const emailInput = form.querySelector<HTMLInputElement>('input[name="email"]');
     const email = emailInput?.value.trim() ?? '';
 
-    if (features.length === 0) {
+    if (selectedFeatures.length === 0) {
       showStatus(form, getMessage('browser.proVoteErrorFeatures', 'Select at least one feature.'), true);
       return;
     }
@@ -79,7 +79,7 @@ export function initBrowserProVote(): void {
 
       const result = await submitWishlistVote({
         email,
-        features: features as WishlistPayload['features'],
+        features: selectedFeatures as WishlistPayload['features'],
         language: currentWishlistLanguage(),
         source_page: currentWishlistSourcePage(),
       });
@@ -91,7 +91,7 @@ export function initBrowserProVote(): void {
         return;
       }
 
-      track('pro_vote_submitted', { feature_name: features.join(',') });
+      track('pro_vote_submitted', proVoteSubmittedProperties(selectedFeatures));
 
       showStatus(
         form,

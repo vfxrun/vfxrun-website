@@ -28,7 +28,12 @@ export const browserHomeI18n = {
     proFeatureFilters: 'フィルター機能を追加',
     proFeatureExportAll: 'タイムライン上のすべてのエフェクトを一括エクスポート',
     proSubmit: '投票',
-    proVoteSuccess: 'ご投票ありがとうございます。記録しました。',
+    proSections: {
+      wishlist: 'ウィッシュリスト',
+    },
+    proWishlistStorageNote:
+      '現在、投票はブラウザにのみ保存されます。確認メールは送信されません。メールアドレスは分析に送信されません。',
+    proVoteSuccess: 'ご投票ありがとうございます。選択内容を記録しました。',
     proVoteErrorFeatures: '少なくとも1つの機能を選択してください。',
     proVoteErrorEmail: '有効なメールアドレスを入力してください。',
   },
@@ -60,7 +65,12 @@ export const browserHomeI18n = {
     proFeatureFilters: '필터 기능 추가',
     proFeatureExportAll: '타임라인의 모든 이펙트를 한 번에 보내기',
     proSubmit: '투표',
-    proVoteSuccess: '투표해 주셔서 감사합니다. 기록되었습니다.',
+    proSections: {
+      wishlist: '위시리스트',
+    },
+    proWishlistStorageNote:
+      '현재 투표는 브라우저에만 저장됩니다. 확인 이메일은 발송되지 않습니다. 이메일은 분석에 전송되지 않습니다.',
+    proVoteSuccess: '투표해 주셔서 감사합니다. 선택 내용이 기록되었습니다.',
     proVoteErrorFeatures: '기능을 하나 이상 선택하세요.',
     proVoteErrorEmail: '유효한 이메일 주소를 입력하세요.',
   },
@@ -92,7 +102,12 @@ export const browserHomeI18n = {
     proFeatureFilters: '新增濾鏡功能',
     proFeatureExportAll: '一鍵匯出時間軸上所有特效',
     proSubmit: '投票',
-    proVoteSuccess: '感謝投票，已記錄您的選擇。',
+    proSections: {
+      wishlist: 'Wishlist',
+    },
+    proWishlistStorageNote:
+      '目前投票會暫存在您的瀏覽器中，不會寄送確認郵件。電子郵件不會進入統計分析。',
+    proVoteSuccess: '感謝投票。我們已記錄你的選擇。',
     proVoteErrorFeatures: '請至少選擇一項功能。',
     proVoteErrorEmail: '請輸入有效的電子郵件地址。',
   },
@@ -124,7 +139,12 @@ export const browserHomeI18n = {
     proFeatureFilters: 'Añadir efectos de filtro',
     proFeatureExportAll: 'Exportar todos los efectos de la línea de tiempo con un clic',
     proSubmit: 'Votar',
-    proVoteSuccess: 'Gracias — tu voto ha sido registrado.',
+    proSections: {
+      wishlist: 'Lista de deseos',
+    },
+    proWishlistStorageNote:
+      'Por ahora, los votos se guardan solo en su navegador. No se envía correo de confirmación. Su correo no se envía a analíticas.',
+    proVoteSuccess: 'Gracias por votar. Hemos registrado sus elecciones.',
     proVoteErrorFeatures: 'Selecciona al menos una función.',
     proVoteErrorEmail: 'Introduce una dirección de correo válida.',
   },
@@ -156,7 +176,12 @@ export const browserHomeI18n = {
     proFeatureFilters: 'Ajouter des filtres',
     proFeatureExportAll: 'Exporter tous les effets de la timeline en un clic',
     proSubmit: 'Voter',
-    proVoteSuccess: 'Merci — votre vote a été enregistré.',
+    proSections: {
+      wishlist: 'Liste de souhaits',
+    },
+    proWishlistStorageNote:
+      'Pour l’instant, les votes sont enregistrés uniquement dans votre navigateur. Aucun e-mail de confirmation n’est envoyé. Votre e-mail n’est pas envoyé aux analytics.',
+    proVoteSuccess: 'Merci pour votre vote. Vos choix ont été enregistrés.',
     proVoteErrorFeatures: 'Sélectionnez au moins une fonctionnalité.',
     proVoteErrorEmail: 'Entrez une adresse e-mail valide.',
   },

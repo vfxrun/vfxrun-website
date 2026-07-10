@@ -1,7 +1,7 @@
 ---
 import Button from './Button.astro';
 import SidebarSectionNav from './SidebarSectionNav.astro';
-import { VFXRUN_PRO_SECTIONS, PRO_VOTE_FEATURES } from '../config/site';
+import { VFXRUN_PRO_SECTIONS, PRO_VOTE_FEATURES, PRO_LAUNCHED } from '../config/site';
 import { defaultText } from '../i18n/messages';
 ---
 
@@ -20,96 +20,141 @@ import { defaultText } from '../i18n/messages';
 
     <div class="section-divider" aria-hidden="true"></div>
 
-    <section class="browser-section" id="features">
-      <h2 class="section-title" data-i18n="browser.proSections.features">{defaultText('browser.proSections.features')}</h2>
-      <p class="pro-subtitle" data-i18n="browser.proFeaturesLead">{defaultText('browser.proFeaturesLead')}</p>
-      <ul class="pro-feature-list">
-        {
-          PRO_VOTE_FEATURES.map((feature) => (
-            <li>
-              <span data-i18n={feature.labelKey}>{defaultText(feature.labelKey)}</span>
-            </li>
-          ))
-        }
-      </ul>
-    </section>
+    {
+      PRO_LAUNCHED ? (
+        <section class="browser-section" id="features">
+          <h2 class="section-title" data-i18n="browser.proSections.features">{defaultText('browser.proSections.features')}</h2>
+          <p class="pro-subtitle" data-i18n="browser.proFeaturesLead">{defaultText('browser.proFeaturesLead')}</p>
+          <ul class="pro-feature-list">
+            {
+              PRO_VOTE_FEATURES.map((feature) => (
+                <li>
+                  <span data-i18n={feature.labelKey}>{defaultText(feature.labelKey)}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </section>
+      ) : (
+        <section class="browser-section browser-section--pro" id="features">
+          <h2 class="section-title" data-i18n="browser.proSections.wishlist">{defaultText('browser.proSections.wishlist')}</h2>
+          <p class="pro-subtitle" data-i18n="browser.proWishlistLead">{defaultText('browser.proWishlistLead')}</p>
+          <p class="pro-wishlist-note" data-i18n="browser.proWishlistStorageNote">{defaultText('browser.proWishlistStorageNote')}</p>
+
+          <form class="pro-vote-form" id="vote-form">
+            <fieldset class="pro-vote-form__features">
+              <legend class="sr-only" data-i18n="browser.proVotesLegend">{defaultText('browser.proVotesLegend')}</legend>
+              {
+                PRO_VOTE_FEATURES.map((feature) => (
+                  <label class="pro-vote-form__check">
+                    <input type="checkbox" name="feature" value={feature.id} />
+                    <span data-i18n={feature.labelKey}>{defaultText(feature.labelKey)}</span>
+                  </label>
+                ))
+              }
+            </fieldset>
+            <label class="pro-vote-form__email">
+              <span class="pro-vote-form__email-label" data-i18n="browser.proEmail">{defaultText('browser.proEmail')}</span>
+              <input type="email" name="email" placeholder="you@example.com" required />
+            </label>
+            <button type="submit" class="pro-vote-form__submit btn btn--primary">
+              <span data-i18n="browser.proSubmit">{defaultText('browser.proSubmit')}</span>
+            </button>
+            <p class="pro-vote-form__status" data-vote-status hidden></p>
+            <span class="sr-only" data-i18n="browser.proVoteSuccess">{defaultText('browser.proVoteSuccess')}</span>
+            <span class="sr-only" data-i18n="browser.proVoteSubmitting">{defaultText('browser.proVoteSubmitting')}</span>
+            <span class="sr-only" data-i18n="browser.proVoteErrorSubmit">{defaultText('browser.proVoteErrorSubmit')}</span>
+            <span class="sr-only" data-i18n="browser.proVoteErrorServer">{defaultText('browser.proVoteErrorServer')}</span>
+            <span class="sr-only" data-i18n="browser.proVoteErrorFeatures">{defaultText('browser.proVoteErrorFeatures')}</span>
+            <span class="sr-only" data-i18n="browser.proVoteErrorEmail">{defaultText('browser.proVoteErrorEmail')}</span>
+          </form>
+        </section>
+      )
+    }
 
     <div class="section-divider" aria-hidden="true"></div>
 
     <section class="browser-section" id="trial">
       <h2 class="section-title" data-i18n="browser.proSections.trial">{defaultText('browser.proSections.trial')}</h2>
       <p class="pro-subtitle" data-i18n="browser.proTrialLead">{defaultText('browser.proTrialLead')}</p>
-      <Button href="#wishlist" class="pro-action-btn" disabled>
+      <Button href={PRO_LAUNCHED ? '#wishlist' : '#features'} class="pro-action-btn" disabled>
         <span data-i18n="browser.proTrialBtn">{defaultText('browser.proTrialBtn')}</span>
       </Button>
     </section>
 
-    <div class="section-divider" aria-hidden="true"></div>
+    {
+      PRO_LAUNCHED ? (
+        <>
+          <div class="section-divider" aria-hidden="true" />
+          <section class="browser-section" id="pricing">
+            <h2 class="section-title" data-i18n="browser.proSections.pricing">{defaultText('browser.proSections.pricing')}</h2>
+            <p class="pro-subtitle" data-i18n="browser.proPricingLead">{defaultText('browser.proPricingLead')}</p>
+            <Button href="#pricing" class="pro-action-btn pro-buy-btn" disabled id="pro-buy-btn">
+              <span data-i18n="browser.proBuyBtn">{defaultText('browser.proBuyBtn')}</span>
+            </Button>
+          </section>
 
-    <section class="browser-section" id="pricing">
-      <h2 class="section-title" data-i18n="browser.proSections.pricing">{defaultText('browser.proSections.pricing')}</h2>
-      <p class="pro-subtitle" data-i18n="browser.proPricingLead">{defaultText('browser.proPricingLead')}</p>
-      <Button href="#pricing" class="pro-action-btn pro-buy-btn" disabled id="pro-buy-btn">
-        <span data-i18n="browser.proBuyBtn">{defaultText('browser.proBuyBtn')}</span>
-      </Button>
-    </section>
+          <div class="section-divider" aria-hidden="true" />
+          <section class="browser-section" id="faq">
+            <h2 class="section-title" data-i18n="browser.proSections.faq">{defaultText('browser.proSections.faq')}</h2>
+            <dl class="faq-list">
+              <div class="faq-item">
+                <dt data-i18n="browser.proFaqAvailableQ">{defaultText('browser.proFaqAvailableQ')}</dt>
+                <dd data-i18n="browser.proFaqAvailableA">{defaultText('browser.proFaqAvailableA')}</dd>
+              </div>
+              <div class="faq-item">
+                <dt data-i18n="browser.proFaqFreeQ">{defaultText('browser.proFaqFreeQ')}</dt>
+                <dd data-i18n="browser.proFaqFreeA">{defaultText('browser.proFaqFreeA')}</dd>
+              </div>
+              <div class="faq-item">
+                <dt data-i18n="browser.proFaqTrialQ">{defaultText('browser.proFaqTrialQ')}</dt>
+                <dd data-i18n="browser.proFaqTrialA">{defaultText('browser.proFaqTrialA')}</dd>
+              </div>
+            </dl>
+            <p class="pro-feedback-link">
+              <a href="/feedback" data-analytics-event="feedback_clicked" data-analytics-target-url="/feedback">
+                <span data-i18n="browser.proFeedbackLink">{defaultText('browser.proFeedbackLink')}</span>
+              </a>
+            </p>
+          </section>
 
-    <div class="section-divider" aria-hidden="true"></div>
+          <div class="section-divider" aria-hidden="true" />
+          <section class="browser-section browser-section--pro" id="wishlist">
+            <h2 class="section-title" data-i18n="browser.proSections.wishlist">{defaultText('browser.proSections.wishlist')}</h2>
+            <p class="pro-subtitle" data-i18n="browser.proWishlistLead">{defaultText('browser.proWishlistLead')}</p>
+            <p class="pro-wishlist-note" data-i18n="browser.proWishlistStorageNote">{defaultText('browser.proWishlistStorageNote')}</p>
 
-    <section class="browser-section" id="faq">
-      <h2 class="section-title" data-i18n="browser.proSections.faq">{defaultText('browser.proSections.faq')}</h2>
-      <dl class="faq-list">
-        <div class="faq-item">
-          <dt data-i18n="browser.proFaqAvailableQ">{defaultText('browser.proFaqAvailableQ')}</dt>
-          <dd data-i18n="browser.proFaqAvailableA">{defaultText('browser.proFaqAvailableA')}</dd>
-        </div>
-        <div class="faq-item">
-          <dt data-i18n="browser.proFaqFreeQ">{defaultText('browser.proFaqFreeQ')}</dt>
-          <dd data-i18n="browser.proFaqFreeA">{defaultText('browser.proFaqFreeA')}</dd>
-        </div>
-        <div class="faq-item">
-          <dt data-i18n="browser.proFaqTrialQ">{defaultText('browser.proFaqTrialQ')}</dt>
-          <dd data-i18n="browser.proFaqTrialA">{defaultText('browser.proFaqTrialA')}</dd>
-        </div>
-      </dl>
-      <p class="pro-feedback-link">
-        <a href="/feedback" data-analytics-event="feedback_clicked" data-analytics-target-url="/feedback">
-          <span data-i18n="browser.proFeedbackLink">{defaultText('browser.proFeedbackLink')}</span>
-        </a>
-      </p>
-    </section>
-
-    <div class="section-divider" aria-hidden="true"></div>
-
-    <section class="browser-section browser-section--pro" id="wishlist">
-      <h2 class="section-title" data-i18n="browser.proSections.wishlist">{defaultText('browser.proSections.wishlist')}</h2>
-      <p class="pro-subtitle" data-i18n="browser.proWishlistLead">{defaultText('browser.proWishlistLead')}</p>
-
-      <form class="pro-vote-form" id="vote-form">
-        <fieldset class="pro-vote-form__features">
-          <legend class="sr-only" data-i18n="browser.proVotesLegend">{defaultText('browser.proVotesLegend')}</legend>
-          {
-            PRO_VOTE_FEATURES.map((feature) => (
-              <label class="pro-vote-form__check">
-                <input type="checkbox" name="feature" value={feature.id} />
-                <span data-i18n={feature.labelKey}>{defaultText(feature.labelKey)}</span>
+            <form class="pro-vote-form" id="vote-form">
+              <fieldset class="pro-vote-form__features">
+                <legend class="sr-only" data-i18n="browser.proVotesLegend">{defaultText('browser.proVotesLegend')}</legend>
+                {
+                  PRO_VOTE_FEATURES.map((feature) => (
+                    <label class="pro-vote-form__check">
+                      <input type="checkbox" name="feature" value={feature.id} />
+                      <span data-i18n={feature.labelKey}>{defaultText(feature.labelKey)}</span>
+                    </label>
+                  ))
+                }
+              </fieldset>
+              <label class="pro-vote-form__email">
+                <span class="pro-vote-form__email-label" data-i18n="browser.proEmail">{defaultText('browser.proEmail')}</span>
+                <input type="email" name="email" placeholder="you@example.com" required />
               </label>
-            ))
-          }
-        </fieldset>
-        <label class="pro-vote-form__email">
-          <span class="pro-vote-form__email-label" data-i18n="browser.proEmail">{defaultText('browser.proEmail')}</span>
-          <input type="email" name="email" placeholder="you@example.com" required />
-        </label>
-        <button type="submit" class="pro-vote-form__submit btn btn--primary">
-          <span data-i18n="browser.proSubmit">{defaultText('browser.proSubmit')}</span>
-        </button>
-        <p class="pro-vote-form__status" data-vote-status hidden></p>
-        <span class="sr-only" data-i18n="browser.proVoteSuccess">{defaultText('browser.proVoteSuccess')}</span>
-        <span class="sr-only" data-i18n="browser.proVoteErrorFeatures">{defaultText('browser.proVoteErrorFeatures')}</span>
-        <span class="sr-only" data-i18n="browser.proVoteErrorEmail">{defaultText('browser.proVoteErrorEmail')}</span>
-      </form>
-    </section>
+              <button type="submit" class="pro-vote-form__submit btn btn--primary">
+                <span data-i18n="browser.proSubmit">{defaultText('browser.proSubmit')}</span>
+              </button>
+              <p class="pro-vote-form__status" data-vote-status hidden></p>
+              <span class="sr-only" data-i18n="browser.proVoteSuccess">{defaultText('browser.proVoteSuccess')}</span>
+              <span class="sr-only" data-i18n="browser.proVoteSubmitting">{defaultText('browser.proVoteSubmitting')}</span>
+              <span class="sr-only" data-i18n="browser.proVoteErrorSubmit">{defaultText('browser.proVoteErrorSubmit')}</span>
+              <span class="sr-only" data-i18n="browser.proVoteErrorServer">{defaultText('browser.proVoteErrorServer')}</span>
+              <span class="sr-only" data-i18n="browser.proVoteErrorFeatures">{defaultText('browser.proVoteErrorFeatures')}</span>
+              <span class="sr-only" data-i18n="browser.proVoteErrorEmail">{defaultText('browser.proVoteErrorEmail')}</span>
+            </form>
+          </section>
+        </>
+      ) : null
+    }
   </div>
 </div>
 
@@ -188,6 +233,14 @@ import { defaultText } from '../i18n/messages';
     font-size: 0.9375rem;
     color: var(--text-muted);
     max-width: 42rem;
+  }
+
+  .pro-wishlist-note {
+    margin: 0 0 0.85rem;
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+    max-width: 42rem;
+    line-height: 1.5;
   }
 
   .pro-feature-list {

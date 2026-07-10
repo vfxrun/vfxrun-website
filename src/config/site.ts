@@ -22,14 +22,6 @@ export const SECONDARY_NAV_LINKS = [
   { href: '/discord', label: 'Discord', minWidth: '4.5rem' },
 ] as const;
 
-export const VFXRUN_PRO_SECTIONS = [
-  { id: 'features', labelKey: 'browser.proSections.features' },
-  { id: 'trial', labelKey: 'browser.proSections.trial' },
-  { id: 'pricing', labelKey: 'browser.proSections.pricing' },
-  { id: 'faq', labelKey: 'browser.proSections.faq' },
-  { id: 'wishlist', labelKey: 'browser.proSections.wishlist' },
-] as const;
-
 export const VFXRUN_SECTIONS = [
   { id: 'overview', labelKey: 'browser.sections.overview' },
   { id: 'download', labelKey: 'browser.sections.download' },
@@ -66,3 +58,24 @@ export const PRIVACY_STATEMENT =
 export const CONTACT_EMAIL = 'ningzw1005@gmail.com';
 
 export const DISCORD_INVITE_URL = 'https://discord.gg/4y6QFSHxW';
+
+/** Flip to `true` when Pro is officially for sale — reveals pricing, FAQ, and full nav. */
+export const PRO_LAUNCHED = false;
+
+const VFXRUN_PRO_SECTIONS_LAUNCH = [
+  { id: 'features', labelKey: 'browser.proSections.features' },
+  { id: 'trial', labelKey: 'browser.proSections.trial' },
+  { id: 'pricing', labelKey: 'browser.proSections.pricing' },
+  { id: 'faq', labelKey: 'browser.proSections.faq' },
+  { id: 'wishlist', labelKey: 'browser.proSections.wishlist' },
+] as const;
+
+/** Pre-launch: wishlist voting lives at `#features`; `#wishlist` is a legacy alias. */
+const VFXRUN_PRO_SECTIONS_PRE_LAUNCH = [
+  { id: 'features', labelKey: 'browser.proSections.wishlist' },
+  { id: 'trial', labelKey: 'browser.proSections.trial' },
+] as const;
+
+export const VFXRUN_PRO_SECTIONS = PRO_LAUNCHED
+  ? VFXRUN_PRO_SECTIONS_LAUNCH
+  : VFXRUN_PRO_SECTIONS_PRE_LAUNCH;

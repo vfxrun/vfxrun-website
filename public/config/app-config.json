@@ -1,10 +1,13 @@
 {
   "proEnabled": false,
+  "proLaunchState": "planned",
+  "licenseState": "free",
   "showProBanner": false,
   "trialEnabled": false,
-  "pricingUrl": "https://vfxrun.com/vfxrun/pro#pricing",
-  "trialUrl": "https://vfxrun.com/vfxrun/pro#trial",
+  "pricingUrl": "https://vfxrun.com/vfxrun/pro#features",
+  "trialUrl": "https://vfxrun.com/vfxrun/pro#features",
   "featuresUrl": "https://vfxrun.com/vfxrun/pro#features",
+  "wishlistUrl": "https://vfxrun.com/vfxrun/pro#wishlist",
   "feedbackUrl": "https://vfxrun.com/feedback",
-  "configVersion": 1
+  "configVersion": 2
 }

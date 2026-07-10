@@ -43,6 +43,21 @@ SheetGen web UI is bundled in `src/apps/sheetgen/` (no external checkout require
 | Output directory | `dist` |
 | Node.js version | 22.x (see `engines` in package.json) |
 
+### Pro Wishlist API (`POST /api/wishlist`)
+
+Votes are stored in **Cloudflare D1** via `functions/api/wishlist.ts`.
+
+1. Create the database and apply the schema:
+   ```bash
+   npx wrangler d1 create vfxrun-wishlist
+   npx wrangler d1 execute vfxrun-wishlist --remote --file=./migrations/0001_wishlist.sql
+   ```
+2. Copy the `database_id` into `wrangler.toml`.
+3. In **Cloudflare Pages → Settings → Functions → D1 bindings**, bind the database as **`DB`**.
+4. Redeploy. Without D1, the API returns **503** and the form shows an error (no fake success).
+
+Local `npm run dev` mocks `/api/wishlist` (set `WISHLIST_DEV_MOCK=0` to test error UI). For local D1 + Functions, use `npm run pages:dev` after `wrangler d1 execute ... --local`.
+
 ## Project layout
 
 - `src/pages/` — routes (fixed URL structure per shared project context)
@@ -50,3 +65,6 @@ SheetGen web UI is bundled in `src/apps/sheetgen/` (no external checkout require
 - `src/components/` — shared UI
 - `src/config/site.ts` — site copy and navigation
 - `public/` — static assets, `robots.txt`, `llms.txt`
+- `functions/` — Cloudflare Pages Functions (wishlist API)
+- `lib/wishlist.ts` — shared wishlist validation + D1 insert
+- `migrations/` — D1 SQL schema

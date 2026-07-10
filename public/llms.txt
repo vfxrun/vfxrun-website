@@ -11,7 +11,7 @@
 
 - VFXRun Browser (home): https://vfxrun.com/
 - Download: https://vfxrun.com/#download (legacy: https://vfxrun.com/vfxrun/download)
-- Pro plan (votes & wishlist, not sold yet): https://vfxrun.com/#pro (legacy: https://vfxrun.com/vfxrun/pro)
+- Pro plan (wishlist votes, not sold yet): https://vfxrun.com/vfxrun/pro#features (legacy wishlist hash: https://vfxrun.com/vfxrun/pro#wishlist; homepage section: https://vfxrun.com/#pro)
 - SheetGen: https://vfxrun.com/sheetgen
 - Documentation: https://vfxrun.com/docs
 - Privacy: https://vfxrun.com/privacy

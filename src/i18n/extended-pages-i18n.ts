@@ -58,6 +58,11 @@ export type ExtendedPagesLocale = {
     analyticsBody3: string;
     emailTitle: string;
     emailBody: string;
+    wishlistTitle: string;
+    wishlistBody1: string;
+    wishlistBody2: string;
+    wishlistBody3: string;
+    wishlistBody4: string;
     cookiesTitle: string;
     cookiesBody: string;
     contactTitle: string;
@@ -168,12 +173,19 @@ const extendedPagesEn: ExtendedPagesLocale = {
     analyticsBody1:
       'When enabled, the website may load lightweight analytics providers such as Cloudflare Web Analytics and PostHog. These tools help us understand aggregate usage — for example page visits, download button clicks, SheetGen tool entry clicks, Pro page views, Pro wishlist votes, feedback and Discord link clicks, and share actions.',
     analyticsBody2:
-      'Analytics events may include only high-level properties such as page path, link target, language, platform, and selected Pro feature names from the wishlist form. We do not collect local file names, local folder paths, image content, project asset details, or user game project names through these tools.',
+      'Analytics events may include only high-level properties such as page path, link target, language, platform, and selected Pro feature names from the wishlist form. We do not collect email addresses, local file names, local folder paths, image content, project asset details, or user game project names through PostHog or similar analytics tools.',
     analyticsBody3:
       'If analytics environment variables are not configured, the site runs without injecting third-party analytics scripts. VFXRun Browser will include a clear explanation and an option to disable anonymous statistics in a future release.',
     emailTitle: 'Email you choose to send',
     emailBody:
-      'If you submit feedback, join a wishlist, or vote for Pro features, we store only the information you voluntarily provide (such as your email address and form selections) to respond or send product updates you requested.',
+      'If you submit feedback or contact us by email, we use only the information you voluntarily provide to respond.',
+    wishlistTitle: 'Pro wishlist email',
+    wishlistBody1:
+      'If you vote on the Pro wishlist, we store your email address and feature selections in our database so we can notify you about Pro trials, feature launches, and related product updates you asked for.',
+    wishlistBody2: 'We do not sell wishlist email addresses.',
+    wishlistBody3: 'Wishlist email addresses are not sent to PostHog or other analytics tools.',
+    wishlistBody4:
+      'You may request deletion of your wishlist email by contacting ningzw1005@gmail.com.',
     cookiesTitle: 'Cookies & third-party services',
     cookiesBody:
       'The website may use basic cookies or similar technologies required by analytics providers. We aim to keep third-party services limited to infrastructure and product analytics needed for launch.',
@@ -291,12 +303,17 @@ export const extendedPagesI18n: Record<Locale, ExtendedPagesLocale> = {
       analyticsBody1:
         '启用后，网站可能加载 Cloudflare Web Analytics、PostHog 等轻量分析服务，帮助我们了解汇总使用情况 — 例如页面访问、下载按钮点击、SheetGen 工具入口点击、Pro 页面浏览、Pro wishlist 投票、反馈与 Discord 链接点击，以及分享操作。',
       analyticsBody2:
-        '分析事件可能仅包含页面路径、链接目标、语言、平台，以及 wishlist 表单中选中的 Pro 功能名称等高层属性。我们不会通过这些工具收集本地文件名、本地文件夹路径、图像内容、项目素材细节或用户游戏项目名称。',
+        '分析事件可能仅包含页面路径、链接目标、语言、平台，以及 wishlist 表单中选中的 Pro 功能名称等高层属性。我们不会通过 PostHog 等分析工具收集邮箱地址、本地文件名、本地文件夹路径、图像内容、项目素材细节或用户游戏项目名称。',
       analyticsBody3:
         '若未配置分析环境变量，网站不会注入第三方分析脚本。VFXRun Browser 将在未来版本中提供清晰说明及关闭匿名统计的选项。',
       emailTitle: '您主动发送的邮件',
-      emailBody:
-        '若您提交反馈、加入 wishlist 或为 Pro 功能投票，我们仅保存您自愿提供的信息（如邮箱地址与表单选项），用于回复或发送您请求的产品更新。',
+      emailBody: '若您通过邮件提交反馈或联系我们，我们仅使用您自愿提供的信息进行回复。',
+      wishlistTitle: 'Pro Wishlist 邮箱',
+      wishlistBody1:
+        '若您参与 Pro Wishlist 投票，我们会将您的邮箱与功能选择保存在数据库中，以便在 Pro 试用开放、相关功能上线或您请求的产品更新时通知您。',
+      wishlistBody2: '我们不会出售 Wishlist 邮箱地址。',
+      wishlistBody3: 'Wishlist 邮箱不会发送到 PostHog 或其他分析工具。',
+      wishlistBody4: '您可通过 ningzw1005@gmail.com 请求删除 Wishlist 邮箱记录。',
       cookiesTitle: 'Cookie 与第三方服务',
       cookiesBody:
         '网站可能使用分析服务所需的基本 Cookie 或类似技术。我们力求将第三方服务限制在发布所需的基础设施与产品分析范围内。',

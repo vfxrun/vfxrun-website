@@ -1,16 +1,11 @@
 ---
-import fs from 'node:fs';
-import path from 'node:path';
 import Button from './Button.astro';
 import SidebarSectionNav from './SidebarSectionNav.astro';
 import BrowserScreenshotCarousel from './BrowserScreenshotCarousel.astro';
 import { VFXRUN_SECTIONS, PRO_VOTE_FEATURES, WINDOWS_DOWNLOAD } from '../config/site';
 import { defaultText } from '../i18n/messages';
 
-const installerPath = path.join(process.cwd(), 'public', 'downloads', WINDOWS_DOWNLOAD.fileName);
-const windowsDownloadSize = fs.existsSync(installerPath)
-  ? `${Math.round(fs.statSync(installerPath).size / (1024 * 1024))} MB`
-  : defaultText('browser.downloadFileSize');
+const windowsDownloadSize = defaultText('browser.downloadFileSize');
 
 const heroBullets = [
   'browser.heroBullet1',

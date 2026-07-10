@@ -2,6 +2,7 @@
 
 interface Env {
   DB?: D1Database;
+  DOWNLOADS?: R2Bucket;
 }
 
 type PagesFunction<Env = unknown> = (context: {

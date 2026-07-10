@@ -63,6 +63,10 @@ export const WINDOWS_DOWNLOAD = {
   href: '/downloads/VFXRun-Setup-Windows.exe',
   fileName: 'VFXRun-Setup-Windows.exe',
   version: '1.3.3',
+  assetGitTag: 'desktop-v1.3.3',
+  r2Key: 'VFXRun-Setup-Windows.exe',
+  fallbackUrl:
+    'https://raw.githubusercontent.com/vfxrun/vfxrun-website/desktop-v1.3.3/public/downloads/VFXRun-Setup-Windows.exe',
 } as const;
 
 /** Flip to `true` when Pro is officially for sale — reveals pricing, FAQ, and full nav. */

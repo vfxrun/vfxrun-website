@@ -4,7 +4,7 @@ interface Env {
   DOWNLOADS?: R2Bucket;
 }
 
-export const onRequestGet: PagesFunction<Env> = async (context) => {
+async function buildDownloadResponse(context: EventContext<Env, string, Record<string, unknown>>) {
   const filename = context.params.filename;
   if (filename !== WINDOWS_DOWNLOAD.fileName) {
     return new Response('Not found', { status: 404 });
@@ -22,4 +22,11 @@ export const onRequestGet: PagesFunction<Env> = async (context) => {
   }
 
   return Response.redirect(WINDOWS_DOWNLOAD.fallbackUrl, 302);
+}
+
+export const onRequestGet: PagesFunction<Env> = async (context) => buildDownloadResponse(context);
+
+export const onRequestHead: PagesFunction<Env> = async (context) => {
+  const response = await buildDownloadResponse(context);
+  return new Response(null, { status: response.status, headers: response.headers });
 };

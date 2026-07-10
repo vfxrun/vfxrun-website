@@ -2,10 +2,7 @@ name = "vfxrun-website"
 compatibility_date = "2024-09-23"
 pages_build_output_dir = "dist"
 
-# Create the database in Cloudflare dashboard, then set database_id:
-#   wrangler d1 create vfxrun-wishlist
-#   wrangler d1 execute vfxrun-wishlist --remote --file=./migrations/0001_wishlist.sql
 [[d1_databases]]
 binding = "DB"
 database_name = "vfxrun-wishlist"
-database_id = "00000000-0000-0000-0000-000000000000"
+database_id = "950ceb47-c7b3-4507-858f-6c4674e902bf"

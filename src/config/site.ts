@@ -59,6 +59,12 @@ export const CONTACT_EMAIL = 'ningzw1005@gmail.com';
 
 export const DISCORD_INVITE_URL = 'https://discord.gg/4y6QFSHxW';
 
+export const WINDOWS_DOWNLOAD = {
+  href: '/downloads/VFXRun-Setup-Windows.exe',
+  fileName: 'VFXRun-Setup-Windows.exe',
+  version: '1.3.3',
+} as const;
+
 /** Flip to `true` when Pro is officially for sale — reveals pricing, FAQ, and full nav. */
 export const PRO_LAUNCHED = false;
 

@@ -1,9 +1,16 @@
 ---
+import fs from 'node:fs';
+import path from 'node:path';
 import Button from './Button.astro';
 import SidebarSectionNav from './SidebarSectionNav.astro';
 import BrowserScreenshotCarousel from './BrowserScreenshotCarousel.astro';
-import { VFXRUN_SECTIONS, PRO_VOTE_FEATURES } from '../config/site';
+import { VFXRUN_SECTIONS, PRO_VOTE_FEATURES, WINDOWS_DOWNLOAD } from '../config/site';
 import { defaultText } from '../i18n/messages';
+
+const installerPath = path.join(process.cwd(), 'public', 'downloads', WINDOWS_DOWNLOAD.fileName);
+const windowsDownloadSize = fs.existsSync(installerPath)
+  ? `${Math.round(fs.statSync(installerPath).size / (1024 * 1024))} MB`
+  : defaultText('browser.downloadFileSize');
 
 const heroBullets = [
   'browser.heroBullet1',
@@ -61,22 +68,26 @@ const heroBullets = [
           </span>
         </div>
 
+        <ul class="download-meta" aria-label={defaultText('browser.downloadMetaLabel')}>
+          <li data-i18n="browser.downloadPlatformLabel">{defaultText('browser.downloadPlatformLabel')}</li>
+          <li data-i18n="browser.downloadEditionLabel">{defaultText('browser.downloadEditionLabel')}</li>
+          <li data-i18n="browser.downloadProStatus">{defaultText('browser.downloadProStatus')}</li>
+        </ul>
+
         <div class="download-actions">
           <div class="download-platform" data-analytics-download="windows">
-            <Button href="#" class="download-platform__btn" disabled>
+            <Button href={WINDOWS_DOWNLOAD.href} class="download-platform__btn" download={WINDOWS_DOWNLOAD.fileName}>
               <span data-i18n="browser.downloadWindowsBtn">{defaultText('browser.downloadWindowsBtn')}</span>
             </Button>
-            <p class="download-platform__size" data-i18n="browser.downloadFileSize">
-              {defaultText('browser.downloadFileSize')}
-            </p>
+            <p class="download-platform__size">{windowsDownloadSize}</p>
           </div>
 
           <div class="download-platform" data-analytics-download="macos">
             <Button href="#" class="download-platform__btn" disabled>
               <span data-i18n="browser.downloadMacBtn">{defaultText('browser.downloadMacBtn')}</span>
             </Button>
-            <p class="download-platform__size" data-i18n="browser.downloadFileSize">
-              {defaultText('browser.downloadFileSize')}
+            <p class="download-platform__size" data-i18n="browser.downloadMacComingSoon">
+              {defaultText('browser.downloadMacComingSoon')}
             </p>
           </div>
         </div>
@@ -269,7 +280,26 @@ const heroBullets = [
     flex-wrap: wrap;
     align-items: center;
     gap: 0.75rem 1rem;
-    margin-bottom: 1.35rem;
+    margin-bottom: 0.85rem;
+  }
+
+  .download-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem 0.85rem;
+    margin: 0 0 1.2rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  .download-meta li {
+    padding: 0.28rem 0.7rem;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    line-height: 1.35;
   }
 
   .share-title {

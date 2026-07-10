@@ -113,9 +113,9 @@ export const fr: MessageTree = {
     faqInstallWindowsQ: 'Pourquoi Windows affiche-t-il un avertissement de sécurité à l’installation ?',
     faqInstallWindowsA:
       'VFXRun Browser est une version gratuite en phase initiale. L’installateur Windows n’est pas encore signé, donc SmartScreen peut afficher des messages comme « Windows a protégé votre PC » ou « Éditeur inconnu », et le bouton d’installation peut être masqué au départ. Téléchargez uniquement depuis le site officiel vfxrun.com. Si vous avez confirmé que l’installateur provient de notre site, vous pouvez choisir « Plus d’infos », puis « Exécuter quand même » pour continuer. Nous prévoyons d’ajouter une signature de code à mesure que le produit mûrit afin de réduire ces avertissements.',
-    faqInstallMacQ: 'macOS affichera-t-il un avertissement similaire ?',
+    faqInstallMacQ: 'Pourquoi macOS affiche-t-il un avertissement de sécurité à l’installation ?',
     faqInstallMacA:
-      'C’est possible. Sans signature Apple Developer ID ni notarisation, macOS peut indiquer que l’app ne peut pas s’ouvrir car le développeur ne peut pas être vérifié. Téléchargez uniquement depuis vfxrun.com. Si vous avez confirmé que le fichier provient de notre site officiel, faites un clic droit sur l’app dans le Finder, choisissez Ouvrir, puis confirmez une nouvelle fois. Nous visons à ajouter signature et notarisation avant le lancement complet sur Mac.',
+      'Nous sommes en phase de version initiale et n’avons pas encore la signature Apple Developer ID ni la notarisation, donc macOS peut indiquer que l’application ne peut pas s’ouvrir car le développeur ne peut pas être vérifié. Téléchargez uniquement depuis le site officiel vfxrun.com. Si vous avez confirmé que l’installateur provient de notre site, faites un clic droit sur l’application dans le Finder, choisissez Ouvrir, puis confirmez une nouvelle fois. Nous visons à finaliser la signature et la notarisation avant le lancement complet sur Mac.',
     downloadSecurityLink: 'Un avertissement de sécurité à l’installation ?',
     faqEnginesQ: 'Est-ce compatible avec Godot ou Unity ?',
     faqEnginesA: 'Oui. Il fonctionne avec tout moteur utilisant des séquences PNG ou des feuilles de sprites. Godot et Unity sont des workflows courants.',

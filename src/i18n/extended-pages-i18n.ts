@@ -133,9 +133,9 @@ const extendedPagesEn: ExtendedPagesLocale = {
     installWindowsTitle: 'Why does Windows show a security warning during install?',
     installWindowsBody:
       'VFXRun Browser is an early free release. The Windows installer is not code-signed yet, so Windows SmartScreen may show messages such as “Windows protected your PC” or “Unknown publisher,” and the install button may be hidden at first. Only download from the official site vfxrun.com. If you have confirmed the installer came from our website, you can choose “More info” and then “Run anyway” to continue. We plan to add code signing as the product matures to reduce these prompts.',
-    installMacTitle: 'Will macOS show a similar warning?',
+    installMacTitle: 'Why does macOS show a security warning during install?',
     installMacBody:
-      'It can. Without Apple Developer ID signing and notarization, macOS may say the app cannot be opened because the developer cannot be verified. Only download from vfxrun.com. If you have confirmed the file is from our official site, you can right-click the app in Finder, choose Open, and confirm once more. We aim to add signing and notarization before the Mac release is fully launched.',
+      'We are in an early release phase and do not yet have Apple Developer ID signing and notarization, so macOS may say the app cannot be opened because the developer cannot be verified. Only download from the official site vfxrun.com. If you have confirmed the installer came from our website, you can right-click the app in Finder, choose Open, and confirm once more. We aim to complete signing and notarization before the Mac release is fully launched.',
     godotTitle: 'Godot workflow (overview)',
     godotStep1: 'Organize PNG sequences in folders on disk.',
     godotStep2: 'Point VFXRun Browser at your VFX library root.',
@@ -271,9 +271,9 @@ export const extendedPagesI18n: Record<Locale, ExtendedPagesLocale> = {
       installWindowsTitle: '为什么 Windows 安装时会出现安全提示？',
       installWindowsBody:
         'VFXRun Browser 目前是早期免费版本，Windows 安装包暂时还没有正式代码签名。因此 Windows SmartScreen 可能会提示“Windows 已保护你的电脑”或“未知发布者”，有时安装按钮会被隐藏。请只从官网 vfxrun.com 下载安装包。若您已确认安装包来自我们的官网，可以点击“更多信息”，再点击“仍要运行”继续安装。后续产品稳定后我们会申请代码签名，以减少这类提示。',
-      installMacTitle: 'macOS 会出现类似提示吗？',
+      installMacTitle: '为什么 macOS 安装时会出现安全提示？',
       installMacBody:
-        '会。早期版本如果没有 Apple Developer ID 签名和 notarization，macOS 可能会提示“无法打开，因为无法验证开发者”。请只从官网 vfxrun.com 下载。若您已确认安装包来自我们的官网，可以在 Finder 中右键点击应用，选择“打开”，然后再次确认打开。正式 Mac 版本发布前，我们会尽量完成签名和 notarization。',
+        '我们处于早期版本，还没有 Apple Developer ID 签名和 notarization，macOS 可能会提示“无法打开，因为无法验证开发者”。请只从官网 vfxrun.com 下载。若您已确认安装包来自我们的官网，可以在 Finder 中右键点击应用，选择“打开”，然后再次确认打开。正式 Mac 版本发布前，我们会尽量完成签名和 notarization。',
       godotTitle: 'Godot 工作流（概览）',
       godotStep1: '在磁盘上将 PNG 序列整理到文件夹中。',
       godotStep2: '将 VFXRun Browser 指向您的 VFX 库根目录。',
@@ -401,9 +401,9 @@ export const extendedPagesI18n: Record<Locale, ExtendedPagesLocale> = {
       installWindowsTitle: '為什麼 Windows 安裝時會出現安全提示？',
       installWindowsBody:
         'VFXRun Browser 目前是早期免費版本，Windows 安裝套件暫時還沒有正式程式碼簽章。因此 Windows SmartScreen 可能會提示「Windows 已保護你的電腦」或「未知發行者」，有時安裝按鈕會被隱藏。請只從官網 vfxrun.com 下載安裝套件。若您已確認安裝套件來自我們的官網，可以點擊「更多資訊」，再點擊「仍要執行」繼續安裝。後續產品穩定後我們會申請程式碼簽章，以減少這類提示。',
-      installMacTitle: 'macOS 會出現類似提示嗎？',
+      installMacTitle: '為什麼 macOS 安裝時會出現安全提示？',
       installMacBody:
-        '會。早期版本如果沒有 Apple Developer ID 簽章和 notarization，macOS 可能會提示「無法打開，因為無法驗證開發者」。請只從官網 vfxrun.com 下載。若您已確認安裝套件來自我們的官網，可以在 Finder 中右鍵點擊應用程式，選擇「打開」，然後再次確認打開。正式 Mac 版本發布前，我們會盡量完成簽章和 notarization。',
+        '我們處於早期版本，還沒有 Apple Developer ID 簽章和 notarization，macOS 可能會提示「無法打開，因為無法驗證開發者」。請只從官網 vfxrun.com 下載。若您已確認安裝套件來自我們的官網，可以在 Finder 中右鍵點擊應用程式，選擇「打開」，然後再次確認打開。正式 Mac 版本發布前，我們會盡量完成簽章和 notarization。',
       godotTitle: 'Godot 工作流程（概覽）',
       godotStep1: '在磁碟上將 PNG 序列整理到資料夾中。',
       godotStep2: '將 VFXRun Browser 指向您的 VFX 庫根目錄。',
@@ -526,9 +526,9 @@ export const extendedPagesI18n: Record<Locale, ExtendedPagesLocale> = {
       installWindowsTitle: 'Windows のインストール時にセキュリティ警告が出るのはなぜですか？',
       installWindowsBody:
         'VFXRun Browser は早期の無料版です。Windows インストーラーはまだコード署名されていないため、SmartScreen が「Windows によって PC が保護されました」や「不明な発行元」などを表示し、インストールボタンが最初は隠れることがあります。公式サイト vfxrun.com からのみダウンロードしてください。当社の公式サイトからのファイルであることを確認したうえで、「詳細情報」を選び、「実行」をクリックして続行できます。製品が成熟するにつれコード署名を追加し、このような表示を減らす予定です。',
-      installMacTitle: 'macOS でも同様の警告が出ますか？',
+      installMacTitle: 'なぜ macOS のインストール時にセキュリティ警告が出るのですか？',
       installMacBody:
-        '出る場合があります。Apple Developer ID の署名と公証（notarization）がない早期版では、開発元を確認できないため開けないと表示されることがあります。vfxrun.com からのみダウンロードしてください。公式サイトからのファイルであることを確認したうえで、Finder でアプリを右クリックし「開く」を選び、もう一度確認して開けます。Mac 版の正式リリース前に、署名と公証への対応を進める予定です。',
+        '早期バージョンのため、まだ Apple Developer ID の署名と公証（notarization）がありません。そのため macOS は「開発元を確認できないため開けません」などと表示することがあります。公式サイト vfxrun.com からのみダウンロードしてください。当社の公式サイトからのインストーラーであることを確認したうえで、Finder でアプリを右クリックし「開く」を選び、もう一度確認して開けます。Mac 版の正式リリース前に、署名と公証への対応を進める予定です。',
       godotTitle: 'Godot ワークフロー（概要）',
       godotStep1: 'ディスク上のフォルダに PNG シーケンスを整理します。',
       godotStep2: 'VFX ライブラリのルートを VFXRun Browser に指定します。',
@@ -652,9 +652,9 @@ export const extendedPagesI18n: Record<Locale, ExtendedPagesLocale> = {
       installWindowsTitle: 'Windows 설치 시 보안 경고가 나타나는 이유는 무엇인가요?',
       installWindowsBody:
         'VFXRun Browser는 초기 무료 버전입니다. Windows 설치 프로그램은 아직 코드 서명이 되어 있지 않아 SmartScreen이 "Windows에서 PC를 보호했습니다" 또는 "알 수 없는 게시자" 등을 표시하고, 설치 버튼이 처음에 숨겨질 수 있습니다. 공식 사이트 vfxrun.com에서만 다운로드하세요. 당사 공식 사이트에서 받은 파일임을 확인한 경우 "추가 정보"를 선택한 뒤 "실행"을 눌러 계속할 수 있습니다. 제품이 안정되면 코드 서명을 추가해 이러한 안내를 줄일 예정입니다.',
-      installMacTitle: 'macOS에서도 비슷한 경고가 나타나나요?',
+      installMacTitle: 'macOS 설치 시 보안 경고가 나타나는 이유는 무엇인가요?',
       installMacBody:
-        '나타날 수 있습니다. Apple Developer ID 서명과 공증(notarization)이 없는 초기 버전에서는 개발자를 확인할 수 없어 앱을 열 수 없다는 메시지가 표시될 수 있습니다. vfxrun.com에서만 다운로드하세요. 공식 사이트에서 받은 파일임을 확인한 경우 Finder에서 앱을 우클릭하고 "열기"를 선택한 뒤 한 번 더 확인하여 열 수 있습니다. Mac 정식 출시 전에 서명과 공증을 진행할 예정입니다.',
+        '초기 버전 단계로 Apple Developer ID 서명과 공증(notarization)이 아직 없습니다. 따라서 macOS에서 "개발자를 확인할 수 없어 열 수 없습니다" 등의 메시지가 표시될 수 있습니다. 공식 사이트 vfxrun.com에서만 다운로드하세요. 당사 공식 사이트에서 받은 설치 파일임을 확인한 경우 Finder에서 앱을 우클릭하고 "열기"를 선택한 뒤 한 번 더 확인하여 열 수 있습니다. Mac 정식 출시 전에 서명과 공증을 진행할 예정입니다.',
       godotTitle: 'Godot 워크플로(개요)',
       godotStep1: '디스크의 폴더에 PNG 시퀀스를 정리합니다.',
       godotStep2: 'VFX 라이브러리 루트를 VFXRun Browser에 지정합니다.',
@@ -778,9 +778,9 @@ export const extendedPagesI18n: Record<Locale, ExtendedPagesLocale> = {
       installWindowsTitle: '¿Por qué Windows muestra una advertencia de seguridad al instalar?',
       installWindowsBody:
         'VFXRun Browser es una versión gratuita en fase inicial. El instalador de Windows aún no tiene firma de código, por lo que SmartScreen puede mostrar mensajes como «Windows protegió su PC» o «Editor desconocido», y el botón de instalación puede estar oculto al principio. Descargue solo desde el sitio oficial vfxrun.com. Si ha confirmado que el instalador proviene de nuestro sitio web, puede elegir «Más información» y luego «Ejecutar de todos modos» para continuar. Planeamos añadir firma de código a medida que el producto madure para reducir estas advertencias.',
-      installMacTitle: '¿macOS mostrará una advertencia similar?',
+      installMacTitle: '¿Por qué macOS muestra una advertencia de seguridad al instalar?',
       installMacBody:
-        'Puede ocurrir. Sin la firma de Apple Developer ID y la notarización, macOS puede indicar que no se puede abrir la app porque no se puede verificar el desarrollador. Descargue solo desde vfxrun.com. Si ha confirmado que el archivo proviene de nuestro sitio oficial, puede hacer clic derecho en la app en Finder, elegir Abrir y confirmar una vez más. Nuestro objetivo es añadir firma y notarización antes del lanzamiento completo en Mac.',
+        'Estamos en una versión inicial y aún no tenemos la firma de Apple Developer ID ni la notarización, por lo que macOS puede indicar que la aplicación no se puede abrir porque no se puede verificar el desarrollador. Descargue solo desde el sitio oficial vfxrun.com. Si ha confirmado que el instalador proviene de nuestro sitio web, puede hacer clic derecho en la aplicación en Finder, elegir Abrir y confirmar una vez más. Nuestro objetivo es completar la firma y la notarización antes del lanzamiento completo en Mac.',
       godotTitle: 'Flujo de trabajo en Godot (resumen)',
       godotStep1: 'Organiza secuencias PNG en carpetas en el disco.',
       godotStep2: 'Apunta VFXRun Browser a la raíz de su biblioteca VFX.',
@@ -904,9 +904,9 @@ export const extendedPagesI18n: Record<Locale, ExtendedPagesLocale> = {
       installWindowsTitle: 'Pourquoi Windows affiche-t-il un avertissement de sécurité à l’installation ?',
       installWindowsBody:
         'VFXRun Browser est une version gratuite en phase initiale. L’installateur Windows n’est pas encore signé, donc SmartScreen peut afficher des messages comme « Windows a protégé votre PC » ou « Éditeur inconnu », et le bouton d’installation peut être masqué au départ. Téléchargez uniquement depuis le site officiel vfxrun.com. Si vous avez confirmé que l’installateur provient de notre site, vous pouvez choisir « Plus d’infos », puis « Exécuter quand même » pour continuer. Nous prévoyons d’ajouter une signature de code à mesure que le produit mûrit afin de réduire ces avertissements.',
-      installMacTitle: 'macOS affichera-t-il un avertissement similaire ?',
+      installMacTitle: 'Pourquoi macOS affiche-t-il un avertissement de sécurité à l’installation ?',
       installMacBody:
-        'C’est possible. Sans signature Apple Developer ID ni notarisation, macOS peut indiquer que l’app ne peut pas s’ouvrir car le développeur ne peut pas être vérifié. Téléchargez uniquement depuis vfxrun.com. Si vous avez confirmé que le fichier provient de notre site officiel, faites un clic droit sur l’app dans le Finder, choisissez Ouvrir, puis confirmez une nouvelle fois. Nous visons à ajouter signature et notarisation avant le lancement complet sur Mac.',
+        'Nous sommes en phase de version initiale et n’avons pas encore la signature Apple Developer ID ni la notarisation, donc macOS peut indiquer que l’application ne peut pas s’ouvrir car le développeur ne peut pas être vérifié. Téléchargez uniquement depuis le site officiel vfxrun.com. Si vous avez confirmé que l’installateur provient de notre site, faites un clic droit sur l’application dans le Finder, choisissez Ouvrir, puis confirmez une nouvelle fois. Nous visons à finaliser la signature et la notarisation avant le lancement complet sur Mac.',
       godotTitle: 'Workflow Godot (aperçu)',
       godotStep1: 'Organisez les séquences PNG dans des dossiers sur le disque.',
       godotStep2: 'Pointez VFXRun Browser vers la racine de votre bibliothèque VFX.',

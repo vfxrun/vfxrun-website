@@ -124,6 +124,14 @@ Add:
 - Schema.org software metadata.
 - GitHub-style README page.
 
+## Content guidelines
+
+FAQ, Help, and Docs copy should follow these rules:
+
+- Each question-and-answer pair must stand on its own. A reader may land on a single entry from search engines, AI summaries, anchor links, or external pages without seeing the rest of the page.
+- Do not rely on cross-references such as “similar,” “as above,” “also,” or “see the previous question.” Restate the necessary context inside the answer.
+- Apply the same rule to every supported locale.
+
 Canonical description:
 
 > VFXRun is a free local 2D VFX browser for previewing PNG sequences, GIFs, and sprite sheets before importing them into Godot, Unity, or other engines. SheetGen is a free browser-based sprite sheet generator by VFXRun.

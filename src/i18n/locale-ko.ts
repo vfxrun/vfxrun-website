@@ -113,9 +113,9 @@ export const ko: MessageTree = {
     faqInstallWindowsQ: 'Windows 설치 시 보안 경고가 나타나는 이유는 무엇인가요?',
     faqInstallWindowsA:
       'VFXRun Browser는 초기 무료 버전입니다. Windows 설치 프로그램은 아직 코드 서명이 되어 있지 않아 SmartScreen이 "Windows에서 PC를 보호했습니다" 또는 "알 수 없는 게시자" 등을 표시하고, 설치 버튼이 처음에 숨겨질 수 있습니다. 공식 사이트 vfxrun.com에서만 다운로드하세요. 당사 공식 사이트에서 받은 파일임을 확인한 경우 "추가 정보"를 선택한 뒤 "실행"을 눌러 계속할 수 있습니다. 제품이 안정되면 코드 서명을 추가해 이러한 안내를 줄일 예정입니다.',
-    faqInstallMacQ: 'macOS에서도 비슷한 경고가 나타나나요?',
+    faqInstallMacQ: 'macOS 설치 시 보안 경고가 나타나는 이유는 무엇인가요?',
     faqInstallMacA:
-      '나타날 수 있습니다. Apple Developer ID 서명과 공증(notarization)이 없는 초기 버전에서는 개발자를 확인할 수 없어 앱을 열 수 없다는 메시지가 표시될 수 있습니다. vfxrun.com에서만 다운로드하세요. 공식 사이트에서 받은 파일임을 확인한 경우 Finder에서 앱을 우클릭하고 "열기"를 선택한 뒤 한 번 더 확인하여 열 수 있습니다. Mac 정식 출시 전에 서명과 공증을 진행할 예정입니다.',
+      '초기 버전 단계로 Apple Developer ID 서명과 공증(notarization)이 아직 없습니다. 따라서 macOS에서 "개발자를 확인할 수 없어 열 수 없습니다" 등의 메시지가 표시될 수 있습니다. 공식 사이트 vfxrun.com에서만 다운로드하세요. 당사 공식 사이트에서 받은 설치 파일임을 확인한 경우 Finder에서 앱을 우클릭하고 "열기"를 선택한 뒤 한 번 더 확인하여 열 수 있습니다. Mac 정식 출시 전에 서명과 공증을 진행할 예정입니다.',
     downloadSecurityLink: '설치 중 보안 안내가 보이나요?',
     faqEnginesQ: 'Godot이나 Unity를 지원하나요?',
     faqEnginesA: '예. PNG 시퀀스나 스프라이트 시트를 사용하는 모든 엔진에서 작동합니다. Godot과 Unity는 흔한 워크플로입니다.',

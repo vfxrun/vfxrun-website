@@ -74,7 +74,7 @@ export const browserHomeI18n = {
     heroBullet4: '產生遊戲引擎需要的檔案格式',
     shareTitle: '完全免費，歡迎分享',
     shareBtn: '分享',
-    shareToast: '連結已複製',
+    shareToast: '網址已複製',
     carousel: {
       slide1: '快速預覽本機特效序列圖',
       slide2: '軟體幫您整理分類，查重',

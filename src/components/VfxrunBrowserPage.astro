@@ -2,10 +2,11 @@
 import Button from './Button.astro';
 import SidebarSectionNav from './SidebarSectionNav.astro';
 import BrowserScreenshotCarousel from './BrowserScreenshotCarousel.astro';
-import { VFXRUN_SECTIONS, PRO_VOTE_FEATURES, WINDOWS_DOWNLOAD } from '../config/site';
+import { VFXRUN_SECTIONS, PRO_VOTE_FEATURES, WINDOWS_DOWNLOAD, MACOS_DOWNLOAD } from '../config/site';
 import { defaultText } from '../i18n/messages';
 
 const windowsDownloadSize = defaultText('browser.downloadFileSize');
+const macDownloadSize = defaultText('browser.downloadMacFileSize');
 
 const heroBullets = [
   'browser.heroBullet1',
@@ -72,12 +73,10 @@ const heroBullets = [
           </div>
 
           <div class="download-platform" data-analytics-download="macos">
-            <Button href="#" class="download-platform__btn" disabled>
+            <Button href={MACOS_DOWNLOAD.href} class="download-platform__btn" download={MACOS_DOWNLOAD.fileName}>
               <span data-i18n="browser.downloadMacBtn">{defaultText('browser.downloadMacBtn')}</span>
             </Button>
-            <p class="download-platform__size" data-i18n="browser.downloadMacComingSoon">
-              {defaultText('browser.downloadMacComingSoon')}
-            </p>
+            <p class="download-platform__size">{macDownloadSize}</p>
           </div>
         </div>
 

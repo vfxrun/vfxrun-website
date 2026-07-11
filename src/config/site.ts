@@ -59,7 +59,16 @@ export const CONTACT_EMAIL = 'ningzw1005@gmail.com';
 
 export const DISCORD_INVITE_URL = 'https://discord.gg/4y6QFSHxW';
 
-export const WINDOWS_DOWNLOAD = {
+export type DownloadAsset = {
+  href: string;
+  fileName: string;
+  version: string;
+  assetGitTag: string;
+  r2Key: string;
+  fallbackUrl: string;
+};
+
+export const WINDOWS_DOWNLOAD: DownloadAsset = {
   href: '/downloads/VFXRun-Setup-Windows.exe',
   fileName: 'VFXRun-Setup-Windows.exe',
   version: '1.3.3',
@@ -67,7 +76,22 @@ export const WINDOWS_DOWNLOAD = {
   r2Key: 'VFXRun-Setup-Windows.exe',
   fallbackUrl:
     'https://raw.githubusercontent.com/vfxrun/vfxrun-website/desktop-v1.3.3/public/downloads/VFXRun-Setup-Windows.exe',
-} as const;
+};
+
+export const MACOS_DOWNLOAD: DownloadAsset = {
+  href: '/downloads/VFXRun-macOS-arm64.dmg',
+  fileName: 'VFXRun-macOS-arm64.dmg',
+  version: '1.3.3',
+  assetGitTag: 'desktop-v1.3.3',
+  r2Key: 'VFXRun-macOS-arm64.dmg',
+  fallbackUrl:
+    'https://raw.githubusercontent.com/vfxrun/vfxrun-website/desktop-v1.3.3/public/downloads/VFXRun-macOS-arm64.dmg',
+};
+
+export const DOWNLOAD_ASSETS: Record<string, DownloadAsset> = {
+  [WINDOWS_DOWNLOAD.fileName]: WINDOWS_DOWNLOAD,
+  [MACOS_DOWNLOAD.fileName]: MACOS_DOWNLOAD,
+};
 
 /** Flip to `true` when Pro is officially for sale — reveals pricing, FAQ, and full nav. */
 export const PRO_LAUNCHED = false;

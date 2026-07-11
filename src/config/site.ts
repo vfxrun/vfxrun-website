@@ -85,7 +85,7 @@ export const MACOS_DOWNLOAD: DownloadAsset = {
   assetGitTag: 'desktop-v1.3.3',
   r2Key: 'VFXRun-macOS-arm64.dmg',
   fallbackUrl:
-    'https://raw.githubusercontent.com/vfxrun/vfxrun-website/desktop-v1.3.3/public/downloads/VFXRun-macOS-arm64.dmg',
+    'https://github.com/vfxrun/vfxrun-website/raw/desktop-v1.3.3/public/downloads/VFXRun-macOS-arm64.dmg',
 };
 
 export const DOWNLOAD_ASSETS: Record<string, DownloadAsset> = {

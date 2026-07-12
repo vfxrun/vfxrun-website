@@ -61,6 +61,7 @@ export const en = {
     carousel: {
       videoDemo: 'Watch VFXRun in 80 seconds',
       playVideo: 'Play demo video',
+      closeVideo: 'Close video',
       slide1: 'Quickly preview local VFX image sequences',
       slide2: 'Organize, categorize, and find duplicates',
       slide3: 'Favorite effects and open local folders',
@@ -269,6 +270,7 @@ export const zhCN: typeof en = {
     carousel: {
       videoDemo: '80 秒了解 VFXRun',
       playVideo: '播放演示视频',
+      closeVideo: '关闭视频',
       slide1: '快速预览本地特效序列图',
       slide2: '软件帮您整理分类，查重',
       slide3: '支持收藏，打开本地文件夹查看',

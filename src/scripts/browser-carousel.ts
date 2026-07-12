@@ -54,14 +54,16 @@ export function initBrowserCarousels() {
     const image = root.querySelector<HTMLImageElement>('[data-carousel-image]');
     const videoPanel = root.querySelector<HTMLElement>('[data-carousel-video]');
     const videoThumb = root.querySelector<HTMLImageElement>('[data-carousel-video-thumb]');
-    const youtubeHost = root.querySelector<HTMLElement>('[data-carousel-youtube-host]');
     const playButton = root.querySelector<HTMLButtonElement>('[data-carousel-play]');
     const caption = root.querySelector<HTMLElement>('[data-carousel-caption]');
     const segments = Array.from(root.querySelectorAll<HTMLElement>('[data-carousel-segment]'));
     const prev = root.querySelector<HTMLButtonElement>('[data-carousel-prev]');
     const next = root.querySelector<HTMLButtonElement>('[data-carousel-next]');
+    const modal = root.querySelector<HTMLElement>('[data-carousel-modal]');
+    const modalPlayer = root.querySelector<HTMLElement>('[data-carousel-modal-player]');
+    const modalCloseButtons = Array.from(root.querySelectorAll<HTMLButtonElement>('[data-carousel-modal-close]'));
 
-    if (!image || !caption || !videoPanel || !videoThumb || !youtubeHost || !playButton) return;
+    if (!image || !caption || !videoPanel || !videoThumb || !playButton || !modal || !modalPlayer) return;
 
     let index = 0;
     let timer: number | undefined;
@@ -69,6 +71,8 @@ export function initBrowserCarousels() {
     let onYoutubeMessage: ((event: MessageEvent) => void) | undefined;
     let activeYoutubeFrame: HTMLIFrameElement | undefined;
     let videoEndedHandled = false;
+
+    const isModalOpen = () => !modal.hidden;
 
     const detachYoutubeListener = () => {
       if (!onYoutubeMessage) return;
@@ -78,10 +82,11 @@ export function initBrowserCarousels() {
       videoEndedHandled = false;
     };
 
-    const stopYoutube = () => {
+    const closeModal = () => {
       detachYoutubeListener();
-      youtubeHost.innerHTML = '';
-      videoPanel.classList.remove('is-playing');
+      modalPlayer.innerHTML = '';
+      modal.hidden = true;
+      document.body.style.overflow = '';
     };
 
     const updateCaption = () => {
@@ -98,7 +103,7 @@ export function initBrowserCarousels() {
     };
 
     const renderSlide = (slide: CarouselSlide) => {
-      stopYoutube();
+      closeModal();
 
       if (slide.kind === 'youtube') {
         image.hidden = true;
@@ -132,7 +137,7 @@ export function initBrowserCarousels() {
 
     const schedule = () => {
       window.clearInterval(timer);
-      if (paused || slides.length < 2 || videoPanel.classList.contains('is-playing')) return;
+      if (paused || slides.length < 2 || isModalOpen()) return;
       timer = window.setInterval(() => show(index + 1), AUTOPLAY_MS);
     };
 
@@ -142,7 +147,7 @@ export function initBrowserCarousels() {
     };
 
     const resume = () => {
-      if (videoPanel.classList.contains('is-playing')) return;
+      if (isModalOpen()) return;
       paused = false;
       schedule();
     };
@@ -150,29 +155,30 @@ export function initBrowserCarousels() {
     const advanceAfterVideoEnd = () => {
       if (videoEndedHandled) return;
       videoEndedHandled = true;
-      detachYoutubeListener();
+      closeModal();
       show(index + 1);
       paused = false;
       schedule();
     };
 
-    const playYoutube = () => {
+    const openVideoModal = () => {
       const slide = slides[index];
       if (!slide || slide.kind !== 'youtube') return;
 
       pause();
-      stopYoutube();
+      closeModal();
       videoEndedHandled = false;
 
       const iframe = document.createElement('iframe');
       iframe.src = youtubeEmbed(slide.videoId);
       iframe.title = getCaptionText(slide.captionKey);
       iframe.allow =
-        'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+        'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen';
       iframe.allowFullscreen = true;
-      youtubeHost.appendChild(iframe);
+      modalPlayer.appendChild(iframe);
       activeYoutubeFrame = iframe;
-      videoPanel.classList.add('is-playing');
+      modal.hidden = false;
+      document.body.style.overflow = 'hidden';
 
       onYoutubeMessage = (event: MessageEvent) => {
         if (!YOUTUBE_ORIGINS.has(event.origin)) return;
@@ -203,11 +209,26 @@ export function initBrowserCarousels() {
     playButton.addEventListener('click', (event) => {
       event.preventDefault();
       event.stopPropagation();
-      playYoutube();
+      openVideoModal();
     });
 
     prev?.addEventListener('click', (event) => onArrowClick(event, -1));
     next?.addEventListener('click', (event) => onArrowClick(event, 1));
+
+    modalCloseButtons.forEach((button) => {
+      button.addEventListener('click', (event) => {
+        event.preventDefault();
+        closeModal();
+        resume();
+      });
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && isModalOpen()) {
+        closeModal();
+        resume();
+      }
+    });
 
     root.addEventListener('mouseenter', pause);
     root.addEventListener('mouseleave', resume);

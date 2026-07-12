@@ -2,10 +2,11 @@ import { getFlatBundleForLocale } from '../i18n/i18n-bundles';
 import { resolveLocale } from '../i18n/locales';
 
 const AUTOPLAY_MS = 7000;
+const YOUTUBE_ORIGINS = new Set(['https://www.youtube-nocookie.com', 'https://www.youtube.com']);
 const initializedCarousels = new WeakSet<HTMLElement>();
 
 type ImageSlide = { kind: 'image'; src: string; captionKey: string };
-type YoutubeSlide = { kind: 'youtube'; videoId: string; captionKey: string };
+type YoutubeSlide = { kind: 'youtube'; videoId: string; thumbSrc: string; captionKey: string };
 type CarouselSlide = ImageSlide | YoutubeSlide;
 
 function getCaptionText(captionKey: string): string {
@@ -14,18 +15,27 @@ function getCaptionText(captionKey: string): string {
   return bundle[captionKey] ?? '';
 }
 
-function youtubeThumb(videoId: string): string {
-  return `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
-}
-
 function youtubeEmbed(videoId: string): string {
   const params = new URLSearchParams({
     autoplay: '1',
     rel: '0',
-    modestbranding: '1',
     playsinline: '1',
+    enablejsapi: '1',
+    controls: '1',
+    fs: '1',
+    origin: window.location.origin,
   });
   return `https://www.youtube-nocookie.com/embed/${videoId}?${params.toString()}`;
+}
+
+function readYoutubePlayerState(data: unknown): number | undefined {
+  if (!data || typeof data !== 'object') return undefined;
+  const payload = data as { event?: string; info?: number | { playerState?: number } };
+  if (payload.event === 'onStateChange' && typeof payload.info === 'number') return payload.info;
+  if (payload.event === 'infoDelivery' && payload.info && typeof payload.info === 'object') {
+    return payload.info.playerState;
+  }
+  return undefined;
 }
 
 export function initBrowserCarousels() {
@@ -56,8 +66,20 @@ export function initBrowserCarousels() {
     let index = 0;
     let timer: number | undefined;
     let paused = false;
+    let onYoutubeMessage: ((event: MessageEvent) => void) | undefined;
+    let activeYoutubeFrame: HTMLIFrameElement | undefined;
+    let videoEndedHandled = false;
+
+    const detachYoutubeListener = () => {
+      if (!onYoutubeMessage) return;
+      window.removeEventListener('message', onYoutubeMessage);
+      onYoutubeMessage = undefined;
+      activeYoutubeFrame = undefined;
+      videoEndedHandled = false;
+    };
 
     const stopYoutube = () => {
+      detachYoutubeListener();
       youtubeHost.innerHTML = '';
       videoPanel.classList.remove('is-playing');
     };
@@ -81,7 +103,7 @@ export function initBrowserCarousels() {
       if (slide.kind === 'youtube') {
         image.hidden = true;
         videoPanel.hidden = false;
-        videoThumb.src = youtubeThumb(slide.videoId);
+        videoThumb.src = slide.thumbSrc;
         videoThumb.alt = getCaptionText(slide.captionKey);
         return;
       }
@@ -125,12 +147,23 @@ export function initBrowserCarousels() {
       schedule();
     };
 
+    const advanceAfterVideoEnd = () => {
+      if (videoEndedHandled) return;
+      videoEndedHandled = true;
+      detachYoutubeListener();
+      show(index + 1);
+      paused = false;
+      schedule();
+    };
+
     const playYoutube = () => {
       const slide = slides[index];
       if (!slide || slide.kind !== 'youtube') return;
 
       pause();
-      youtubeHost.innerHTML = '';
+      stopYoutube();
+      videoEndedHandled = false;
+
       const iframe = document.createElement('iframe');
       iframe.src = youtubeEmbed(slide.videoId);
       iframe.title = getCaptionText(slide.captionKey);
@@ -138,7 +171,26 @@ export function initBrowserCarousels() {
         'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
       iframe.allowFullscreen = true;
       youtubeHost.appendChild(iframe);
+      activeYoutubeFrame = iframe;
       videoPanel.classList.add('is-playing');
+
+      onYoutubeMessage = (event: MessageEvent) => {
+        if (!YOUTUBE_ORIGINS.has(event.origin)) return;
+        if (event.source !== activeYoutubeFrame?.contentWindow) return;
+
+        let payload: unknown = event.data;
+        if (typeof payload === 'string') {
+          try {
+            payload = JSON.parse(payload);
+          } catch {
+            return;
+          }
+        }
+
+        if (readYoutubePlayerState(payload) === 0) advanceAfterVideoEnd();
+      };
+
+      window.addEventListener('message', onYoutubeMessage);
     };
 
     const onArrowClick = (event: Event, direction: -1 | 1) => {

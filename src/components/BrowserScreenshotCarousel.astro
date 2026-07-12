@@ -3,11 +3,16 @@ import { BROWSER_CAROUSEL_SLIDES } from '../config/site';
 import { defaultText } from '../i18n/messages';
 
 const firstSlide = BROWSER_CAROUSEL_SLIDES[0];
-const firstVideoId = firstSlide.kind === 'youtube' ? firstSlide.videoId : '';
+const firstVideoThumb = firstSlide.kind === 'youtube' ? firstSlide.thumbSrc : '';
 const slidesJson = JSON.stringify(
   BROWSER_CAROUSEL_SLIDES.map((slide) =>
     slide.kind === 'youtube'
-      ? { kind: 'youtube', videoId: slide.videoId, captionKey: slide.captionKey }
+      ? {
+          kind: 'youtube',
+          videoId: slide.videoId,
+          thumbSrc: slide.thumbSrc,
+          captionKey: slide.captionKey,
+        }
       : { kind: 'image', src: slide.src, captionKey: slide.captionKey },
   ),
 );
@@ -38,7 +43,7 @@ const slidesJson = JSON.stringify(
             <img
               class="browser-carousel__video-thumb"
               data-carousel-video-thumb
-              src={firstVideoId ? `https://i.ytimg.com/vi/${firstVideoId}/hqdefault.jpg` : undefined}
+              src={firstVideoThumb || undefined}
               alt=""
               width="1280"
               height="720"
@@ -150,11 +155,17 @@ const slidesJson = JSON.stringify(
 
   .browser-carousel__video-stage {
     position: relative;
+    width: 100%;
+    height: 100%;
+    background: #000;
+  }
+
+  .browser-carousel__video.is-playing .browser-carousel__video-stage {
     width: min(100%, calc((100% - var(--carousel-footer-height)) * 16 / 9));
+    height: auto;
     max-height: calc(100% - var(--carousel-footer-height));
     aspect-ratio: 16 / 9;
     margin: 0 auto;
-    background: #000;
   }
 
   .browser-carousel__video-thumb {
@@ -210,6 +221,7 @@ const slidesJson = JSON.stringify(
     position: absolute;
     inset: 0;
     display: none;
+    pointer-events: auto;
   }
 
   .browser-carousel__video.is-playing .browser-carousel__video-thumb,

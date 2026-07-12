@@ -38,10 +38,15 @@ export const SHEETGEN_INFO_SECTIONS = [
 
 export type BrowserCarouselSlide =
   | { kind: 'image'; src: string; captionKey: string }
-  | { kind: 'youtube'; videoId: string; captionKey: string };
+  | { kind: 'youtube'; videoId: string; thumbSrc: string; captionKey: string };
 
 export const BROWSER_CAROUSEL_SLIDES: BrowserCarouselSlide[] = [
-  { kind: 'youtube', videoId: 'F_UYPGBbB4w', captionKey: 'browser.carousel.videoDemo' },
+  {
+    kind: 'youtube',
+    videoId: 'F_UYPGBbB4w',
+    thumbSrc: '/images/browser-carousel/VFXRun_Carousel_00.png',
+    captionKey: 'browser.carousel.videoDemo',
+  },
   { kind: 'image', src: '/images/browser-carousel/VFXRun_Carousel_01.png', captionKey: 'browser.carousel.slide1' },
   { kind: 'image', src: '/images/browser-carousel/VFXRun_Carousel_02.png', captionKey: 'browser.carousel.slide2' },
   { kind: 'image', src: '/images/browser-carousel/VFXRun_Carousel_03.png', captionKey: 'browser.carousel.slide3' },

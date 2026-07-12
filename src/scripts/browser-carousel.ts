@@ -2,11 +2,11 @@ import { getFlatBundleForLocale } from '../i18n/i18n-bundles';
 import { resolveLocale } from '../i18n/locales';
 
 const AUTOPLAY_MS = 7000;
+const initializedCarousels = new WeakSet<HTMLElement>();
 
-interface CarouselSlide {
-  src: string;
-  captionKey: string;
-}
+type ImageSlide = { kind: 'image'; src: string; captionKey: string };
+type YoutubeSlide = { kind: 'youtube'; videoId: string; captionKey: string };
+type CarouselSlide = ImageSlide | YoutubeSlide;
 
 function getCaptionText(captionKey: string): string {
   const locale = resolveLocale(document.documentElement.dataset.locale) ?? 'en';
@@ -14,10 +14,23 @@ function getCaptionText(captionKey: string): string {
   return bundle[captionKey] ?? '';
 }
 
+function youtubeThumb(videoId: string): string {
+  return `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
+}
+
+function youtubeEmbed(videoId: string): string {
+  const params = new URLSearchParams({
+    autoplay: '1',
+    rel: '0',
+    modestbranding: '1',
+    playsinline: '1',
+  });
+  return `https://www.youtube-nocookie.com/embed/${videoId}?${params.toString()}`;
+}
+
 export function initBrowserCarousels() {
   document.querySelectorAll<HTMLElement>('[data-browser-carousel]').forEach((root) => {
-    if (root.dataset.carouselReady === '1') return;
-    root.dataset.carouselReady = '1';
+    if (initializedCarousels.has(root)) return;
 
     let slides: CarouselSlide[] = [];
     try {
@@ -29,16 +42,25 @@ export function initBrowserCarousels() {
 
     const frame = root.querySelector<HTMLElement>('.browser-carousel__frame');
     const image = root.querySelector<HTMLImageElement>('[data-carousel-image]');
+    const videoPanel = root.querySelector<HTMLElement>('[data-carousel-video]');
+    const videoThumb = root.querySelector<HTMLImageElement>('[data-carousel-video-thumb]');
+    const youtubeHost = root.querySelector<HTMLElement>('[data-carousel-youtube-host]');
+    const playButton = root.querySelector<HTMLButtonElement>('[data-carousel-play]');
     const caption = root.querySelector<HTMLElement>('[data-carousel-caption]');
     const segments = Array.from(root.querySelectorAll<HTMLElement>('[data-carousel-segment]'));
     const prev = root.querySelector<HTMLButtonElement>('[data-carousel-prev]');
     const next = root.querySelector<HTMLButtonElement>('[data-carousel-next]');
 
-    if (!image || !caption) return;
+    if (!image || !caption || !videoPanel || !videoThumb || !youtubeHost || !playButton) return;
 
     let index = 0;
     let timer: number | undefined;
     let paused = false;
+
+    const stopYoutube = () => {
+      youtubeHost.innerHTML = '';
+      videoPanel.classList.remove('is-playing');
+    };
 
     const updateCaption = () => {
       const slide = slides[index];
@@ -53,6 +75,23 @@ export function initBrowserCarousels() {
       });
     };
 
+    const renderSlide = (slide: CarouselSlide) => {
+      stopYoutube();
+
+      if (slide.kind === 'youtube') {
+        image.hidden = true;
+        videoPanel.hidden = false;
+        videoThumb.src = youtubeThumb(slide.videoId);
+        videoThumb.alt = getCaptionText(slide.captionKey);
+        return;
+      }
+
+      videoPanel.hidden = true;
+      image.hidden = false;
+      image.src = slide.src;
+      image.alt = getCaptionText(slide.captionKey);
+    };
+
     const show = (nextIndex: number) => {
       index = (nextIndex + slides.length) % slides.length;
       const slide = slides[index];
@@ -60,7 +99,7 @@ export function initBrowserCarousels() {
 
       frame?.classList.add('is-fading');
       window.setTimeout(() => {
-        image.src = slide.src;
+        renderSlide(slide);
         updateCaption();
         updateSegments();
         frame?.classList.remove('is-fading');
@@ -71,7 +110,7 @@ export function initBrowserCarousels() {
 
     const schedule = () => {
       window.clearInterval(timer);
-      if (paused || slides.length < 2) return;
+      if (paused || slides.length < 2 || videoPanel.classList.contains('is-playing')) return;
       timer = window.setInterval(() => show(index + 1), AUTOPLAY_MS);
     };
 
@@ -81,8 +120,25 @@ export function initBrowserCarousels() {
     };
 
     const resume = () => {
+      if (videoPanel.classList.contains('is-playing')) return;
       paused = false;
       schedule();
+    };
+
+    const playYoutube = () => {
+      const slide = slides[index];
+      if (!slide || slide.kind !== 'youtube') return;
+
+      pause();
+      youtubeHost.innerHTML = '';
+      const iframe = document.createElement('iframe');
+      iframe.src = youtubeEmbed(slide.videoId);
+      iframe.title = getCaptionText(slide.captionKey);
+      iframe.allow =
+        'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+      iframe.allowFullscreen = true;
+      youtubeHost.appendChild(iframe);
+      videoPanel.classList.add('is-playing');
     };
 
     const onArrowClick = (event: Event, direction: -1 | 1) => {
@@ -91,6 +147,12 @@ export function initBrowserCarousels() {
       show(index + direction);
       schedule();
     };
+
+    playButton.addEventListener('click', (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      playYoutube();
+    });
 
     prev?.addEventListener('click', (event) => onArrowClick(event, -1));
     next?.addEventListener('click', (event) => onArrowClick(event, 1));
@@ -104,13 +166,8 @@ export function initBrowserCarousels() {
 
     document.addEventListener('vfxrun:locale-change', updateCaption);
 
+    initializedCarousels.add(root);
     updateSegments();
     schedule();
   });
-}
-
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initBrowserCarousels);
-} else {
-  initBrowserCarousels();
 }

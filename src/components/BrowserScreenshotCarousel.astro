@@ -3,23 +3,62 @@ import { BROWSER_CAROUSEL_SLIDES } from '../config/site';
 import { defaultText } from '../i18n/messages';
 
 const firstSlide = BROWSER_CAROUSEL_SLIDES[0];
+const firstVideoId = firstSlide.kind === 'youtube' ? firstSlide.videoId : '';
 const slidesJson = JSON.stringify(
-  BROWSER_CAROUSEL_SLIDES.map((slide) => ({ src: slide.src, captionKey: slide.captionKey })),
+  BROWSER_CAROUSEL_SLIDES.map((slide) =>
+    slide.kind === 'youtube'
+      ? { kind: 'youtube', videoId: slide.videoId, captionKey: slide.captionKey }
+      : { kind: 'image', src: slide.src, captionKey: slide.captionKey },
+  ),
 );
 ---
 
 <div class="browser-carousel" data-browser-carousel data-slides={slidesJson}>
   <div class="browser-carousel__viewport">
     <figure class="browser-carousel__frame">
-      <img
-        data-carousel-image
-        src={firstSlide.src}
-        alt=""
-        width="960"
-        height="600"
-        loading="eager"
-        decoding="async"
-      />
+      <div class="browser-carousel__media">
+        <img
+          class="browser-carousel__image"
+          data-carousel-image
+          src={firstSlide.kind === 'image' ? firstSlide.src : undefined}
+          alt=""
+          width="960"
+          height="600"
+          loading="eager"
+          decoding="async"
+          hidden={firstSlide.kind === 'youtube'}
+        />
+
+        <div
+          class="browser-carousel__video"
+          data-carousel-video
+          hidden={firstSlide.kind !== 'youtube'}
+        >
+          <div class="browser-carousel__video-stage">
+            <img
+              class="browser-carousel__video-thumb"
+              data-carousel-video-thumb
+              src={firstVideoId ? `https://i.ytimg.com/vi/${firstVideoId}/hqdefault.jpg` : undefined}
+              alt=""
+              width="1280"
+              height="720"
+              loading="eager"
+              decoding="async"
+            />
+            <button
+              type="button"
+              class="browser-carousel__play"
+              data-carousel-play
+              data-i18n-aria-label="browser.carousel.playVideo"
+              aria-label={defaultText('browser.carousel.playVideo')}
+            >
+              <span class="browser-carousel__play-icon" aria-hidden="true"></span>
+            </button>
+            <div class="browser-carousel__youtube-host" data-carousel-youtube-host></div>
+          </div>
+        </div>
+      </div>
+
       <figcaption class="browser-carousel__footer">
         <p class="browser-carousel__caption" data-carousel-caption data-i18n={firstSlide.captionKey}>
           {defaultText(firstSlide.captionKey)}
@@ -70,6 +109,8 @@ const slidesJson = JSON.stringify(
     aspect-ratio: 720 / 355;
     background: #0c0d10;
     overflow: hidden;
+    isolation: isolate;
+    z-index: 0;
     --carousel-footer-height: 3.75rem;
   }
 
@@ -79,7 +120,13 @@ const slidesJson = JSON.stringify(
     margin: 0;
   }
 
-  .browser-carousel__frame img {
+  .browser-carousel__media {
+    position: absolute;
+    inset: 0;
+    bottom: 0;
+  }
+
+  .browser-carousel__image {
     display: block;
     width: 100%;
     height: 100%;
@@ -88,8 +135,97 @@ const slidesJson = JSON.stringify(
     transition: opacity 0.2s ease;
   }
 
-  .browser-carousel__frame.is-fading img {
+  .browser-carousel__frame.is-fading .browser-carousel__image {
     opacity: 0.82;
+  }
+
+  .browser-carousel__video {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #000;
+  }
+
+  .browser-carousel__video-stage {
+    position: relative;
+    width: min(100%, calc((100% - var(--carousel-footer-height)) * 16 / 9));
+    max-height: calc(100% - var(--carousel-footer-height));
+    aspect-ratio: 16 / 9;
+    margin: 0 auto;
+    background: #000;
+  }
+
+  .browser-carousel__video-thumb {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+  }
+
+  .browser-carousel__play {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: rgba(0, 0, 0, 0.28);
+    cursor: pointer;
+    transition: background 0.15s ease;
+  }
+
+  .browser-carousel__play:hover {
+    background: rgba(0, 0, 0, 0.42);
+  }
+
+  .browser-carousel__play-icon {
+    display: block;
+    width: 4.25rem;
+    height: 4.25rem;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.62);
+    border: 2px solid rgba(255, 255, 255, 0.92);
+    box-shadow: 0 0.35rem 1.25rem rgba(0, 0, 0, 0.45);
+    position: relative;
+  }
+
+  .browser-carousel__play-icon::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 54%;
+    transform: translate(-50%, -50%);
+    border-style: solid;
+    border-width: 0.72rem 0 0.72rem 1.2rem;
+    border-color: transparent transparent transparent #fff;
+  }
+
+  .browser-carousel__youtube-host {
+    position: absolute;
+    inset: 0;
+    display: none;
+  }
+
+  .browser-carousel__video.is-playing .browser-carousel__video-thumb,
+  .browser-carousel__video.is-playing .browser-carousel__play {
+    display: none;
+  }
+
+  .browser-carousel__video.is-playing .browser-carousel__youtube-host {
+    display: block;
+  }
+
+  .browser-carousel__youtube-host :global(iframe) {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
   }
 
   .browser-carousel__footer {
@@ -97,7 +233,7 @@ const slidesJson = JSON.stringify(
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 1;
+    z-index: 2;
     margin: 0;
     pointer-events: none;
     background: rgba(0, 0, 0, 0.62);
@@ -181,6 +317,15 @@ const slidesJson = JSON.stringify(
       width: 2.375rem;
       height: 2.375rem;
       font-size: 1.6875rem;
+    }
+
+    .browser-carousel__play-icon {
+      width: 3.5rem;
+      height: 3.5rem;
+    }
+
+    .browser-carousel__play-icon::after {
+      border-width: 0.58rem 0 0.58rem 0.95rem;
     }
   }
 </style>

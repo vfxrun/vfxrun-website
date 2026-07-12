@@ -12,6 +12,8 @@ export const browserHomeI18n = {
     shareBtn: '共有',
     shareToast: 'コピーしました',
     carousel: {
+      videoDemo: '80秒で VFXRun を見る',
+      playVideo: 'デモ動画を再生',
       slide1: 'ローカルのVFX画像シーケンスを素早くプレビュー',
       slide2: '整理・分類・重複の検出',
       slide3: 'お気に入り登録とローカルフォルダーを開く',
@@ -56,6 +58,8 @@ export const browserHomeI18n = {
     shareBtn: '공유',
     shareToast: '복사됨',
     carousel: {
+      videoDemo: '80초로 VFXRun 보기',
+      playVideo: '데모 영상 재생',
       slide1: '로컬 VFX 이미지 시퀀스를 빠르게 미리 보기',
       slide2: '정리, 분류 및 중복 찾기',
       slide3: '즐겨찾기 및 로컬 폴더 열기',
@@ -100,6 +104,8 @@ export const browserHomeI18n = {
     shareBtn: '分享',
     shareToast: '已複製',
     carousel: {
+      videoDemo: '80 秒了解 VFXRun',
+      playVideo: '播放示範影片',
       slide1: '快速預覽本機特效序列圖',
       slide2: '軟體幫您整理分類，查重',
       slide3: '支援收藏，開啟本機資料夾查看',
@@ -144,6 +150,8 @@ export const browserHomeI18n = {
     shareBtn: 'Compartir',
     shareToast: 'Copiado',
     carousel: {
+      videoDemo: 'VFXRun en 80 segundos',
+      playVideo: 'Reproducir video demo',
       slide1: 'Previsualiza rápidamente secuencias VFX locales',
       slide2: 'Organiza, clasifica y detecta duplicados',
       slide3: 'Marca favoritos y abre carpetas locales',
@@ -188,6 +196,8 @@ export const browserHomeI18n = {
     shareBtn: 'Partager',
     shareToast: 'Copié',
     carousel: {
+      videoDemo: 'VFXRun en 80 secondes',
+      playVideo: 'Lire la vidéo de démo',
       slide1: 'Prévisualisez rapidement les séquences VFX locales',
       slide2: 'Organisez, classez et détectez les doublons',
       slide3: 'Favoris et ouverture des dossiers locaux',

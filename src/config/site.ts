@@ -36,14 +36,19 @@ export const SHEETGEN_INFO_SECTIONS = [
   { id: 'faq', labelKey: 'sheetgen.sections.faq' },
 ] as const;
 
-export const BROWSER_CAROUSEL_SLIDES = [
-  { src: '/images/browser-carousel/VFXRun_Carousel_01.png', captionKey: 'browser.carousel.slide1' },
-  { src: '/images/browser-carousel/VFXRun_Carousel_02.png', captionKey: 'browser.carousel.slide2' },
-  { src: '/images/browser-carousel/VFXRun_Carousel_03.png', captionKey: 'browser.carousel.slide3' },
-  { src: '/images/browser-carousel/VFXRun_Carousel_04.png', captionKey: 'browser.carousel.slide4' },
-  { src: '/images/browser-carousel/VFXRun_Carousel_05.png', captionKey: 'browser.carousel.slide5' },
-  { src: '/images/browser-carousel/VFXRun_Carousel_06.png', captionKey: 'browser.carousel.slide6' },
-] as const;
+export type BrowserCarouselSlide =
+  | { kind: 'image'; src: string; captionKey: string }
+  | { kind: 'youtube'; videoId: string; captionKey: string };
+
+export const BROWSER_CAROUSEL_SLIDES: BrowserCarouselSlide[] = [
+  { kind: 'youtube', videoId: 'F_UYPGBbB4w', captionKey: 'browser.carousel.videoDemo' },
+  { kind: 'image', src: '/images/browser-carousel/VFXRun_Carousel_01.png', captionKey: 'browser.carousel.slide1' },
+  { kind: 'image', src: '/images/browser-carousel/VFXRun_Carousel_02.png', captionKey: 'browser.carousel.slide2' },
+  { kind: 'image', src: '/images/browser-carousel/VFXRun_Carousel_03.png', captionKey: 'browser.carousel.slide3' },
+  { kind: 'image', src: '/images/browser-carousel/VFXRun_Carousel_04.png', captionKey: 'browser.carousel.slide4' },
+  { kind: 'image', src: '/images/browser-carousel/VFXRun_Carousel_05.png', captionKey: 'browser.carousel.slide5' },
+  { kind: 'image', src: '/images/browser-carousel/VFXRun_Carousel_06.png', captionKey: 'browser.carousel.slide6' },
+];
 
 export const PRO_VOTE_FEATURES = [
   { id: 'timeline', labelKey: 'browser.proFeatureTimeline' },

@@ -9,6 +9,10 @@ export function initPageFeatures(): void {
     void import('./browser-pro-vote.ts').then((mod) => mod.initBrowserProVote());
   }
 
+  if (document.querySelector('#browser-share-btn')) {
+    void import('./browser-share.ts').then((mod) => mod.initBrowserShare());
+  }
+
   if (document.querySelector('.sheetgen-tool-mount')) {
     initSheetGenToolI18nObserver();
   }

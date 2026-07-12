@@ -1,7 +1,12 @@
-export function initBrowserShare() {
+import { SITE } from '../config/site';
+
+const SHARE_URL = `${SITE.url}/`;
+
+export function initBrowserShare(): void {
   const button = document.getElementById('browser-share-btn');
   const toast = document.getElementById('browser-share-toast');
-  if (!button || !toast) return;
+  if (!button || !toast || button.dataset.shareBound === '1') return;
+  button.dataset.shareBound = '1';
 
   let timer: number | undefined;
 
@@ -40,14 +45,8 @@ export function initBrowserShare() {
 
   button.addEventListener('click', () => {
     void import('./analytics').then(({ track }) => {
-      track('external_share_clicked', { target_url: window.location.href });
+      track('external_share_clicked', { target_url: SHARE_URL });
     });
-    void copy(window.location.href);
+    void copy(SHARE_URL);
   });
-}
-
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initBrowserShare);
-} else {
-  initBrowserShare();
 }

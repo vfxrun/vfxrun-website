@@ -57,7 +57,7 @@ export const en = {
     heroBullet4: 'Generate file formats your game engine needs',
     shareTitle: 'Completely free. No sign-up required. Share it if it helps.',
     shareBtn: 'Share',
-    shareToast: 'URL copied',
+    shareToast: 'Copied',
     carousel: {
       slide1: 'Quickly preview local VFX image sequences',
       slide2: 'Organize, categorize, and find duplicates',
@@ -263,7 +263,7 @@ export const zhCN: typeof en = {
     heroBullet4: '生成游戏引擎需要的文件格式',
     shareTitle: '完全免费，无需注册，欢迎分享',
     shareBtn: '分享',
-    shareToast: '网址已复制',
+    shareToast: '已复制',
     carousel: {
       slide1: '快速预览本地特效序列图',
       slide2: '软件帮您整理分类，查重',

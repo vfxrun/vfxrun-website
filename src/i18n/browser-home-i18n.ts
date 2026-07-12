@@ -10,7 +10,7 @@ export const browserHomeI18n = {
     heroBullet4: 'ゲームエンジンに必要なファイル形式を生成',
     shareTitle: '完全無料。登録不要。役に立ったらぜひ共有してください。',
     shareBtn: '共有',
-    shareToast: 'リンクをコピーしました',
+    shareToast: 'コピーしました',
     carousel: {
       slide1: 'ローカルのVFX画像シーケンスを素早くプレビュー',
       slide2: '整理・分類・重複の検出',
@@ -54,7 +54,7 @@ export const browserHomeI18n = {
     heroBullet4: '게임 엔진에 필요한 파일 형식 생성',
     shareTitle: '완전 무료입니다. 가입 불필요. 도움이 되었다면 공유해 주세요.',
     shareBtn: '공유',
-    shareToast: '링크가 복사되었습니다',
+    shareToast: '복사됨',
     carousel: {
       slide1: '로컬 VFX 이미지 시퀀스를 빠르게 미리 보기',
       slide2: '정리, 분류 및 중복 찾기',
@@ -98,7 +98,7 @@ export const browserHomeI18n = {
     heroBullet4: '產生遊戲引擎需要的檔案格式',
     shareTitle: '完全免費，無需註冊，歡迎分享',
     shareBtn: '分享',
-    shareToast: '網址已複製',
+    shareToast: '已複製',
     carousel: {
       slide1: '快速預覽本機特效序列圖',
       slide2: '軟體幫您整理分類，查重',
@@ -142,7 +142,7 @@ export const browserHomeI18n = {
     heroBullet4: 'Genera formatos de archivo que tu motor de juego necesita',
     shareTitle: 'Completamente gratis. Sin registro. Compártelo si te ayuda.',
     shareBtn: 'Compartir',
-    shareToast: 'Enlace copiado',
+    shareToast: 'Copiado',
     carousel: {
       slide1: 'Previsualiza rápidamente secuencias VFX locales',
       slide2: 'Organiza, clasifica y detecta duplicados',
@@ -186,7 +186,7 @@ export const browserHomeI18n = {
     heroBullet4: 'Générez les formats de fichiers dont votre moteur de jeu a besoin',
     shareTitle: 'Entièrement gratuit. Sans inscription. Partagez si cela vous aide.',
     shareBtn: 'Partager',
-    shareToast: 'Lien copié',
+    shareToast: 'Copié',
     carousel: {
       slide1: 'Prévisualisez rapidement les séquences VFX locales',
       slide2: 'Organisez, classez et détectez les doublons',
